@@ -61,7 +61,7 @@ class PersonController extends Controller
      */
     public function edit(Person $person)
     {
-        //
+        return view('person.edit')->with('person', $person);
     }
 
     /**
@@ -69,7 +69,20 @@ class PersonController extends Controller
      */
     public function update(Request $request, Person $person)
     {
-        //
+        $validated = $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'nullable|email',
+        ]);
+
+        $person->firstname = $request->firstname;
+        $person->lastname = $request->lastname;
+        $person->email = $request->email;
+        $person->phone = $request->phone;
+
+        $person->save();
+
+        return redirect(route('person.index'));
     }
 
     /**
