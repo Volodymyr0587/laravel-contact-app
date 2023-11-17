@@ -13,8 +13,8 @@ class PersonController extends Controller
     public function index()
     {
         // $people = Person::all();
-        return view('person.index')->with('people', Person::all());
         // return view('person.index', compact('people'));
+        return view('person.index')->with('people', Person::all());
     }
 
     /**
@@ -30,7 +30,22 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'nullable|email',
+        ]);
+
+        $person = new Person;
+
+        $person->firstname = $request->firstname;
+        $person->lastname = $request->lastname;
+        $person->email = $request->email;
+        $person->phone = $request->phone;
+
+        $person->save();
+
+        return redirect(route('person.index'));
     }
 
     /**
