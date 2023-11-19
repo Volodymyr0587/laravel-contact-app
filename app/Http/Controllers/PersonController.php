@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Business;
 use App\Models\Person;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,7 @@ class PersonController extends Controller
      */
     public function create()
     {
-        return view('person.create');
+        return view('person.create')->with('businesses', Business::all());
     }
 
     /**
@@ -42,6 +43,7 @@ class PersonController extends Controller
         $person->lastname = $request->lastname;
         $person->email = $request->email;
         $person->phone = $request->phone;
+        $person->business_id = $request->business_id;
 
         $person->save();
 
@@ -61,7 +63,7 @@ class PersonController extends Controller
      */
     public function edit(Person $person)
     {
-        return view('person.edit')->with('person', $person);
+        return view('person.edit')->with(['person' => $person, 'businesses' => Business::all()]);
     }
 
     /**
@@ -79,6 +81,7 @@ class PersonController extends Controller
         $person->lastname = $request->lastname;
         $person->email = $request->email;
         $person->phone = $request->phone;
+        $person->business_id = $request->business_id;
 
         $person->save();
 
