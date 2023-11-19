@@ -12,8 +12,9 @@
 
                     <h3 class="font-semibold pb-5">Edit business: {{ $business->business_name }}</h3>
 
-                    <form action="{{ route('business.update') }}" method="POST">
+                    <form action="{{ route('business.update', $business->id) }}" method="POST">
                         @csrf
+                        @method('PUT')
 
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
@@ -32,6 +33,19 @@
                             <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" href="{{ route('business.index') }}">Cancel</a>
                             <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">
                                 Save
+                            </button>
+                        </div>
+                    </form>
+
+                    <form action="{{ route('business.destroy', $business->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+
+                        <div class="border bg-red-600 text-white mt-6 p-6">
+                            <h3 class="font-semibold">Danger zone</h3>
+                            <p>You can delete this business here</p>
+                            <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">
+                                Delete
                             </button>
                         </div>
                     </form>

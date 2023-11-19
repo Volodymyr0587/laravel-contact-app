@@ -68,8 +68,6 @@ class BusinessController extends Controller
             'contact_email' => 'nullable|email',
         ]);
 
-        $business = new Business;
-
         $business->business_name = $request->business_name;
         $business->contact_email = $request->contact_email;
 
