@@ -15,6 +15,11 @@ class PersonController extends Controller
     {
         // $people = Person::all();
         // return view('person.index', compact('people'));
+
+        //? Eager Loading:
+        //? 1st variant
+        // return view('person.index')->with('people', Person::with('business')->get());
+        //? 2nd variant (add `protected $with = ['business'];` to `Person` model)
         return view('person.index')->with('people', Person::all());
     }
 
