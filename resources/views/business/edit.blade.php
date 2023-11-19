@@ -37,7 +37,8 @@
                         </div>
                     </form>
 
-                    <form action="{{ route('business.destroy', $business->id) }}" method="POST">
+                    <form action="{{ route('business.destroy', $business->id) }}" method="POST"
+                        onsubmit="return confirm('Are you sure?');">
                         @csrf
                         @method('DELETE')
 

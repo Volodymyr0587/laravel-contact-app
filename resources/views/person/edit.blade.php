@@ -60,7 +60,8 @@
                         </div>
                     </form>
 
-                    <form action="{{ route('person.destroy', $person->id) }}" method="POST">
+                    <form action="{{ route('person.destroy', $person->id) }}" method="POST"
+                        onsubmit="return confirm('Are you sure?');">
                         @csrf
                         @method('DELETE')
 
