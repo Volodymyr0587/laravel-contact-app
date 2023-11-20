@@ -21,17 +21,34 @@
                                 <label class="block" for="business_name">Business name</label>
                                 <input class="block w-full" type="text" name="business_name" id="business_name"
                                     value="{{ old('business_name', $business->business_name) }}">
+
+                                @error('business_name')
+                                    <div class="text-red-500 mt-2 text-sm">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </span>
+
                             <span class="sm:col-span-3">
                                 <label class="block" for="contact_email">Email</label>
                                 <input class="block w-full" type="text" name="contact_email" id="contact_email"
                                     value="{{ old('contact_email', $business->contact_email) }}">
+
+                                @error('contact_email')
+                                    <div class="text-red-500 mt-2 text-sm">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </span>
+
                         </div>
 
                         <div class="mt-6 flex items-center justify-end gap-x-6">
-                            <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" href="{{ route('business.index') }}">Cancel</a>
-                            <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">
+                            <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
+                                href="{{ route('business.index') }}">Cancel</a>
+                            <button
+                                class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
+                                type="submit">
                                 Save
                             </button>
                         </div>
@@ -45,7 +62,9 @@
                         <div class="border bg-red-600 text-white mt-6 p-6">
                             <h3 class="font-semibold">Danger zone</h3>
                             <p>You can delete this business here</p>
-                            <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">
+                            <button
+                                class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
+                                type="submit">
                                 Delete
                             </button>
                         </div>
