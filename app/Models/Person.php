@@ -15,6 +15,6 @@ class Person extends Model
 
     public function business(): BelongsTo
     {
-        return $this->belongsTo(Business::class);
+        return $this->belongsTo(Business::class)->withTrashed();
     }
 }
