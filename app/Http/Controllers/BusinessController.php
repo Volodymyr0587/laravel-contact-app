@@ -28,12 +28,8 @@ class BusinessController extends Controller
      */
     public function store(BusinessRequest $request)
     {
-        $business = new Business;
 
-        $business->business_name = $request->business_name;
-        $business->contact_email = $request->contact_email;
-
-        $business->save();
+        Business::create($request->validated());
 
         return redirect(route('business.index'));
     }
@@ -59,10 +55,7 @@ class BusinessController extends Controller
      */
     public function update(BusinessRequest $request, Business $business)
     {
-        $business->business_name = $request->business_name;
-        $business->contact_email = $request->contact_email;
-
-        $business->save();
+        $business->update($request->validated());
 
         return redirect(route('business.index'));
     }

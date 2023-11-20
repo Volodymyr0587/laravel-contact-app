@@ -11,6 +11,16 @@ class Business extends Model
 {
     use HasFactory, SoftDeletes;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'business_name',
+        'contact_email',
+    ];
+
     public function people(): HasMany
     {
         return $this->hasMany(Person::class);
