@@ -28,6 +28,7 @@
                             @foreach ($business->tasks as $task)
                                 <h4 class="font-semibold">{{ $task->title }}</h4>
                                 <p>{{ $task->description }}</p>
+                                <p>Status: {{ $task->status }}</p>
                             @endforeach
                         </div>
                     </div>

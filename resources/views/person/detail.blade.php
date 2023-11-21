@@ -27,6 +27,11 @@
                         </div>
                         <div class="sm:col-span-3">
                             <h3 class="font-semibold text-l pb-5">Tasks</h3>
+                            @foreach ($person->tasks as $task)
+                                <h4 class="font-semibold">{{ $task->title }}</h4>
+                                <p>{{ $task->description }}</p>
+                                <p>Status: {{ $task->status }}</p>
+                            @endforeach
                         </div>
                     </div>
                 </div>
