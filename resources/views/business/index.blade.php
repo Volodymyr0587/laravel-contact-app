@@ -20,6 +20,7 @@
                                 <th>Business Name</th>
                                 <th>Contact Email</th>
                                 <th>Categories</th>
+                                <th>Tags</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -33,6 +34,11 @@
                                         {{-- @foreach ($business->categories as $categories)
                                             {{ $categories->category_name }}
                                         @endforeach --}}
+                                    </td>
+                                    <td>
+                                        @foreach ($business->tags as $tag)
+                                            {{ $tag->tag_name }}
+                                        @endforeach
                                     </td>
                                     <td>
                                         <a href="{{ route('business.edit', $business->id) }}">
