@@ -26,7 +26,7 @@
                         <tbody>
                             @foreach ($business as $business)
                                 <tr>
-                                    <td>{{ $business->business_name }}</td>
+                                    <td><a href="{{ route('business.show', $business->id) }}">{{ $business->business_name }}</a></td>
                                     <td>{{ $business->contact_email }}</td>
                                     <td>
                                         {{ implode(' | ', $business->categories->pluck('category_name')->toArray()) }}

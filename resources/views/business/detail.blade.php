@@ -14,13 +14,13 @@
                             <h3 class="font-semibold text-l pb-5">Business Details</h3>
                             <dl>
                                 <dt class="font-semibold">Business Name</dt>
-                                <dd class="pl-3">{{ $business->name }}</dd>
+                                <dd class="pl-3">{{ $business->business_name }}</dd>
                                 <dt class="font-semibold">Email</dt>
                                 <dd class="pl-3">{{ $business->contact_email }}</dd>
                             </dl>
 
                             <div class="pt-3">
-                                <a href="" class="bg-blue-600 text-white py-2 px-3 rounded-full"></a>
+                                <a href="{{ route('business.edit', $business->id) }}" class="bg-blue-600 text-white py-2 px-3 rounded-full">Edit Business</a>
                             </div>
                         </div>
                         <div class="sm:col-span-3">

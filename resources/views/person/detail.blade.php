@@ -22,7 +22,7 @@
                             </dl>
 
                             <div class="pt-3">
-                                <a href="" class="bg-blue-600 text-white py-2 px-3 rounded-full"></a>
+                                <a href="{{ route('person.edit', $person->id) }}" class="bg-blue-600 text-white py-2 px-3 rounded-full">Edit Person</a>
                             </div>
                         </div>
                         <div class="sm:col-span-3">
