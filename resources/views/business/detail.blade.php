@@ -20,7 +20,8 @@
                             </dl>
 
                             <div class="pt-3">
-                                <a class="bg-blue-600 text-white py-2 px-3 rounded-full" href="{{route('business.edit', $business->id)}}">Edit Business</a>
+                                <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
+                                href="{{route('business.edit', $business->id)}}">Edit Business</a>
                             </div>
                         </div>
                         <div class="sm:col-span-3">
@@ -52,7 +53,7 @@
                                 </div>
 
                                 <div class="mt-5 flex items-center justify-end gap-x-6">
-                                    <button type="submit" class="flex items-center justify-end ml-2 bg-blue-600 text-white py-2 px-3 rounded-full">Create Task</button>
+                                    <button type="submit" class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600">Create Task</button>
                                 </div>
                             </form>
 
@@ -66,7 +67,7 @@
                                             <form action="{{route('task.complete', $task->id)}}" method="POST">
                                                 @csrf
                                                 @method('PUT')
-                                                <button class="bg-blue-600 text-white py-2 px-3 rounded-full" type="submit">Complete Task</button>
+                                                <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">Complete Task</button>
                                             </form>
                                         </div>
                                     @else
