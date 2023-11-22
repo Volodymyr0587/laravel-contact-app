@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PersonRequest;
 use App\Models\Business;
 use App\Models\Person;
 use Illuminate\Http\Request;
@@ -34,23 +35,24 @@ class PersonController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PersonRequest $request)
     {
-        $validated = $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'email' => 'nullable|email',
-        ]);
+        // $validated = $request->validate([
+        //     'firstname' => 'required',
+        //     'lastname' => 'required',
+        //     'email' => 'nullable|email',
+        // ]);
 
-        $person = new Person;
+        // $person = new Person;
 
-        $person->firstname = $request->firstname;
-        $person->lastname = $request->lastname;
-        $person->email = $request->email;
-        $person->phone = $request->phone;
-        $person->business_id = $request->business_id;
+        // $person->firstname = $request->firstname;
+        // $person->lastname = $request->lastname;
+        // $person->email = $request->email;
+        // $person->phone = $request->phone;
+        // $person->business_id = $request->business_id;
 
-        $person->save();
+        // $person->save();
+        Person::create($request->validated());
 
         return redirect(route('person.index'));
     }
@@ -74,21 +76,23 @@ class PersonController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Person $person)
+    public function update(PersonRequest $request, Person $person)
     {
-        $validated = $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'email' => 'nullable|email',
-        ]);
+        // $validated = $request->validate([
+        //     'firstname' => 'required',
+        //     'lastname' => 'required',
+        //     'email' => 'nullable|email',
+        // ]);
 
-        $person->firstname = $request->firstname;
-        $person->lastname = $request->lastname;
-        $person->email = $request->email;
-        $person->phone = $request->phone;
-        $person->business_id = $request->business_id;
+        // $person->firstname = $request->firstname;
+        // $person->lastname = $request->lastname;
+        // $person->email = $request->email;
+        // $person->phone = $request->phone;
+        // $person->business_id = $request->business_id;
 
-        $person->save();
+        // $person->save();
+
+        $person->update($request->validated());
 
         return redirect(route('person.index'));
     }

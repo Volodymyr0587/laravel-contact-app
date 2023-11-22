@@ -20,21 +20,45 @@
                                 <label class="block" for="firstname">First name</label>
                                 <input class="block w-full" type="text" name="firstname" id="firstname"
                                     value="{{ old('firstname') }}">
+
+                                @error('firstname')
+                                    <div class="text-red-500 mt-2 text-sm">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="lastname">Last name</label>
                                 <input class="block w-full" type="text" name="lastname" id="lastname"
                                     value="{{ old('lastname') }}">
+
+                                @error('lastname')
+                                    <div class="text-red-500 mt-2 text-sm">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="email">Email</label>
                                 <input class="block w-full" type="text" name="email" id="email"
                                     value="{{ old('email') }}">
+
+                                @error('email')
+                                    <div class="text-red-500 mt-2 text-sm">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="phone">Phone</label>
                                 <input class="block w-full" type="text" name="phone" id="phone"
                                     value="{{ old('phone') }}">
+
+                                @error('phone')
+                                    <div class="text-red-500 mt-2 text-sm">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="business">Business</label>
@@ -50,8 +74,11 @@
                         </div>
 
                         <div class="mt-6 flex items-center justify-end gap-x-6">
-                            <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" href="{{ route('person.index') }}">Cancel</a>
-                            <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">
+                            <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
+                                href="{{ route('person.index') }}">Cancel</a>
+                            <button
+                                class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
+                                type="submit">
                                 Save
                             </button>
                         </div>
