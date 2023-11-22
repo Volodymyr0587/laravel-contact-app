@@ -11,8 +11,20 @@ class Task extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'title',
+        'description',
+    ];
+
     public function taskable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function markAsCompleted()
+    {
+        $this->status = 'completed';
+        $this->save();
+        return true;
     }
 }

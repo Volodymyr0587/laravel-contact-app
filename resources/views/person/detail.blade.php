@@ -27,14 +27,15 @@
                         </div>
                         <div class="sm:col-span-3">
                             <h3 class="font-semibold text-l pb-5">Creat new task</h3>
-                            <form action="" method="POST">
+                            <form action="{{ route('task.store') }}" method="POST">
                                 @csrf
 
+                                <input type="hidden" name="taskable_id" value="{{$person->id}}">
+                                <input type="hidden" name="target_model" value="person">
                                 <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
-                                    <span class="sm:col-span-3">
-                                        <label class="block" for="title">Task title</label>
-                                        <input class="block w-full" type="text" name="title" id="title"
-                                            value="{{ old('title') }}">
+                                    <span class="sm:col-span-6">
+                                        <label class="block" for="title">Task title </label>
+                                        <input class="block w-full" type="text" name="title" id="title" value="{{ old('title') }}">
 
                                         @error('title')
                                             <div class="text-red-500 mt-2 text-sm">
@@ -42,10 +43,9 @@
                                             </div>
                                         @enderror
                                     </span>
-                                    <span class="sm:col-span-3">
+                                    <span class="sm:col-span-6">
                                         <label class="block" for="description">Task description</label>
-                                        <input class="block w-full" type="text" name="description" id="description"
-                                            value="{{ old('description') }}">
+                                        <textarea class="block w-full" type="text" name="description" id="description">{{ old('description') }}</textarea>
 
                                         @error('description')
                                             <div class="text-red-500 mt-2 text-sm">
@@ -55,21 +55,28 @@
                                     </span>
                                 </div>
 
-                                <div class="mt-6 flex items-center justify-end gap-x-6">
-
-                                    <button
-                                        class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                                        type="submit">
-                                        Create Task
-                                    </button>
+                                <div class="mt-5 flex items-center justify-end gap-x-6">
+                                    <button type="submit" class="flex items-center justify-end ml-2 bg-blue-600 text-white py-2 px-3 rounded-full">Create Task</button>
                                 </div>
                             </form>
 
                             <h3 class="font-semibold text-l pb-5">Tasks</h3>
-                            @foreach ($person->tasks as $task)
-                                <h4 class="font-semibold">{{ $task->title }}</h4>
-                                <p>{{ $task->description }}</p>
-                                <p>Status: {{ $task->status }}</p>
+                            @foreach ($person->tasks->sortByDesc('created_at') as $task)
+                                <div class="border-t border-grey-500 py-3">
+                                    <h4 class="font-semibold">{{$task->title}}</h4>
+                                    <p>{{$task->description}}</p>
+                                    @if ($task->status == "open")
+                                        <div class="pt-3">
+                                            <form action="{{route('task.complete', $task->id)}}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <button class="bg-blue-600 text-white py-2 px-3 rounded-full" type="submit">Complete Task</button>
+                                            </form>
+                                        </div>
+                                    @else
+                                        <p class="italic">Completed</p>
+                                    @endif
+                                </div>
                             @endforeach
                         </div>
                     </div>

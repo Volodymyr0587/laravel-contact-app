@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\BusinessController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BusinessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,12 @@ Route::controller(BusinessController::class)->prefix('business')->name('business
     Route::get('/{business}/edit', 'edit')->name('.edit');
     Route::put('/{business}/update', 'update')->name('.update');
     Route::delete('/{business}/destroy', 'destroy')->name('.destroy');
+});
+
+Route::controller(TaskController::class)->prefix('task')->name('task')->middleware('auth')->group(function(){
+    Route::get('/', 'index')->name('.index');
+    Route::post('/store', 'store')->name('.store');
+    Route::put('/{task}/complete', 'complete')->name('.complete');
 });
 
 require __DIR__.'/auth.php';
