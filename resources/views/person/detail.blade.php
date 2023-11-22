@@ -26,6 +26,45 @@
                             </div>
                         </div>
                         <div class="sm:col-span-3">
+                            <h3 class="font-semibold text-l pb-5">Creat new task</h3>
+                            <form action="" method="POST">
+                                @csrf
+
+                                <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
+                                    <span class="sm:col-span-3">
+                                        <label class="block" for="title">Task title</label>
+                                        <input class="block w-full" type="text" name="title" id="title"
+                                            value="{{ old('title') }}">
+
+                                        @error('title')
+                                            <div class="text-red-500 mt-2 text-sm">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </span>
+                                    <span class="sm:col-span-3">
+                                        <label class="block" for="description">Task description</label>
+                                        <input class="block w-full" type="text" name="description" id="description"
+                                            value="{{ old('description') }}">
+
+                                        @error('description')
+                                            <div class="text-red-500 mt-2 text-sm">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </span>
+                                </div>
+
+                                <div class="mt-6 flex items-center justify-end gap-x-6">
+
+                                    <button
+                                        class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
+                                        type="submit">
+                                        Create Task
+                                    </button>
+                                </div>
+                            </form>
+
                             <h3 class="font-semibold text-l pb-5">Tasks</h3>
                             @foreach ($person->tasks as $task)
                                 <h4 class="font-semibold">{{ $task->title }}</h4>
