@@ -52,7 +52,10 @@ class PersonController extends Controller
         // $person->business_id = $request->business_id;
 
         // $person->save();
-        Person::create($request->validated());
+
+        $person = Person::create($request->validated());
+
+        $person->tags()->sync($request->tags);
 
         return redirect(route('person.index'));
     }
