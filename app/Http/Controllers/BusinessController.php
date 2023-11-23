@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BusinessRequest;
+use App\Models\Tag;
 use App\Models\Business;
-use Illuminate\Http\Request;
+use App\Http\Requests\BusinessRequest;
 
 class BusinessController extends Controller
 {
@@ -13,7 +13,7 @@ class BusinessController extends Controller
      */
     public function index()
     {
-        return view('business.index')->with('business', Business::all());
+        return view('business.index')->with(['business' => Business::all(), 'tags' => Tag::all()]);
     }
 
     /**
@@ -47,7 +47,7 @@ class BusinessController extends Controller
      */
     public function edit(Business $business)
     {
-        return view('business.edit')->with('business', $business);
+        return view('business.edit')->with(['business' => $business, 'tags' => Tag::all()]);
     }
 
     /**
@@ -56,6 +56,8 @@ class BusinessController extends Controller
     public function update(BusinessRequest $request, Business $business)
     {
         $business->update($request->validated());
+
+        $business->tags()->sync($request->tags);
 
         return redirect(route('business.index'));
     }
