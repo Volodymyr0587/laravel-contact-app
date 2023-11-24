@@ -11,7 +11,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        return view('task.index')->with('tasks', Task::paginate(5));
+        return view('task.index')->with('tasks', Task::open()->paginate(5));
     }
 
     public function store(Request $request)
