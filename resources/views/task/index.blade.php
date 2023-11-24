@@ -42,7 +42,8 @@
                                     </td>
                                     <td>{{$task->status}}</td>
                                     <td>
-                                        <form action="{{route('task.complete', $task->id)}}" method="POST">
+                                        <form action="{{route('task.complete', $task->id)}}" method="POST"
+                                            onsubmit="return confirm('Are you sure?');">
                                             @csrf
                                             @method('PUT')
                                             <button class="bg-blue-600 text-white py-2 px-3 rounded-full" type="submit">Complete Task</button>
