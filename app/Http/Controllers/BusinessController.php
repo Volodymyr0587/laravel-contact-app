@@ -13,7 +13,7 @@ class BusinessController extends Controller
      */
     public function index()
     {
-        return view('business.index')->with(['business' => Business::all(), 'tags' => Tag::all()]);
+        return view('business.index')->with(['businesses' => Business::paginate(10), 'tags' => Tag::all()]);
     }
 
     /**

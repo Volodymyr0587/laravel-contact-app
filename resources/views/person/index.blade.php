@@ -50,6 +50,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $people->links() }}
                 </div>
             </div>
         </div>

@@ -25,7 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($business as $business)
+                            @foreach ($businesses as $business)
                                 <tr>
                                     <td><a href="{{ route('business.show', $business->id) }}"
                                         class="text-blue-700 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
@@ -53,6 +53,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $businesses->links() }}
                 </div>
             </div>
         </div>
