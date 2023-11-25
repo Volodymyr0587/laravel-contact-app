@@ -21,6 +21,7 @@
                                 <th>Contact Email</th>
                                 <th>Categories</th>
                                 <th>Tags</th>
+                                <th>#people</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -41,6 +42,9 @@
                                         @foreach ($business->tags as $tag)
                                         <span class="bg-green-500 py-1 px-1 rounded-full">{{ $tag->tag_name }}</span>
                                         @endforeach
+                                    </td>
+                                    <td>
+                                        {{ $business->people_count }}
                                     </td>
                                     <td>
                                         <a href="{{ route('business.edit', $business->id) }}" class="flex justify-center items-center">
