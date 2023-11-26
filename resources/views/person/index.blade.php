@@ -5,8 +5,9 @@
                 {{ __('People') }}
             </h2>
             <form action="{{ route('person.search') }}" method="GET">
-                <input type="text" name="search" required/>
-                <button type="submit">Search</button>
+                <input class="rounded-md" type="text" name="search" required/>
+                <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
+                type="submit">Search</button>
             </form>
         </div>
     </x-slot>
