@@ -46,7 +46,9 @@
                                     <td>
                                         @foreach ($person->tags as $tag)
                                             <span
-                                                class="bg-green-500 py-1 px-1 rounded-full">{{ $tag->tag_name }}</span>
+                                                class="bg-green-500 py-1 px-1 rounded-full">
+                                                <a href="{{ route('person.getByTag', $tag->tag_name) }}">{{ $tag->tag_name }}</a>
+                                            </span>
                                         @endforeach
                                     </td>
                                     <td>

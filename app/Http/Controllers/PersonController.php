@@ -120,6 +120,16 @@ class PersonController extends Controller
         return view('person.search')->with(['people' => $people, 'search' => $search]);
     }
 
+    public function getByTag($tag)
+    {
+        $tagModel = Tag::where('tag_name', $tag)->firstOrFail();
+        $people = $tagModel->people()->paginate(4);
+
+        return view('person.index', ['people' => $people]);
+        // $people = Tag::where('tag_name', $tag)->firstOrFail()->people;
+        // return view('person.index')->with(['people' => $people, Person::paginate(10)]);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
