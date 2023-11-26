@@ -26,6 +26,7 @@ class PersonRequest extends FormRequest
             'lastname' => 'required',
             'email' => 'nullable|email',
             'phone' => 'nullable',
+            'image' => 'image|mimes:png,jpg,jpeg|max:2048',
             'business_id' => 'nullable',
         ];
     }

@@ -19,6 +19,11 @@
                         <div class="sm:col-span-3">
                             <h3 class="font-semibold text-l pb-5">Person Details</h3>
                             <dl>
+                                <dt class="font-semibold">Photo</dt>
+                                <dd class="pl-3">
+                                    <img src="{{ asset('/public/images/no-image.png') }}" alt="Photo">
+                                    <img src="{{ $person->image ? asset('storage' . $person->image) : asset('/images/no_image.png') }}" alt="Photo">
+                                </dd>
                                 <dt class="font-semibold">Name</dt>
                                 <dd class="pl-3">{{ $person->firstname }} {{ $person->lastname }}</dd>
                                 <dt class="font-semibold">Phone</dt>

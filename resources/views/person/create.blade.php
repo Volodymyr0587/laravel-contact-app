@@ -12,7 +12,8 @@
 
                     <h3 class="font-semibold pb-5">Add a new person</h3>
 
-                    <form action="{{ route('person.store') }}" method="POST">
+                    <form action="{{ route('person.store') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
 
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
@@ -55,6 +56,17 @@
                                     value="{{ old('phone') }}">
 
                                 @error('phone')
+                                    <div class="text-red-500 mt-2 text-sm">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </span>
+                            <span class="sm:col-span-3">
+                                <label class="block" for="image">Image</label>
+                                <input class="block w-full" type="file" name="image" id="image"
+                                    value="{{ old('image') }}">
+
+                                @error('image')
                                     <div class="text-red-500 mt-2 text-sm">
                                         {{ $message }}
                                     </div>

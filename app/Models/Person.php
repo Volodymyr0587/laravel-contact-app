@@ -18,6 +18,7 @@ class Person extends Model
         'lastname',
         'email',
         'phone',
+        'image',
         'business_id',
     ];
 

@@ -53,8 +53,14 @@ class PersonController extends Controller
         // $person->business_id = $request->business_id;
 
         // $person->save();
-
         $person = Person::create($request->validated());
+
+        if ($request->hasFile('image')) {
+            $image = $request->image;
+            $imageName = time() . '_' . $person->firstname . '_' . $person->lastname . '.' . $image->extension();
+            // $image->storeAs('images', $imageName, 'public');
+            $image->move(public_path('images'), $imageName);
+        }
 
         $person->tags()->sync($request->tags);
 
@@ -97,6 +103,12 @@ class PersonController extends Controller
         // $person->save();
 
         $person->update($request->validated());
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $person->firstname . '_' . $person->lastname . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('images', $imageName, 'public');
+        }
 
         $person->tags()->sync($request->tags);
 

@@ -12,7 +12,8 @@
 
                     <h3 class="font-semibold pb-5">Edit a person: {{ $person->firstname }} {{ $person->lastname }}</h3>
 
-                    <form action="{{ route('person.update', $person->id) }}" method="POST">
+                    <form action="{{ route('person.update', $person->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -36,6 +37,11 @@
                                 <label class="block" for="phone">Phone</label>
                                 <input class="block w-full" type="text" name="phone" id="phone"
                                     value="{{ old('phone', $person->phone) }}">
+                            </span>
+                            <span class="sm:col-span-3">
+                                <label class="block" for="image">Image</label>
+                                <input class="block w-full" type="file" name="image" id="image"
+                                    value="{{ old('image') }}">
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="business">Business</label>
