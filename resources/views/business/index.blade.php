@@ -48,8 +48,10 @@
                                     </td>
                                     <td>
                                         @foreach ($business->tags as $tag)
-                                            <span
-                                                class="bg-green-500 py-1 px-1 rounded-full">{{ $tag->tag_name }}</span>
+                                            <span class="bg-green-500 py-1 px-1 rounded-full">
+                                                <a
+                                                    href="{{ route('business.getByTag', $tag->tag_name) }}">{{ $tag->tag_name }}</a>
+                                            </span>
                                         @endforeach
                                     </td>
                                     <td>

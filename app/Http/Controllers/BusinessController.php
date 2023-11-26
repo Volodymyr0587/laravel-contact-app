@@ -81,6 +81,14 @@ class BusinessController extends Controller
         return view('business.search')->with(['businesses' => $businesses, 'search' => $search]);
     }
 
+    public function getByTag($tag)
+    {
+        $tagModel = Tag::where('tag_name', $tag)->firstOrFail();
+        $businesses = $tagModel->businesses()->paginate(4);
+
+        return view('business.index', ['businesses' => $businesses]);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
