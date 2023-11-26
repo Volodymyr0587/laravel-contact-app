@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Search People Result') }}
+            {{ __('People. Search result ror ') }} <span class="italic">"{{ $search }}"</span>
         </h2>
     </x-slot>
 

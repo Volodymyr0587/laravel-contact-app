@@ -117,7 +117,7 @@ class PersonController extends Controller
             ->orWhere('lastname', 'LIKE', "%{$search}%")
             ->get();
 
-        return view('person.search')->with('people', $people);
+        return view('person.search')->with(['people' => $people, 'search' => $search]);
     }
 
     /**
