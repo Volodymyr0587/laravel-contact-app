@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use App\Models\Business;
+use Illuminate\Http\Request;
 use App\Http\Requests\BusinessRequest;
 
 class BusinessController extends Controller
@@ -62,6 +63,22 @@ class BusinessController extends Controller
         $business->tags()->sync($request->tags);
 
         return redirect(route('business.index'));
+    }
+
+    /**
+     * Search business
+     */
+    public function search(Request $request)
+    {
+        // Get the search value from teh request
+        $search = $request->input('search');
+
+        // Search in the business_name column from the business table
+        $businesses = Business::query()
+            ->where('business_name', 'LIKE', "%{$search}%")
+            ->get();
+
+        return view('business.search')->with(['businesses' => $businesses, 'search' => $search]);
     }
 
     /**

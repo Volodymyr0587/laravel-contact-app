@@ -50,6 +50,7 @@ Route::controller(BusinessController::class)->prefix('business')->name('business
     Route::get('/{business}/show', 'show')->name('.show');
     Route::get('/{business}/edit', 'edit')->name('.edit');
     Route::put('/{business}/update', 'update')->name('.update');
+    Route::get('/search', 'search')->name('.search');
     Route::delete('/{business}/destroy', 'destroy')->name('.destroy');
 });
 
