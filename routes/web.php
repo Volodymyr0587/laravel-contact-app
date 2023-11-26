@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\PersonController;
@@ -55,6 +56,16 @@ Route::controller(TaskController::class)->prefix('task')->name('task')->middlewa
     Route::get('/', 'index')->name('.index');
     Route::post('/store', 'store')->name('.store');
     Route::put('/{task}/complete', 'complete')->name('.complete');
+});
+
+Route::controller(TagController::class)->prefix('tag')->name('tag')->middleware('auth')->group(function(){
+    Route::get('/', 'index')->name('.index');
+    Route::get('/create', 'create')->name('.create');
+    Route::post('/store', 'store')->name('.store');
+    // Route::get('/{tag}/show', 'show')->name('.show');
+    Route::get('/{tag}/edit', 'edit')->name('.edit');
+    Route::put('/{tag}/update', 'update')->name('.update');
+    Route::delete('/{tag}/destroy', 'destroy')->name('.destroy');
 });
 
 require __DIR__.'/auth.php';
