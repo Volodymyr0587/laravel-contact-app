@@ -19,6 +19,14 @@
                                 <dd class="pl-3">{{ $person->phone }}</dd>
                                 <dt class="font-semibold">Email</dt>
                                 <dd class="pl-3">{{ $person->email }}</dd>
+                                <dt class="font-semibold">Birthday</dt>
+                                <dd class="pl-3">{{ $person->birthday }}</dd>
+                                <dt class="font-semibold">Tags</dt>
+                                <dd class="pl-3">
+                                    @foreach ($person->tags as $tag)
+                                        <span class="bg-green-600 text-white text-xs px-1 rounded-full">{{ $tag->tag_name }}</span>
+                                    @endforeach
+                                </dd>
                             </dl>
 
                             <div class="pt-3">
