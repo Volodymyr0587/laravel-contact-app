@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PersonRequest;
-use App\Models\Business;
-use App\Models\Person;
 use App\Models\Tag;
+use App\Models\Person;
+use App\Models\Business;
+use Illuminate\Http\Request;
+use App\Http\Requests\PersonRequest;
 
 class PersonController extends Controller
 {
@@ -100,6 +101,23 @@ class PersonController extends Controller
         $person->tags()->sync($request->tags);
 
         return redirect(route('person.index'));
+    }
+
+    /**
+     * Search person
+     */
+    public function search(Request $request)
+    {
+        // Get the search value from teh request
+        $search = $request->input('search');
+
+        // Search in the firstname and lastname columns from the people table
+        $people = Person::query()
+            ->where('firstname', 'LIKE', "%{$search}%")
+            ->orWhere('lastname', 'LIKE', "%{$search}%")
+            ->get();
+
+        return view('person.search')->with('people', $people);
     }
 
     /**

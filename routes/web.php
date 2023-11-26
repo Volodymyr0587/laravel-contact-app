@@ -39,6 +39,7 @@ Route::controller(PersonController::class)->prefix('person')->name('person')->mi
     Route::get('/{person}/show', 'show')->name('.show');
     Route::get('/{person}/edit', 'edit')->name('.edit');
     Route::put('/{person}/update', 'update')->name('.update');
+    Route::get('/search', 'search')->name('.search');
     Route::delete('/{person}/destroy', 'destroy')->name('.destroy');
 });
 
