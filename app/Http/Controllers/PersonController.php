@@ -42,7 +42,8 @@ class PersonController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $path = $image->store('public/images');
+            $custom_name = time() . '_' . $person->firstname . '_' . $person->lastname . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('public/images', $custom_name);
             $person->image = $path;
             $person->save();
         }
