@@ -38,28 +38,13 @@ class PersonController extends Controller
      */
     public function store(PersonRequest $request)
     {
-        // $validated = $request->validate([
-        //     'firstname' => 'required',
-        //     'lastname' => 'required',
-        //     'email' => 'nullable|email',
-        // ]);
-
-        // $person = new Person;
-
-        // $person->firstname = $request->firstname;
-        // $person->lastname = $request->lastname;
-        // $person->email = $request->email;
-        // $person->phone = $request->phone;
-        // $person->business_id = $request->business_id;
-
-        // $person->save();
         $person = Person::create($request->validated());
 
         if ($request->hasFile('image')) {
-            $image = $request->image;
-            $imageName = time() . '_' . $person->firstname . '_' . $person->lastname . '.' . $image->extension();
-            // $image->storeAs('images', $imageName, 'public');
-            $image->move(public_path('images'), $imageName);
+            $image = $request->file('image');
+            $path = $image->store('public/images');
+            $person->image = $path;
+            $person->save();
         }
 
         $person->tags()->sync($request->tags);
@@ -88,26 +73,13 @@ class PersonController extends Controller
      */
     public function update(PersonRequest $request, Person $person)
     {
-        // $validated = $request->validate([
-        //     'firstname' => 'required',
-        //     'lastname' => 'required',
-        //     'email' => 'nullable|email',
-        // ]);
-
-        // $person->firstname = $request->firstname;
-        // $person->lastname = $request->lastname;
-        // $person->email = $request->email;
-        // $person->phone = $request->phone;
-        // $person->business_id = $request->business_id;
-
-        // $person->save();
-
         $person->update($request->validated());
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = time() . '_' . $person->firstname . '_' . $person->lastname . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('images', $imageName, 'public');
+            $path = $image->store('public/images');
+            $person->image = $path;
+            $person->save();
         }
 
         $person->tags()->sync($request->tags);
@@ -137,9 +109,9 @@ class PersonController extends Controller
         $tagModel = Tag::where('tag_name', $tag)->firstOrFail();
         $people = $tagModel->people()->paginate(4);
 
-        return view('person.index', ['people' => $people]);
+        // return view('person.index', ['people' => $people]);
         // $people = Tag::where('tag_name', $tag)->firstOrFail()->people;
-        // return view('person.index')->with(['people' => $people, Person::paginate(10)]);
+        return view('person.index')->with(['people' => $people]);
     }
 
     /**

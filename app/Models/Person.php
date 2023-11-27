@@ -38,4 +38,18 @@ class Person extends Model
     {
         return $this->morphToMany(Tag::class, 'taggable');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Listen for the "deleting" event and delete the associated image
+        static::deleting(function ($person) {
+            // Check if the person has an image
+            if (!is_null($person->image)) {
+                // Delete the image file
+                \Storage::delete($person->image);
+            }
+        });
+    }
 }
