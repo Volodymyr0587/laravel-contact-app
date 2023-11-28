@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
@@ -70,6 +71,16 @@ Route::controller(TagController::class)->prefix('tag')->name('tag')->middleware(
     Route::get('/{tag}/edit', 'edit')->name('.edit');
     Route::put('/{tag}/update', 'update')->name('.update');
     Route::delete('/{tag}/destroy', 'destroy')->name('.destroy');
+});
+
+Route::controller(NoteController::class)->prefix('note')->name('note')->middleware('auth')->group(function(){
+    Route::get('/', 'index')->name('.index');
+    Route::get('/create', 'create')->name('.create');
+    Route::post('/store', 'store')->name('.store');
+    Route::get('/{note}/show', 'show')->name('.show');
+    Route::get('/{note}/edit', 'edit')->name('.edit');
+    Route::put('/{note}/update', 'update')->name('.update');
+    Route::delete('/{note}/destroy', 'destroy')->name('.destroy');
 });
 
 require __DIR__.'/auth.php';
