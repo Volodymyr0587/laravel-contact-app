@@ -21,7 +21,7 @@
                             <div class="pl-3">
                                 <img class="object-contain object-left h-48 w-96" src="{{ $note->image ? Storage::url($note->image) : asset('/images/note-no-image.png') }}" alt="Photo">
                             </div>
-                            <div>
+                            <div class="pl-3 mt-5">
                                 {{ $note->body }}
                             </div>
                             <dl>

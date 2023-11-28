@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\NoteRequest;
 use App\Models\Note;
 use App\Models\NoteTag;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\NoteRequest;
 
 class NoteController extends Controller
 {
@@ -14,7 +15,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        return view('note.index')->with('notes', Note::paginate(10));
+        return view('note.index')->with('notes', Note::orderBy('created_at', 'desc')->paginate(10));
     }
 
     /**
@@ -50,6 +51,39 @@ class NoteController extends Controller
         }
 
         $note->tags()->sync($tags);
+
+        // Find other notes with the same tags
+        $relatedNotes = Note::whereHas('tags', function ($query) use ($tags) {
+            $query->whereIn('note_tag_id', $tags);
+        })->where('id', '!=', $note->id)->get();
+
+        $relatedNotesArr = [];
+        foreach ($relatedNotes as $relatedNote) {
+            $body = $relatedNote->body;
+            $relatedNotesArr[] = $body;
+        }
+        // dd($relatedNotesArr);
+        //     // Use a regular expression to find tags in the text
+        //     preg_match_all('/\b(' . implode('|', $tagNames) . ')\b/i', $body, $matches);
+
+        //     // Replace each tag with a link
+        //     foreach ($matches[0] as $match) {
+        //         $tag = NoteTag::where('tag_name', $match)->first();
+
+        //         if ($tag) {
+        //             $notes = $this->getByTag($match)->getData()['notes']->items();
+        //             foreach ($notes as $note) {
+        //                 $link = route('note.index', $note->id);
+        //                 // dd($link); // http://127.0.0.1:8000/note?32
+        //                 $body = str_replace($match, "<a href='$link' class='text-blue-500 underline'>$match</a>", $body);
+        //                 // $body = Str::replaceFirst($match, "<a href=\"$link\">$match</a>", $body);
+        //             }
+        //         }
+        //     }
+
+        //     // Update the note's body with the replaced text
+        //     $relatedNote->update(['body' => $body]);
+        // }
 
 
         return redirect(route('note.index'));
