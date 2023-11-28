@@ -44,11 +44,11 @@
                         </x-dropdown>
                     </div>
 
-                    <x-nav-link :href="route('task.index')" :active="request()->routeIs('task')">
+                    <x-nav-link :href="route('task.index')" :active="request()->routeIs('task.index')">
                         {{ __('Tasks') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('tag.index')" :active="request()->routeIs('tag')">
+                    <x-nav-link :href="route('tag.index')" :active="request()->routeIs('tag.index')">
                         {{ __('Tags') }}
                     </x-nav-link>
                 </div>
