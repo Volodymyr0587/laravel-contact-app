@@ -7,7 +7,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
                 </svg>
             </a>
-            {{ __('People. Search result ror ') }} <span class="italic">"{{ $search }}"</span>
+            {{ __('Notes. Search result ror ') }} <span class="italic">"{{ $search }}"</span>
         </h2>
     </x-slot>
 
@@ -16,36 +16,31 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    @if ($people->isNotEmpty())
+                    @if ($notes->isNotEmpty())
                         <table class="table-fixed border-separate border-spacing-6">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Business</th>
-                                    <th>Tags</th>
+                                    <th>Title</th>
+                                    <th>Keywords</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($people as $person)
+                                @foreach ($notes as $note)
                                     <tr>
-                                        <td><a href="{{ route('person.show', $person->id) }}"
+                                        <td><a href="{{ route('note.show', $note->id) }}"
                                                 class="text-blue-700 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
-                                                {{ $person->firstname }} {{ $person->lastname }}</a></td>
-                                        <td>{{ $person->email }}</td>
-                                        <td>{{ $person->phone }}</td>
-                                        <td class="{{ $person->business?->deleted_at ? 'italic' : 'non-italic' }}">
-                                            {{ $person->business?->business_name }}</td>
+                                                {{ $note->title }}</a></td>
                                         <td>
-                                            @foreach ($person->tags as $tag)
-                                                <span
-                                                    class="bg-green-500 py-1 px-1 rounded-full">{{ $tag->tag_name }}</span>
+                                            @foreach ($note->tags as $tag)
+                                                <span class="bg-green-500 py-1 px-1 rounded-full">
+                                                    <a
+                                                        href="{{ route('note.getByTag', $tag->tag_name) }}">{{ $tag->tag_name }}</a>
+                                                </span>
                                             @endforeach
                                         </td>
                                         <td>
-                                            <a href="{{ route('person.edit', $person->id) }}"
+                                            <a href="{{ route('note.edit', $note->id) }}"
                                                 class="flex justify-center items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -59,7 +54,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{-- {{ $people->links() }} --}}
+                        {{ $notes->links() }}
                     @else
                         <div>
                             <h2>No results</h2>

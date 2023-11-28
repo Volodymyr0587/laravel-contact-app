@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Notes') }}
             </h2>
-            <form action="{{ route('person.search') }}" method="GET">
+            <form action="{{ route('note.search') }}" method="GET">
                 <input class="rounded-md" type="text" name="search" required/>
                 <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
                 type="submit">Search</button>
@@ -26,7 +26,7 @@
                         <thead>
                             <tr>
                                 <th>Title</th>
-                                <th>Tags</th>
+                                <th>Keywords</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -36,20 +36,16 @@
                                     <td><a href="{{ route('note.show', $note->id) }}"
                                             class="text-blue-700 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
                                             {{ $note->title }}</a></td>
-                                    <td>{{ $person->email }}</td>
-                                    <td>{{ $person->phone }}</td>
-                                    <td class="{{ $person->business?->deleted_at ? 'italic' : 'non-italic' }}">
-                                        {{ $person->business?->business_name }}</td>
                                     <td>
-                                        @foreach ($person->tags as $tag)
+                                        @foreach ($note->tags as $tag)
                                             <span
                                                 class="bg-green-500 py-1 px-1 rounded-full">
-                                                <a href="{{ route('person.getByTag', $tag->tag_name) }}">{{ $tag->tag_name }}</a>
+                                                <a href="{{ route('note.getByTag', $tag->tag_name) }}">{{ $tag->tag_name }}</a>
                                             </span>
                                         @endforeach
                                     </td>
                                     <td>
-                                        <a href="{{ route('person.edit', $person->id) }}"
+                                        <a href="{{ route('note.edit', $note->id) }}"
                                             class="flex justify-center items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor"

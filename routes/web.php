@@ -80,6 +80,8 @@ Route::controller(NoteController::class)->prefix('note')->name('note')->middlewa
     Route::get('/{note}/show', 'show')->name('.show');
     Route::get('/{note}/edit', 'edit')->name('.edit');
     Route::put('/{note}/update', 'update')->name('.update');
+    Route::get('/search', 'search')->name('.search');
+    Route::get('/tag/{tag_name}', 'getByTag')->name('.getByTag');
     Route::delete('/{note}/destroy', 'destroy')->name('.destroy');
 });
 

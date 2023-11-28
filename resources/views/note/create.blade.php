@@ -12,8 +12,7 @@
 
                     <h3 class="font-semibold pb-5">Add a new note</h3>
 
-                    <form action="{{ route('note.store') }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('note.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
@@ -41,8 +40,7 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="body">Content</label>
-                                <textarea class="block w-full" type="text" name="body" id="body"
-                                >{{ old('body') }}</textarea>
+                                <textarea class="block w-full" type="text" name="body" id="body">{{ old('body') }}</textarea>
 
                                 @error('body')
                                     <div class="text-red-500 mt-2 text-sm">
@@ -54,12 +52,15 @@
 
                         <h4 class="font-semibold pt-5">Tags</h4>
                         <div class="grid grid-cols-1 sm:grid-cols-12 gap-x-6 gap-y-6">
-                            @foreach ($note_tags as $tag)
+                            {{-- @foreach ($note_tags as $tag)
                                 <span class="sm:col-span-2">
                                     <input type="checkbox" id="tag{{ $tag->id }}" name="tags[]" value="{{ $tag->id }}">
                                     <label for="tag{{ $tag->id }}">{{ $tag->tag_name }}</label>
                                 </span>
-                            @endforeach
+                            @endforeach --}}
+                            <span class="sm:col-span-2">
+                                <input type="text" id="tags" name="tags">
+                            </span>
                         </div>
 
                         <div class="mt-6 flex items-center justify-end gap-x-6">

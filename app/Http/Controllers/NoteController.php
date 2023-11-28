@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NoteRequest;
 use App\Models\Note;
 use App\Models\NoteTag;
 use Illuminate\Http\Request;
@@ -27,9 +28,31 @@ class NoteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NoteRequest $request)
     {
-        //
+        $note = Note::create($request->validated());
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $custom_name = time() . '_' . preg_replace('/\s+/', '_', $note->title) . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('public/images/notes', $custom_name);
+            $note->image = $path;
+            $note->save();
+        }
+
+        $tagNames = explode(" ", preg_replace('/\s+/', ' ', trim($request->tags)));
+
+        $tags = [];
+
+        foreach ($tagNames as $tagName) {
+            $tag = NoteTag::firstOrCreate(['tag_name' => $tagName]);
+            $tags[] = $tag->id;
+        }
+
+        $note->tags()->sync($tags);
+
+
+        return redirect(route('note.index'));
     }
 
     /**
@@ -37,7 +60,7 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        //
+        return view('note.detail')->with('note', $note);
     }
 
     /**
@@ -45,15 +68,62 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-        //
+        return view('note.edit')->with(['note' => $note, 'tags' => NoteTag::all()]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Note $note)
+    public function update(NoteRequest $request, Note $note)
     {
-        //
+        $note->update($request->validated());
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $custom_name = time() . '_' . preg_replace('/\s+/', '_', $note->title) . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('public/images/notes', $custom_name);
+            $note->image = $path;
+            $note->save();
+        }
+
+        $tagNames = explode(" ", preg_replace('/\s+/', ' ', trim($request->tags)));
+
+        $tags = [];
+
+        foreach ($tagNames as $tagName) {
+            $tag = NoteTag::firstOrCreate(['tag_name' => $tagName]);
+            $tags[] = $tag->id;
+        }
+
+        $note->tags()->sync($tags);
+
+
+        return redirect(route('note.index'));
+    }
+
+    /**
+     * Search notes
+     */
+    public function search(Request $request)
+    {
+        // Get the search value from teh request
+        $search = $request->input('search');
+
+        // Search in the firstname and lastname columns from the notes table
+        $notes = Note::query()
+            ->where('title', 'LIKE', "%{$search}%")
+            ->orWhere('body', 'LIKE', "%{$search}%")
+            ->paginate(5);
+
+        return view('note.search')->with(['notes' => $notes, 'search' => $search]);
+    }
+
+    public function getByTag($tag)
+    {
+        $tagModel = NoteTag::where('tag_name', $tag)->firstOrFail();
+        $notes = $tagModel->notes()->paginate(4);
+
+        return view('note.index')->with(['notes' => $notes]);
     }
 
     /**
@@ -61,6 +131,22 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
-        //
+        $tagsToDelete = $note->tags;
+
+    // Detach the tags from the note
+    $note->tags()->detach();
+
+    // Check if any of the detached tags are not associated with any other notes
+    foreach ($tagsToDelete as $tag) {
+        if ($tag->notes()->count() === 0) {
+            // If the tag is not associated with any other notes, delete it
+            $tag->delete();
+        }
+    }
+
+    // Delete the note
+    $note->delete();
+
+    return redirect(route('note.index'));
     }
 }
