@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
+use App\Models\NoteTag;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
@@ -12,7 +13,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        //
+        return view('note.index')->with('notes', Note::paginate(10));
     }
 
     /**
@@ -20,7 +21,7 @@ class NoteController extends Controller
      */
     public function create()
     {
-        //
+        return view('note.create')->with('note_tags', NoteTag::all());
     }
 
     /**
