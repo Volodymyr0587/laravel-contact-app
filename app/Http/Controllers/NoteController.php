@@ -25,6 +25,22 @@ class NoteController extends Controller
         return view('note.create')->with('note_tags', NoteTag::all());
     }
 
+
+    /**
+     * Tag handling method
+     */
+    private function syncTags(Note $note, $tagNames)
+    {
+        $tags_id = [];
+
+        foreach ($tagNames as $tagName) {
+            $tag = NoteTag::firstOrCreate(['tag_name' => $tagName]);
+            $tags_id[] = $tag->id;
+        }
+
+        $note->tags()->sync($tags_id);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -42,14 +58,7 @@ class NoteController extends Controller
 
         $tagNames = explode(" ", preg_replace('/\s+/', ' ', trim($request->tags)));
 
-        $tags_id = [];
-
-        foreach ($tagNames as $tagName) {
-            $tag = NoteTag::firstOrCreate(['tag_name' => $tagName]);
-            $tags_id[] = $tag->id;
-        }
-
-        $note->tags()->sync($tags_id);
+        $this->syncTags($note, $tagNames);
 
         return redirect(route('note.index'));
     }
