@@ -24,7 +24,7 @@
                                     alt="Photo">
                             </div>
                             <div class="pl-3 mt-5">
-                                {{ $note->body }}
+                                {!! $note->body !!}
                             </div>
                             <dl>
                                 <dd>
@@ -41,7 +41,7 @@
                                     Related notes:
                                     @if ($relatedNotes->isNotEmpty())
                                         @foreach ($relatedNotes as $relatedNote)
-                                            <span class="bg-green-600 text-white text-sm px-2 py-2 rounded-full">
+                                            <span class="bg-green-600 text-white text-sm px-2 py-1 rounded-full">
                                                 <a href="{{ route('note.show', $relatedNote->id) }}">
                                                     {{ $relatedNote->title }}
                                                 </a>

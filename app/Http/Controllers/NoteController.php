@@ -60,6 +60,22 @@ class NoteController extends Controller
 
         $this->syncTags($note, $tagNames);
 
+        foreach ($tagNames as $tagName) {
+            $relatedNotes = Note::whereHas('tags', function ($query) use ($note) {
+                $query->whereIn('note_tag_id', $note->tags->pluck('id'));
+            })->where('id', '!=', $note->id)->get();
+
+            // Add links to related articles
+            foreach ($relatedNotes as $relatedNote) {
+                // Check if the tag is present in the related note's body
+                if (stripos($relatedNote->body, $tagName) !== false) {
+                    // Create a link in the text
+                    $linkText = "<a href='" . route('note.show', $note->id) . "' class='text-blue-500 font-bold'>$tagName</a>";
+                    $relatedNote->body = str_ireplace($tagName, $linkText, $relatedNote->body);
+                    $relatedNote->save();
+                }
+            }
+        }
         return redirect(route('note.index'));
     }
 
