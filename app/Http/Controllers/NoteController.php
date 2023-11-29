@@ -52,40 +52,6 @@ class NoteController extends Controller
 
         $note->tags()->sync($tags);
 
-        // Find other notes with the same tags
-        $relatedNotes = Note::whereHas('tags', function ($query) use ($tags) {
-            $query->whereIn('note_tag_id', $tags);
-        })->where('id', '!=', $note->id)->get();
-
-        $relatedNotesArr = [];
-        foreach ($relatedNotes as $relatedNote) {
-            $body = $relatedNote->body;
-            $relatedNotesArr[] = $body;
-        }
-        // dd($relatedNotesArr);
-        //     // Use a regular expression to find tags in the text
-        //     preg_match_all('/\b(' . implode('|', $tagNames) . ')\b/i', $body, $matches);
-
-        //     // Replace each tag with a link
-        //     foreach ($matches[0] as $match) {
-        //         $tag = NoteTag::where('tag_name', $match)->first();
-
-        //         if ($tag) {
-        //             $notes = $this->getByTag($match)->getData()['notes']->items();
-        //             foreach ($notes as $note) {
-        //                 $link = route('note.index', $note->id);
-        //                 // dd($link); // http://127.0.0.1:8000/note?32
-        //                 $body = str_replace($match, "<a href='$link' class='text-blue-500 underline'>$match</a>", $body);
-        //                 // $body = Str::replaceFirst($match, "<a href=\"$link\">$match</a>", $body);
-        //             }
-        //         }
-        //     }
-
-        //     // Update the note's body with the replaced text
-        //     $relatedNote->update(['body' => $body]);
-        // }
-
-
         return redirect(route('note.index'));
     }
 
@@ -167,20 +133,20 @@ class NoteController extends Controller
     {
         $tagsToDelete = $note->tags;
 
-    // Detach the tags from the note
-    $note->tags()->detach();
+        // Detach the tags from the note
+        $note->tags()->detach();
 
-    // Check if any of the detached tags are not associated with any other notes
-    foreach ($tagsToDelete as $tag) {
-        if ($tag->notes()->count() === 0) {
-            // If the tag is not associated with any other notes, delete it
-            $tag->delete();
+        // Check if any of the detached tags are not associated with any other notes
+        foreach ($tagsToDelete as $tag) {
+            if ($tag->notes()->count() === 0) {
+                // If the tag is not associated with any other notes, delete it
+                $tag->delete();
+            }
         }
-    }
 
-    // Delete the note
-    $note->delete();
+        // Delete the note
+        $note->delete();
 
-    return redirect(route('note.index'));
+        return redirect(route('note.index'));
     }
 }

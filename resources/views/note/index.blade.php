@@ -5,9 +5,9 @@
                 {{ __('Notes') }}
             </h2>
             <form action="{{ route('note.search') }}" method="GET">
-                <input class="rounded-md" type="text" name="search" required/>
+                <input class="rounded-md" type="text" name="search" required />
                 <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                type="submit">Search</button>
+                    type="submit">Search</button>
             </form>
         </div>
     </x-slot>
@@ -38,8 +38,7 @@
                                             {{ $note->title }}</a></td>
                                     <td>
                                         @foreach ($note->tags as $tag)
-                                            <span
-                                                class="bg-green-500 py-1 px-1 rounded-full">
+                                            <span class="bg-green-500 py-1 px-1 rounded-full">
                                                 <a href="{{ route('note.getByTag', $tag->tag_name) }}">{{ $tag->tag_name }}</a>
                                             </span>
                                         @endforeach
