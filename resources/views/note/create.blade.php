@@ -48,20 +48,24 @@
                                     </div>
                                 @enderror
                             </span>
+                            <span class="sm:col-span-3">
+                                <label class="block" for="tags">Keywords [separated by a space]</label>
+                                <input class="block w-full" type="text" id="tags" name="tags" value="{{ old('tags') }}">
+                            </span>
                         </div>
 
-                        <h4 class="font-semibold pt-5">Tags</h4>
+                        {{-- <h4 class="pt-5">Keywords [separated by a space]</h4>
                         <div class="grid grid-cols-1 sm:grid-cols-12 gap-x-6 gap-y-6">
-                            {{-- @foreach ($note_tags as $tag)
+                            @foreach ($note_tags as $tag)
                                 <span class="sm:col-span-2">
                                     <input type="checkbox" id="tag{{ $tag->id }}" name="tags[]" value="{{ $tag->id }}">
                                     <label for="tag{{ $tag->id }}">{{ $tag->tag_name }}</label>
                                 </span>
-                            @endforeach --}}
-                            <span class="sm:col-span-2">
+                            @endforeach
+                            {<span class="sm:col-span-2">
                                 <input type="text" id="tags" name="tags">
                             </span>
-                        </div>
+                        </div>--}}
 
                         <div class="mt-6 flex items-center justify-end gap-x-6">
                             <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"

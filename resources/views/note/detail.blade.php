@@ -19,21 +19,45 @@
                         <div class="sm:col-span-3">
                             <h3 class="font-semibold text-l pb-5">{{ $note->title }}</h3>
                             <div class="pl-3">
-                                <img class="object-contain object-left h-48 w-96" src="{{ $note->image ? Storage::url($note->image) : asset('/images/note-no-image.png') }}" alt="Photo">
+                                <img class="object-contain object-left h-48 w-96"
+                                    src="{{ $note->image ? Storage::url($note->image) : asset('/images/note-no-image.png') }}"
+                                    alt="Photo">
                             </div>
                             <div class="pl-3 mt-5">
                                 {{ $note->body }}
                             </div>
                             <dl>
                                 <dd>
+                                    Keywords:
                                     @foreach ($note->tags as $tag)
-                                        <span class="bg-green-600 text-white text-xs px-1 rounded-full">{{ $tag->tag_name }}</span>
+                                        <span class="bg-green-600 text-white text-xs px-1 rounded-full">
+                                            <a href="{{ route('note.getByTag', $tag->tag_name) }}">
+                                                {{ $tag->tag_name }}
+                                            </a>
+                                        </span>
                                     @endforeach
+                                </dd>
+                                <dd>
+                                    Related notes:
+                                    @if ($relatedNotes->isNotEmpty())
+                                        @foreach ($relatedNotes as $relatedNote)
+                                            <span class="bg-green-600 text-white text-sm px-2 py-2 rounded-full">
+                                                <a href="{{ route('note.show', $relatedNote->id) }}">
+                                                    {{ $relatedNote->title }}
+                                                </a>
+                                            </span>
+                                        @endforeach
+                                    @else
+                                            <i> No related notes </i>
+                                    @endif
+
                                 </dd>
                             </dl>
 
                             <div class="pt-3">
-                                <a href="{{ route('note.edit', $note->id) }}" class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600">Edit Note</a>
+                                <a href="{{ route('note.edit', $note->id) }}"
+                                    class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600">Edit
+                                    Note</a>
                             </div>
                         </div>
 

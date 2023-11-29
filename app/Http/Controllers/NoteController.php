@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use App\Models\NoteTag;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\NoteRequest;
 
@@ -43,14 +42,14 @@ class NoteController extends Controller
 
         $tagNames = explode(" ", preg_replace('/\s+/', ' ', trim($request->tags)));
 
-        $tags = [];
+        $tags_id = [];
 
         foreach ($tagNames as $tagName) {
             $tag = NoteTag::firstOrCreate(['tag_name' => $tagName]);
-            $tags[] = $tag->id;
+            $tags_id[] = $tag->id;
         }
 
-        $note->tags()->sync($tags);
+        $note->tags()->sync($tags_id);
 
         return redirect(route('note.index'));
     }
@@ -60,7 +59,15 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        return view('note.detail')->with('note', $note);
+        // Get related notes with the same tags
+        $relatedNotes = Note::whereHas('tags', function ($query) use ($note) {
+            $query->whereIn('note_tag_id', $note->tags->pluck('id'));
+        })->where('id', '!=', $note->id)->get();
+
+        return view('note.detail')->with([
+            'note' => $note,
+            'relatedNotes' => $relatedNotes,
+        ]);
     }
 
     /**
@@ -88,15 +95,14 @@ class NoteController extends Controller
 
         $tagNames = explode(" ", preg_replace('/\s+/', ' ', trim($request->tags)));
 
-        $tags = [];
+        $tags_id = [];
 
         foreach ($tagNames as $tagName) {
             $tag = NoteTag::firstOrCreate(['tag_name' => $tagName]);
-            $tags[] = $tag->id;
+            $tags_id[] = $tag->id;
         }
 
-        $note->tags()->sync($tags);
-
+        $note->tags()->sync($tags_id);
 
         return redirect(route('note.index'));
     }

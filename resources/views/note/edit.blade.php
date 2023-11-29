@@ -24,24 +24,28 @@
                                     value="{{ old('title', $note->title) }}">
                             </span>
                             <span class="sm:col-span-3">
+                                <label class="block" for="image">Image</label>
+                                <input class="block w-full" type="file" name="image" id="image"
+                                    value="{{ old('image') }}">
+                            </span>
+                            <span class="sm:col-span-3">
                                 <label class="block" for="body">Content</label>
                                 <input class="block w-full" type="text" name="body" id="body"
                                     value="{{ old('body', $note->body) }}">
                             </span>
                             <span class="sm:col-span-3">
-                                <label class="block" for="image">Image</label>
-                                <input class="block w-full" type="file" name="image" id="image"
-                                    value="{{ old('image') }}">
+                                <label class="block" for="tags">Keywords [separated by a space]</label>
+                                <input class="block w-full" type="text" id="tags" name="tags" value="{{ implode(" ", $note->tags->pluck('tag_name')->toArray()) }}">
                             </span>
 
                         </div>
 
-                        <h4 class="font-semibold pt-5">Tags</h4>
+                        {{-- <h4 class="font-semibold pt-5">Keywords</h4>
                         <div class="grid grid-cols-1 sm:grid-cols-12 gap-x-6 gap-y-6">
                             <span class="sm:col-span-2">
                                 <input type="text" id="tags" name="tags" value="{{ implode(" ", $note->tags->pluck('tag_name')->toArray()) }}">
                             </span>
-                        </div>
+                        </div> --}}
 
                         <div class="mt-6 flex items-center justify-end gap-x-6">
                             <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" href="{{ route('note.show', $note->id) }}">
