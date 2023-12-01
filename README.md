@@ -1,3 +1,5 @@
+An application for storing contacts with the ability to add categories to a contact, associate a contact with a business (which can also be added as a contact category), add tags (keywords) to a contact, by which you can filter contacts. It is possible to create notes (also with keywords and filters). A system of links by keywords is implemented between the notes. There is a system for searching contacts, business and notes. For contacts and businesses, it is possible to add tasks, which can then be given the status "completed" (when a task is created, a message is sent to the e-mail).
+
 ```git clone https://github.com/Volodymyr0587/laravel-contact-app```
 
 ```cd laravel-contact-app```
