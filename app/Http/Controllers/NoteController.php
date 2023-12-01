@@ -106,14 +106,7 @@ class NoteController extends Controller
 
         $tagNames = explode(" ", preg_replace('/\s+/', ' ', trim($request->tags)));
 
-        $tags_id = [];
-
-        foreach ($tagNames as $tagName) {
-            $tag = NoteTag::firstOrCreate(['tag_name' => $tagName]);
-            $tags_id[] = $tag->id;
-        }
-
-        $note->tags()->sync($tags_id);
+        $this->syncTags($note, $tagNames);
 
         // Call the method to add links to related articles
         $this->addLinksToRelatedNotes($note, $tagNames);
