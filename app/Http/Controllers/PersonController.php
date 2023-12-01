@@ -30,7 +30,7 @@ class PersonController extends Controller
      */
     public function create()
     {
-        return view('person.create')->with(['businesses' => Business::all(), 'tags' => Tag::all()]);
+        return view('person.create')->with(['businesses' => Business::orderBy('business_name')->get(), 'tags' => Tag::all()]);
     }
 
     /**
