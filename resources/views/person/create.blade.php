@@ -61,6 +61,18 @@
                                     </div>
                                 @enderror
                             </span>
+
+                            <span class="sm:col-span-3">
+                                <label class="block" for="birthday">Date of birth</label>
+                                <input class="block w-full" type="date" name="birthday" id="birthday"
+                                    value="{{ old('birthday') }}">
+
+                                @error('birthday')
+                                    <div class="text-red-500 mt-2 text-sm">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="image">Image</label>
                                 <input class="block w-full" type="file" name="image" id="image"

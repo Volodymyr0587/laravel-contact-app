@@ -30,7 +30,7 @@
                                 <dt class="font-semibold">Email</dt>
                                 <dd class="pl-3">{{ $person->email }}</dd>
                                 <dt class="font-semibold">Birthday</dt>
-                                <dd class="pl-3">{{ $person->birthday }}</dd>
+                                <dd class="pl-3">{{ $person->birthday ?: 'No date' }}</dd>
                                 <dt class="font-semibold">Tags</dt>
                                 <dd class="pl-3">
                                     @foreach ($person->tags as $tag)
