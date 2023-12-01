@@ -25,7 +25,6 @@ class NoteController extends Controller
         return view('note.create')->with('note_tags', NoteTag::all());
     }
 
-
     /**
      * Tag handling method
      */
@@ -60,26 +59,9 @@ class NoteController extends Controller
 
         $this->syncTags($note, $tagNames);
 
-        $relatedNotes = Note::whereHas('tags', function ($query) use ($note) {
-            $query->whereIn('note_tag_id', $note->tags->pluck('id'));
-        })->where('id', '!=', $note->id)->get();
+        // Call the method to add links to related articles
+        $this->addLinksToRelatedNotes($note, $tagNames);
 
-        foreach ($tagNames as $tagName) {
-            // Add links to related articles
-            foreach ($relatedNotes as $relatedNote) {
-                // Use regular expressions with a callback function for replacement
-                $relatedNote->body = preg_replace_callback(
-                    "/\b$tagName\b/i",
-                    function ($matches) use ($note, $tagName) {
-                        // Create a link in the text
-                        return "<a href='" . route('note.show', $note->id) . "' class='text-blue-500 underline font-bold'>$matches[0]</a>";
-                    },
-                    $relatedNote->body
-                );
-
-                $relatedNote->save();
-            }
-        }
         return redirect(route('note.index'));
     }
 
@@ -133,6 +115,9 @@ class NoteController extends Controller
 
         $note->tags()->sync($tags_id);
 
+        // Call the method to add links to related articles
+        $this->addLinksToRelatedNotes($note, $tagNames);
+
         return redirect(route('note.index'));
     }
 
@@ -166,6 +151,9 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
+        // Find and remove links pointing to the deleted note
+        $this->removeLinksToDeletedNote($note);
+
         $tagsToDelete = $note->tags;
 
         // Detach the tags from the note
@@ -178,10 +166,50 @@ class NoteController extends Controller
                 $tag->delete();
             }
         }
-
         // Delete the note
         $note->delete();
 
         return redirect(route('note.index'));
+    }
+
+
+    private function addLinksToRelatedNotes(Note $note, $tagNames)
+    {
+        $relatedNotes = Note::whereHas('tags', function ($query) use ($note) {
+            $query->whereIn('note_tag_id', $note->tags->pluck('id'));
+        })->where('id', '!=', $note->id)->get();
+
+        foreach ($tagNames as $tagName) {
+            // Add links to related articles
+            foreach ($relatedNotes as $relatedNote) {
+                // Use regular expressions with a callback function for replacement
+                $relatedNote->body = preg_replace_callback(
+                    "/\b$tagName\b/i",
+                    function ($matches) use ($note, $tagName) {
+                        // Create a link in the text
+                        return "<a href='" . route('note.show', $note->id) . "' class='text-blue-500 underline font-bold'>$matches[0]</a>";
+                    },
+                    $relatedNote->body
+                );
+                $relatedNote->save();
+            }
+        }
+    }
+
+    private function removeLinksToDeletedNote(Note $deletedNote)
+    {
+        // Find all notes that have links to the deleted note
+        $notesWithLinks = Note::where('body', 'like', "%href='" . route('note.show', $deletedNote->id) . "%")
+            ->get();
+
+        // Remove links to the deleted note from other notes
+        foreach ($notesWithLinks as $noteWithLinks) {
+            $noteWithLinks->body = preg_replace(
+                "/<a\s+href='" . preg_quote(route('note.show', $deletedNote->id), '/') . "'[^>]*>(.*?)<\/a>/i",
+                '$1',
+                $noteWithLinks->body
+            );
+            $noteWithLinks->save();
+        }
     }
 }

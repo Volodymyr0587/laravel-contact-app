@@ -31,7 +31,7 @@
                             <span class="sm:col-span-3">
                                 <label class="block" for="body">Content</label>
                                 <input class="block w-full" type="text" name="body" id="body"
-                                    value="{{ old('body', $note->body) }}">
+                                    value="{{ old('body', strip_tags($note->body)) }}">
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="tags">Keywords [separated by a space]</label>
