@@ -96,11 +96,19 @@ class PersonController extends Controller
         // Get the search value from teh request
         $search = $request->input('search');
 
-        // Search in the firstname and lastname columns from the people table
-        $people = Person::query()
-            ->where('firstname', 'LIKE', "%{$search}%")
-            ->orWhere('lastname', 'LIKE', "%{$search}%")
-            ->get();
+        // Combine search in the firstname and lastname columns from the people table
+        $searchTerms = explode(' ', $search);
+
+        $people = Person::query();
+
+        foreach ($searchTerms as $term) {
+            $people->where(function ($query) use ($term) {
+                $query->where('firstname', 'LIKE', "%{$term}%")
+                    ->orWhere('lastname', 'LIKE', "%{$term}%");
+            });
+        }
+
+        $people = $people->get();
 
         return view('person.search')->with(['people' => $people, 'search' => $search]);
     }
