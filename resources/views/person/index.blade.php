@@ -5,9 +5,9 @@
                 {{ __('People') }}
             </h2>
             <form action="{{ route('person.search') }}" method="GET">
-                <input class="rounded-md" type="text" name="search" required/>
+                <input class="rounded-md" type="text" name="search" required />
                 <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                type="submit">Search</button>
+                    type="submit">Search</button>
             </form>
         </div>
     </x-slot>
@@ -17,7 +17,24 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <div class="flex items-center justify-end">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between">
+                            <a href="{{ route('person.index', ['order' => 'asc']) }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" />
+                                </svg>
+                            </a>
+                            <a href="{{ route('person.index', ['order' => 'desc']) }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15.75 17.25L12 21m0 0l-3.75-3.75M12 21V3" />
+                                </svg>
+                            </a>
+                        </div>
+
                         <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
                             href="{{ route('person.create') }}">Add Person</a>
                     </div>
@@ -45,9 +62,9 @@
                                         {{ $person->business?->business_name }}</td>
                                     <td>
                                         @foreach ($person->tags as $tag)
-                                            <span
-                                                class="bg-green-500 py-1 px-1 rounded-full">
-                                                <a href="{{ route('person.getByTag', $tag->tag_name) }}">{{ $tag->tag_name }}</a>
+                                            <span class="bg-green-500 py-1 px-1 rounded-full">
+                                                <a
+                                                    href="{{ route('person.getByTag', $tag->tag_name) }}">{{ $tag->tag_name }}</a>
                                             </span>
                                         @endforeach
                                     </td>

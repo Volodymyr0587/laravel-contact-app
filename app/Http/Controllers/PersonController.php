@@ -13,8 +13,10 @@ class PersonController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $order = $request->query('order', 'asc');
+
         // $people = Person::all();
         // return view('person.index', compact('people'));
 
@@ -22,7 +24,11 @@ class PersonController extends Controller
         //? 1st variant
         // return view('person.index')->with('people', Person::with('business')->get());
         //? 2nd variant (add `protected $with = ['business'];` to `Person` model)
-        return view('person.index')->with('people', Person::paginate(10));
+        $people = Person::orderBy('firstname', $order)
+                        ->orderBy('lastname', $order)
+                        ->paginate(10);
+
+        return view('person.index')->with(['people' => $people, 'order' => $order]);
     }
 
     /**
