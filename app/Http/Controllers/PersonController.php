@@ -16,6 +16,7 @@ class PersonController extends Controller
     public function index(Request $request)
     {
         $order = $request->query('order', 'asc');
+        $currentPage = $request->query('page', 1); // Capture current page number
 
         // $people = Person::all();
         // return view('person.index', compact('people'));
@@ -24,9 +25,12 @@ class PersonController extends Controller
         //? 1st variant
         // return view('person.index')->with('people', Person::with('business')->get());
         //? 2nd variant (add `protected $with = ['business'];` to `Person` model)
+        // $people = Person::orderBy('firstname', $order)
+        //                 ->orderBy('lastname', $order)
+        //                 ->paginate(10);
         $people = Person::orderBy('firstname', $order)
                         ->orderBy('lastname', $order)
-                        ->paginate(10);
+                        ->paginate(10, ['*'], 'page', $currentPage);
 
         return view('person.index')->with(['people' => $people, 'order' => $order]);
     }

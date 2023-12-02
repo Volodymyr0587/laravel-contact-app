@@ -83,7 +83,8 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $people->links() }}
+                    {{-- {{ $people->links() }} --}}
+                    {{ $people->appends(['order' => $order])->links() }}
                 </div>
             </div>
         </div>
