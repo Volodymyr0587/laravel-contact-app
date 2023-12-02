@@ -95,7 +95,9 @@ class PersonController extends Controller
 
         $person->tags()->sync($request->tags);
 
-        return redirect(route('person.index'));
+        // return redirect(route('person.index'));
+        return view('person.detail')->with('person', $person);
+
     }
 
     /**
