@@ -67,7 +67,7 @@
                             </span>
                         </div>
 
-                        <h4 class="font-semibold pt-5">Tags</h4>
+                        <h4 class="font-semibold pt-5">Categories</h4>
                         <div class="grid grid-cols-1 sm:grid-cols-12 gap-x-6 gap-y-6">
                             @foreach ($tags as $tag)
                                 <span class="sm:col-span-2">

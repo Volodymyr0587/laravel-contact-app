@@ -46,7 +46,7 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Business</th>
-                                <th>Tags</th>
+                                <th>Categories</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>

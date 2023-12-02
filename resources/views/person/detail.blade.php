@@ -31,7 +31,7 @@
                                 <dd class="pl-3">{{ $person->email }}</dd>
                                 <dt class="font-semibold">Birthday</dt>
                                 <dd class="pl-3">{{ $person->birthday ?: 'No date' }}</dd>
-                                <dt class="font-semibold">Tags</dt>
+                                <dt class="font-semibold">Categories</dt>
                                 <dd class="pl-3">
                                     @foreach ($person->tags as $tag)
                                         <span class="bg-green-600 text-white text-xs px-1 rounded-full">{{ $tag->tag_name }}</span>
