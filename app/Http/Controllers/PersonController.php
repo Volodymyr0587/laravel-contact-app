@@ -123,14 +123,15 @@ class PersonController extends Controller
         return view('person.search')->with(['people' => $people, 'search' => $search]);
     }
 
-    public function getByTag($tag)
+    public function getByTag(Request $request, $tag)
     {
         $tagModel = Tag::where('tag_name', $tag)->firstOrFail();
         $people = $tagModel->people()->paginate(4);
+        $order = $request->query('order', 'asc');
 
         // return view('person.index', ['people' => $people]);
         // $people = Tag::where('tag_name', $tag)->firstOrFail()->people;
-        return view('person.index')->with(['people' => $people]);
+        return view('person.index')->with(['people' => $people, 'order' => $order]);
     }
 
     /**
