@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Categories') }}
+            {{ __('Tags') }}
         </h2>
     </x-slot>
 
@@ -10,14 +10,14 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <h3 class="font-semibold pb-5">Add a new category</h3>
+                    <h3 class="font-semibold pb-5">Add a new tag</h3>
 
                     <form action="{{ route('tag.store') }}" method="POST">
                         @csrf
 
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
-                                <label class="block" for="firstname">Category name</label>
+                                <label class="block" for="firstname">Tag name</label>
                                 <input class="block w-full" type="text" name="tag_name" id="tag_name"
                                     value="{{ old('tag_name') }}">
 
