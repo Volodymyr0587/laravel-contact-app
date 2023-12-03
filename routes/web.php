@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BusinessCategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\NoteController;
@@ -72,6 +73,15 @@ Route::controller(TagController::class)->prefix('tag')->name('tag')->middleware(
     Route::get('/{tag}/edit', 'edit')->name('.edit');
     Route::put('/{tag}/update', 'update')->name('.update');
     Route::delete('/{tag}/destroy', 'destroy')->name('.destroy');
+});
+
+Route::controller(BusinessCategoryController::class)->prefix('businessCategory')->name('businessCategory')->middleware('auth')->group(function(){
+    Route::get('/', 'index')->name('.index');
+    Route::get('/create', 'create')->name('.create');
+    Route::post('/store', 'store')->name('.store');
+    Route::get('/{businessCategory}/edit', 'edit')->name('.edit');
+    Route::put('/{businessCategory}/update', 'update')->name('.update');
+    Route::delete('/{businessCategory}/destroy', 'destroy')->name('.destroy');
 });
 
 Route::controller(NoteController::class)->prefix('note')->name('note')->middleware('auth')->group(function(){

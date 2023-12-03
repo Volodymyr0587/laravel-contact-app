@@ -53,7 +53,7 @@ class BusinessController extends Controller
      */
     public function edit(Business $business)
     {
-        return view('business.edit')->with(['business' => $business, 'tags' => Tag::all()]);
+        return view('business.edit')->with(['business' => $business, 'tags' => Tag::all(), 'categories' => BusinessCategory::orderBy('category_name')->get()]);
     }
 
     /**
@@ -62,6 +62,8 @@ class BusinessController extends Controller
     public function update(BusinessRequest $request, Business $business)
     {
         $business->update($request->validated());
+
+        $business->categories()->sync($request->category_id);
 
         $business->tags()->sync($request->tags);
 
