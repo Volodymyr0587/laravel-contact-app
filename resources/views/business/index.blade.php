@@ -41,10 +41,11 @@
                                             {{ $business->business_name }}</a></td>
                                     <td>{{ $business->contact_email }}</td>
                                     <td>
-                                        {{ implode(' | ', $business->categories->pluck('category_name')->toArray()) }}
-                                        {{-- @foreach ($business->categories as $categories)
-                                            {{ $categories->category_name }}
-                                        @endforeach --}}
+                                        @foreach ($business->categories as $category)
+                                            <span class="bg-orange-500 py-1 px-1 rounded-full">
+                                                <a href="{{ route('business.getByCategory', $category->category_name) }}">{{ $category->category_name }}</a>
+                                            </span>
+                                        @endforeach
                                     </td>
                                     <td>
                                         @foreach ($business->tags as $tag)

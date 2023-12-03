@@ -54,6 +54,7 @@ Route::controller(BusinessController::class)->prefix('business')->name('business
     Route::put('/{business}/update', 'update')->name('.update');
     Route::get('/search', 'search')->name('.search');
     Route::get('/tag/{tag_name}', 'getByTag')->name('.getByTag');
+    Route::get('/category/{category_name}', 'getByCategory')->name('.getByCategory');
     Route::delete('/{business}/destroy', 'destroy')->name('.destroy');
 });
 

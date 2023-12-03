@@ -22,6 +22,7 @@ class Business extends Model
     protected $fillable = [
         'business_name',
         'contact_email',
+        'category_id',
     ];
 
     public function people(): HasMany

@@ -24,6 +24,7 @@ class BusinessRequest extends FormRequest
         return [
             'business_name' => 'required',
             'contact_email' => 'nullable|email',
+            'category_id' => 'nullable',
         ];
     }
 }

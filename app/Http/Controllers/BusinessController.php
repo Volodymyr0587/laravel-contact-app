@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BusinessCategory;
 use App\Models\Tag;
 use App\Models\Business;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class BusinessController extends Controller
      */
     public function create()
     {
-        return view('business.create')->with(['businesses' => Business::all(), 'tags' => Tag::all()]);;
+        return view('business.create')->with(['businesses' => Business::all(), 'tags' => Tag::all(), 'categories' => BusinessCategory::orderBy('category_name')->get()]);;
     }
     /**
      * Store a newly created resource in storage.
@@ -31,6 +32,8 @@ class BusinessController extends Controller
     {
 
         $business = Business::create($request->validated());
+
+        $business->categories()->sync($request->category);
 
         $business->tags()->sync($request->tags);
 
@@ -89,6 +92,13 @@ class BusinessController extends Controller
         return view('business.index', ['businesses' => $businesses]);
     }
 
+    public function getByCategory($category)
+    {
+        $categoryModel = BusinessCategory::where('category_name', $category)->firstOrFail();
+        $businesses = $categoryModel->business()->paginate(4);
+
+        return view('business.index', ['businesses' => $businesses]);
+    }
     /**
      * Remove the specified resource from storage.
      */

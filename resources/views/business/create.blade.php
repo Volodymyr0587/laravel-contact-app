@@ -38,6 +38,17 @@
                                     </div>
                                 @enderror
                             </span>
+                            <span class="sm:col-span-3">
+                                <label class="block" for="category">Category</label>
+                                <select class="block w-full" name="category" id="category">
+                                    <option value="" selected>( No Category )</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" @selected($category->id == old('category_id'))>
+                                            {{ $category->category_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </span>
                         </div>
 
                         <h4 class="font-semibold pt-5">Tags</h4>
