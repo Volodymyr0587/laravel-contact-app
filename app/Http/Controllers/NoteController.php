@@ -80,7 +80,10 @@ class NoteController extends Controller
         // Get related notes with the same tags
         $relatedNotes = Note::whereHas('tags', function ($query) use ($note) {
             $query->whereIn('note_tag_id', $note->tags->pluck('id'));
-        })->where('id', '!=', $note->id)->get();
+        })->where([
+                    ['id', '!=', $note->id],
+                    ['user_id', '=', $note->user_id],
+                ])->get();
 
         return view('note.detail')->with([
             'note' => $note,
