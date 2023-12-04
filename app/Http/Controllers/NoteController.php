@@ -133,7 +133,7 @@ class NoteController extends Controller
         $search = $request->input('search');
 
         // Search in the firstname and lastname columns from the notes table
-        $notes = Note::query()
+        $notes = auth()->user()->notes()
             ->where('title', 'LIKE', "%{$search}%")
             ->orWhere('body', 'LIKE', "%{$search}%")
             ->paginate(5);
