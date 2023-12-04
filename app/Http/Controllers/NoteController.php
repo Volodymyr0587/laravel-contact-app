@@ -147,7 +147,7 @@ class NoteController extends Controller
     public function getByTag($tag)
     {
         $tagModel = NoteTag::where('tag_name', $tag)->firstOrFail();
-        $notes = $tagModel->notes()->paginate(4);
+        $notes = $tagModel->notes()->where('user_id', auth()->id())->paginate(4);
 
         return view('note.index')->with(['notes' => $notes]);
     }
