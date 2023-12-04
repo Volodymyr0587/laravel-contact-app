@@ -14,7 +14,9 @@ class NoteController extends Controller
      */
     public function index()
     {
-        return view('note.index')->with('notes', Note::orderBy('created_at', 'desc')->paginate(10));
+        $user = auth()->user();
+        $notes = $user->notes()->orderBy('created_at', 'desc')->paginate(10);
+        return view('note.index')->with('notes', $notes);
     }
 
     /**
@@ -45,7 +47,11 @@ class NoteController extends Controller
      */
     public function store(NoteRequest $request)
     {
-        $note = Note::create($request->validated());
+        $user = auth()->user();
+
+        $note = new Note($request->validated());
+        $note->user()->associate($user);
+        $note->save();
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -70,6 +76,7 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
+        $this->authorize('view', $note);
         // Get related notes with the same tags
         $relatedNotes = Note::whereHas('tags', function ($query) use ($note) {
             $query->whereIn('note_tag_id', $note->tags->pluck('id'));
@@ -86,6 +93,8 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
+        $this->authorize('view', $note);
+
         return view('note.edit')->with(['note' => $note, 'tags' => NoteTag::all()]);
     }
 
@@ -94,6 +103,7 @@ class NoteController extends Controller
      */
     public function update(NoteRequest $request, Note $note)
     {
+        $this->authorize('update', $note);
         $note->update($request->validated());
 
         if ($request->hasFile('image')) {
@@ -144,6 +154,7 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
+        $this->authorize('delete', $note);
         // Find and remove links pointing to the deleted note
         $this->removeLinksToDeletedNote($note);
 
