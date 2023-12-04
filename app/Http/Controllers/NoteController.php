@@ -135,7 +135,7 @@ class NoteController extends Controller
         // Get the search value from teh request
         $search = $request->input('search');
 
-        // Search in the firstname and lastname columns from the notes table
+        // Search in the title and body columns from the notes table
         $notes = auth()->user()->notes()
             ->where('title', 'LIKE', "%{$search}%")
             ->orWhere('body', 'LIKE', "%{$search}%")
@@ -184,8 +184,10 @@ class NoteController extends Controller
     {
         $relatedNotes = Note::whereHas('tags', function ($query) use ($note) {
             $query->whereIn('note_tag_id', $note->tags->pluck('id'));
-        })->where('id', '!=', $note->id)->get();
-
+        })->where([
+                    ['id', '!=', $note->id],
+                    ['user_id', '=', $note->user_id],
+                ])->get();
         foreach ($tagNames as $tagName) {
             // Add links to related articles
             foreach ($relatedNotes as $relatedNote) {
