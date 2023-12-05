@@ -63,11 +63,11 @@ class NoteController extends Controller
 
         $tagNames = explode(" ", preg_replace('/\s+/', ' ', trim($request->tags)));
 
-        $this->syncTags($note, $tagNames);
-
-        // Call the method to add links to related articles
-        $this->addLinksToRelatedNotes($note, $tagNames);
-
+        if (!empty(array_filter($tagNames, 'strlen'))) {
+            $this->syncTags($note, $tagNames);
+            // Call the method to add links to related articles
+            $this->addLinksToRelatedNotes($note, $tagNames);
+        }
         return redirect(route('note.index'));
     }
 
@@ -119,10 +119,16 @@ class NoteController extends Controller
 
         $tagNames = explode(" ", preg_replace('/\s+/', ' ', trim($request->tags)));
 
-        $this->syncTags($note, $tagNames);
+        // Remove existing tags
+        $note->tags()->detach();
 
-        // Call the method to add links to related articles
-        $this->addLinksToRelatedNotes($note, $tagNames);
+        if (!empty(array_filter($tagNames, 'strlen'))) {
+            $this->syncTags($note, $tagNames);
+            // Call the method to add links to related articles
+            $this->addLinksToRelatedNotes($note, $tagNames);
+        }
+
+        $note->save();
 
         return redirect(route('note.index'));
     }
@@ -188,6 +194,7 @@ class NoteController extends Controller
                     ['id', '!=', $note->id],
                     ['user_id', '=', $note->user_id],
                 ])->get();
+
         foreach ($tagNames as $tagName) {
             // Add links to related articles
             foreach ($relatedNotes as $relatedNote) {

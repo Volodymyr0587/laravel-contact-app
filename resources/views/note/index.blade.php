@@ -38,9 +38,12 @@
                                             {{ $note->title }}</a></td>
                                     <td>
                                         @foreach ($note->tags as $tag)
-                                            <span class="bg-green-500 py-1 px-1 rounded-full">
-                                                <a href="{{ route('note.getByTag', $tag->tag_name) }}">{{ $tag->tag_name }}</a>
-                                            </span>
+
+                                                <a href="{{ route('note.getByTag', $tag->tag_name) }}"
+                                                    class="bg-green-500 py-1 px-1 rounded-full">
+                                                    {{ $tag->tag_name }}
+                                                </a>
+
                                         @endforeach
                                     </td>
                                     <td>
