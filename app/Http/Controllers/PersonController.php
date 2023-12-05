@@ -18,17 +18,9 @@ class PersonController extends Controller
         $order = $request->query('order', 'asc');
         $currentPage = $request->query('page', 1); // Capture current page number
 
-        // $people = Person::all();
-        // return view('person.index', compact('people'));
+        $user = auth()->user();
 
-        //? Eager Loading:
-        //? 1st variant
-        // return view('person.index')->with('people', Person::with('business')->get());
-        //? 2nd variant (add `protected $with = ['business'];` to `Person` model)
-        // $people = Person::orderBy('firstname', $order)
-        //                 ->orderBy('lastname', $order)
-        //                 ->paginate(10);
-        $people = Person::orderBy('firstname', $order)
+        $people = $user->people()->orderBy('firstname', $order)
                         ->orderBy('lastname', $order)
                         ->paginate(10, ['*'], 'page', $currentPage);
 
@@ -48,7 +40,12 @@ class PersonController extends Controller
      */
     public function store(PersonRequest $request)
     {
-        $person = Person::create($request->validated());
+        $user = auth()->user();
+
+        $person = new Person($request->validated());
+        $person->user()->associate($user);
+        $person->save();
+
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -68,6 +65,8 @@ class PersonController extends Controller
      */
     public function show(Person $person)
     {
+        $this->authorize('view', $person);
+
         return view('person.detail')->with('person', $person);
     }
 
@@ -76,6 +75,8 @@ class PersonController extends Controller
      */
     public function edit(Person $person)
     {
+        $this->authorize('view', $person);
+
         return view('person.edit')->with(['person' => $person, 'businesses' => Business::all(), 'tags' => Tag::all()]);
     }
 
@@ -84,6 +85,7 @@ class PersonController extends Controller
      */
     public function update(PersonRequest $request, Person $person)
     {
+        $this->authorize('update', $person);
         $person->update($request->validated());
 
         if ($request->hasFile('image')) {
@@ -111,7 +113,8 @@ class PersonController extends Controller
         // Combine search in the firstname and lastname columns from the people table
         $searchTerms = explode(' ', $search);
 
-        $people = Person::query();
+        // $people = Person::query();
+        $people = auth()->user()->people();
 
         foreach ($searchTerms as $term) {
             $people->where(function ($query) use ($term) {
@@ -128,11 +131,9 @@ class PersonController extends Controller
     public function getByTag(Request $request, $tag)
     {
         $tagModel = Tag::where('tag_name', $tag)->firstOrFail();
-        $people = $tagModel->people()->paginate(4);
+        $people = $tagModel->people()->where('user_id', auth()->id())->paginate(4);
         $order = $request->query('order', 'asc');
 
-        // return view('person.index', ['people' => $people]);
-        // $people = Tag::where('tag_name', $tag)->firstOrFail()->people;
         return view('person.index')->with(['people' => $people, 'order' => $order]);
     }
 
@@ -141,6 +142,7 @@ class PersonController extends Controller
      */
     public function destroy(Person $person)
     {
+        $this->authorize('delete', $person);
         $person->delete();
 
         return redirect(route('person.index'));

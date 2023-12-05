@@ -14,6 +14,7 @@ class Person extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'user_id',
         'firstname',
         'lastname',
         'email',
@@ -38,6 +39,11 @@ class Person extends Model
     public function tags(): MorphToMany
     {
         return $this->morphToMany(Tag::class, 'taggable');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     protected static function boot()
