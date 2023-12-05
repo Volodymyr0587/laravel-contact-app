@@ -11,11 +11,15 @@ class TaskController extends Controller
 {
     public function index()
     {
-        return view('task.index')->with('tasks', Task::open()->paginate(10));
+        $userId = auth()->user()->id;
+        $tasks = Task::where('user_id', $userId);
+        return view('task.index')->with('tasks', $tasks->open()->paginate(10));
     }
 
     public function store(Request $request)
     {
+        $userId = auth()->user()->id;
+
         $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -27,6 +31,7 @@ class TaskController extends Controller
         };
 
         $targetModel->tasks()->create([
+            'user_id' => $userId,
             'title' => $request->title,
             'description' => $request->description,
         ]);
