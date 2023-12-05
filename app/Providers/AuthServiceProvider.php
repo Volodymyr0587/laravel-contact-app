@@ -4,8 +4,10 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use App\Models\Business;
+use App\Models\BusinessCategory;
 use App\Models\Note;
 use App\Models\Person;
+use App\Policies\BusinessCategoryPolicy;
 use App\Policies\BusinessPolicy;
 use App\Policies\NotePolicy;
 use App\Policies\PersonPolicy;
@@ -22,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
         Note::class => NotePolicy::class,
         Person::class => PersonPolicy::class,
         Business::class => BusinessPolicy::class,
+        BusinessCategory::class => BusinessCategoryPolicy::class,
     ];
 
     /**

@@ -62,7 +62,9 @@ class BusinessController extends Controller
     {
         $this->authorize('view', $business);
 
-        return view('business.edit')->with(['business' => $business, 'tags' => Tag::all(), 'categories' => BusinessCategory::orderBy('category_name')->get()]);
+        $categories = auth()->user()->businessCategories()->orderBy('category_name')->get();
+
+        return view('business.edit')->with(['business' => $business, 'tags' => Tag::all(), 'categories' => $categories]);
     }
 
     /**
@@ -90,7 +92,7 @@ class BusinessController extends Controller
         $search = $request->input('search');
 
         // Search in the business_name column from the business table
-        $businesses = auth()->user()->businesses()
+        $businesses = auth()->user()->businesses()->withCount('people')
             ->where('business_name', 'LIKE', "%{$search}%")
             ->get();
 
@@ -100,7 +102,8 @@ class BusinessController extends Controller
     public function getByTag($tag)
     {
         $tagModel = Tag::where('tag_name', $tag)->firstOrFail();
-        $businesses = $tagModel->businesses()->where('user_id', auth()->id())->paginate(4);
+        $businesses = $tagModel->businesses()->withCount('people')
+            ->where('user_id', auth()->id())->paginate(4);
 
         return view('business.index', ['businesses' => $businesses]);
     }
@@ -108,7 +111,8 @@ class BusinessController extends Controller
     public function getByCategory($category)
     {
         $categoryModel = BusinessCategory::where('category_name', $category)->firstOrFail();
-        $businesses = $categoryModel->business()->where('user_id', auth()->id())->paginate(4);
+        $businesses = $categoryModel->business()->withCount('people')
+            ->where('user_id', auth()->id())->paginate(4);
 
         return view('business.index', ['businesses' => $businesses]);
     }

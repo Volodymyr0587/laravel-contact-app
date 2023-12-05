@@ -13,7 +13,10 @@ class BusinessCategoryController extends Controller
      */
     public function index()
     {
-        return view('business_category.index')->with('businessCategories', BusinessCategory::paginate(5));
+        $user = auth()->user();
+
+        $businessCategories = $user->businessCategories()->orderBy('category_name')->paginate(5);
+        return view('business_category.index')->with('businessCategories', $businessCategories);
     }
 
     /**
@@ -29,7 +32,11 @@ class BusinessCategoryController extends Controller
      */
     public function store(BusinessCategoryRequest $request)
     {
-        BusinessCategory::create($request->validated());
+        $user = auth()->user();
+
+        $businessCategory = new BusinessCategory($request->validated());
+        $businessCategory->user()->associate($user);
+        $businessCategory->save();
 
         return redirect(route('businessCategory.index'));
     }
@@ -47,6 +54,7 @@ class BusinessCategoryController extends Controller
      */
     public function edit(BusinessCategory $businessCategory)
     {
+        $this->authorize('view', $businessCategory);
         return view('business_category.edit')->with('businessCategory', $businessCategory);
     }
 
@@ -55,6 +63,7 @@ class BusinessCategoryController extends Controller
      */
     public function update(BusinessCategoryRequest $request, BusinessCategory $businessCategory)
     {
+        $this->authorize('update', $businessCategory);
         $businessCategory->update($request->validated());
 
         return redirect(route('businessCategory.index'));
@@ -65,6 +74,7 @@ class BusinessCategoryController extends Controller
      */
     public function destroy(BusinessCategory $businessCategory)
     {
+        $this->authorize('delete', $businessCategory);
         $businessCategory->delete();
 
         return redirect(route('businessCategory.index'));

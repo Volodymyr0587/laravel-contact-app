@@ -32,7 +32,8 @@ class PersonController extends Controller
      */
     public function create()
     {
-        return view('person.create')->with(['businesses' => Business::orderBy('business_name')->get(), 'tags' => Tag::all()]);
+        $businesses = auth()->user()->businesses()->orderBy('business_name')->get();
+        return view('person.create')->with(['businesses' => $businesses, 'tags' => Tag::all()]);
     }
 
     /**
@@ -77,7 +78,9 @@ class PersonController extends Controller
     {
         $this->authorize('view', $person);
 
-        return view('person.edit')->with(['person' => $person, 'businesses' => Business::all(), 'tags' => Tag::all()]);
+        $businesses = auth()->user()->businesses()->orderBy('business_name')->get();
+
+        return view('person.edit')->with(['person' => $person, 'businesses' => $businesses, 'tags' => Tag::all()]);
     }
 
     /**
