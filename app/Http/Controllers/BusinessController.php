@@ -25,7 +25,9 @@ class BusinessController extends Controller
      */
     public function create()
     {
-        return view('business.create')->with(['businesses' => Business::all(), 'tags' => Tag::all(), 'categories' => BusinessCategory::orderBy('category_name')->get()]);;
+        $tags = auth()->user()->tags()->get();
+        $businessCategories = auth()->user()->businessCategories()->orderBy('category_name')->get();
+        return view('business.create')->with(['businesses' => Business::all(), 'tags' => $tags, 'categories' => $businessCategories]);;
     }
     /**
      * Store a newly created resource in storage.

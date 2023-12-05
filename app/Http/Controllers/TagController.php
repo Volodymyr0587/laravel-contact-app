@@ -12,7 +12,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view('tag.index')->with('tags', Tag::paginate(5));
+        $user = auth()->user();
+        $tags = $user->tags()->orderBy('tag_name')->paginate(5);
+        return view('tag.index')->with('tags', $tags);
     }
 
     /**
@@ -28,7 +30,10 @@ class TagController extends Controller
      */
     public function store(TagRequest $request)
     {
-        $tag = Tag::create($request->validated());
+        $user = auth()->user();
+        $tag = new Tag($request->validated());
+        $tag->user()->associate($user);
+        $tag->save();
 
         return redirect(route('tag.index'));
     }
@@ -46,6 +51,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
+        $this->authorize('view', $tag);
         return view('tag.edit')->with('tag', $tag);
     }
 
@@ -54,6 +60,7 @@ class TagController extends Controller
      */
     public function update(TagRequest $request, Tag $tag)
     {
+        $this->authorize('update', $tag);
         $tag->update($request->validated());
 
         return redirect(route('tag.index'));
@@ -64,6 +71,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
+        $this->authorize('delete', $tag);
         $tag->delete();
 
         return redirect(route('tag.index'));
