@@ -24,4 +24,4 @@ An application for storing contacts with the ability to add categories to a cont
 
 Register new users.
 
-To enable the functionality of sending a message to mail when a new task is created for a contact, add the details of your Email Delivery Platform to the .env, such as MAIL_HOST, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, etc.
+To enable the functionality of sending a message to mail when a new task is created for a contact, add the details of your Email Delivery Platform to the `.env`, such as MAIL_HOST, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, etc. Also, in the observer `app/Observers/TaskObserver.php`, uncomment the line `// Mail::to($user)->send(new TaskCreated());` in the `created` method.

@@ -14,7 +14,8 @@ class TaskObserver
      */
     public function created(Task $task): void
     {
-        Mail::to(User::find(1))->send(new TaskCreated());
+        $user = auth()->user();
+        // Mail::to($user)->send(new TaskCreated());
     }
 
     /**
