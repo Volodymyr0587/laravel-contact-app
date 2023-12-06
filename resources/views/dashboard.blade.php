@@ -46,6 +46,24 @@
                                 <tr class="bg-white border-b ">
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
+                                        Total Business Categories
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ $businessCategoriesCount }}
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b ">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
+                                        Total Notes
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ $noteCount }}
+                                    </td>
+                                </tr>
+                                <tr class="bg-white border-b ">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
                                         Total Tasks
                                     </th>
                                     <td class="px-6 py-4">
@@ -61,19 +79,11 @@
                                         {{ $categoryCount }}
                                     </td>
                                 </tr>
-                                <tr class="bg-white border-b ">
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
-                                        Total Notes
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        {{ $noteCount }}
-                                    </td>
-                                </tr>
+
 
                                 @php
                                     $timePeriods = ['Day', 'Week', 'Month', 'Year'];
-                                    $categories = ['Persons', 'Businesses', 'Notes', 'Tasks', 'Categories'];
+                                    $categories = ['Persons', 'Businesses', 'BusinessCategories', 'Notes', 'Tasks', 'Categories'];
                                 @endphp
 
                                 @foreach ($timePeriods as $timePeriod)

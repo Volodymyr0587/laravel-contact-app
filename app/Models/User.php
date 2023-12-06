@@ -64,6 +64,11 @@ class User extends Authenticatable
         return $this->hasMany(BusinessCategory::class);
     }
 
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
+
     public function tags(): HasMany
     {
         return $this->hasMany(Tag::class);
