@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BusinessCategoryRequest extends FormRequest
@@ -22,7 +23,14 @@ class BusinessCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_name' => 'required|unique:business_categories|min:2|max:50',
+            'category_name' => [
+                'required',
+                Rule::unique('business_categories', 'category_name')->where(function ($query) {
+                    return $query->where('user_id', auth()->id());
+                }),
+                'min:2',
+                'max:50',
+            ],
         ];
     }
 }
