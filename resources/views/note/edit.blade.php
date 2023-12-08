@@ -32,6 +32,14 @@
                                 <label class="block" for="body">Content</label>
                                 <input class="block w-full" type="text" name="body" id="body"
                                     value="{{ old('body', strip_tags($note->body)) }}">
+
+                                <div class="mt-4">
+                                    <input type="hidden" name="is_active" value="0">
+                                    <input type="checkbox" id="is_active" name="is_active"
+                                    value="1" {{ $note->is_active || old('is_active', 0) === 1 ? 'checked' : '' }} >
+                                    <label for="is_active">Is Active</label>
+                                </div>
+
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="tags">Keywords [separated by a space]</label>

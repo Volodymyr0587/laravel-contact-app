@@ -47,6 +47,11 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
+
+                                <div class="mt-4">
+                                    <input type="checkbox" id="is_active" name="is_active" value="1">
+                                    <label for="is_active">Is Active</label>
+                                </div>
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="tags">Keywords [separated by a space]</label>
