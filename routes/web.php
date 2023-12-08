@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BusinessCategoryController;
+use App\Http\Controllers\PeoplePdfController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\NoteController;
@@ -27,6 +28,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/people-pdf', [PeoplePdfController::class, 'download'])
+    ->middleware('auth')->name('people.downloadPDF');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
