@@ -33,11 +33,14 @@
                                 <input class="block w-full" type="text" name="body" id="body"
                                     value="{{ old('body', strip_tags($note->body)) }}">
 
-                                <div class="mt-4">
+                                <div class="flex mt-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
+                                    </svg>
                                     <input type="hidden" name="is_active" value="0">
-                                    <input type="checkbox" id="is_active" name="is_active"
+                                    <input type="checkbox" id="is_active" name="is_active" class="w-6 h-6 mr-2"
                                     value="1" {{ $note->is_active || old('is_active', 0) === 1 ? 'checked' : '' }} >
-                                    <label for="is_active">Is Active</label>
+                                    <label for="is_active">Staple to the top</label>
                                 </div>
 
                             </span>
