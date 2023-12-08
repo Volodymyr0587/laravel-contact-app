@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Business;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -26,6 +27,7 @@ class PersonFactory extends Factory
             'birthday' => fake()->date('Y-m-d'),
             'phone' => fake()->phoneNumber(),
             'business_id' => (fake()->boolean(50) ? fake()->randomElement($businesses) : null),
+            'user_id' => User::all()->random()->id,
         ];
     }
 }
