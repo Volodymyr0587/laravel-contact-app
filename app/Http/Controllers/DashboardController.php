@@ -53,12 +53,12 @@ class DashboardController extends Controller
         //Get auth user
         $user = auth()->user();
 
-        $createdPersons = Person::where('created_at', '>', Carbon::now()->subWeek())->count();
-        $createdBusinesses = Business::where('created_at', '>', Carbon::now()->subWeek())->count();
+        $createdPersons = $user->people()->where('created_at', '>', Carbon::now()->subWeek())->count();
+        $createdBusinesses = $user->businesses()->where('created_at', '>', Carbon::now()->subWeek())->count();
         $createdBusinessCategories = $user->businessCategories()->where('created_at', '>', Carbon::now()->subWeek())->count();
-        $createdNotes = Note::where('created_at', '>', Carbon::now()->subWeek())->count();
-        $createdTasks = Task::where('created_at', '>', Carbon::now()->subWeek())->count();
-        $createdCategories = Tag::where('created_at', '>', Carbon::now()->subWeek())->count();
+        $createdNotes = $user->notes()->where('created_at', '>', Carbon::now()->subWeek())->count();
+        $createdTasks = $user->tasks()->where('created_at', '>', Carbon::now()->subWeek())->count();
+        $createdCategories = $user->tags()->where('created_at', '>', Carbon::now()->subWeek())->count();
 
         return compact('createdPersons', 'createdBusinesses', 'createdBusinessCategories', 'createdNotes', 'createdTasks', 'createdCategories');
     }
@@ -68,12 +68,12 @@ class DashboardController extends Controller
         //Get auth user
         $user = auth()->user();
 
-        $createdPersons = Person::where('created_at', '>', Carbon::now()->subMonth())->count();
-        $createdBusinesses = Business::where('created_at', '>', Carbon::now()->subMonth())->count();
+        $createdPersons = $user->people()->where('created_at', '>', Carbon::now()->subMonth())->count();
+        $createdBusinesses = $user->businesses()->where('created_at', '>', Carbon::now()->subMonth())->count();
         $createdBusinessCategories = $user->businessCategories()->where('created_at', '>', Carbon::now()->subMonth())->count();
-        $createdNotes = Note::where('created_at', '>', Carbon::now()->subMonth())->count();
-        $createdTasks = Task::where('created_at', '>', Carbon::now()->subMonth())->count();
-        $createdCategories = Tag::where('created_at', '>', Carbon::now()->subMonth())->count();
+        $createdNotes = $user->notes()->where('created_at', '>', Carbon::now()->subMonth())->count();
+        $createdTasks = $user->tasks()->where('created_at', '>', Carbon::now()->subMonth())->count();
+        $createdCategories = $user->tags()->where('created_at', '>', Carbon::now()->subMonth())->count();
 
         return compact('createdPersons', 'createdBusinesses', 'createdBusinessCategories', 'createdNotes', 'createdTasks', 'createdCategories');
     }
@@ -83,12 +83,12 @@ class DashboardController extends Controller
         //Get auth user
         $user = auth()->user();
 
-        $createdPersons = Person::where('created_at', '>', Carbon::now()->subYear())->count();
-        $createdBusinesses = Business::where('created_at', '>', Carbon::now()->subYear())->count();
+        $createdPersons = $user->people()->where('created_at', '>', Carbon::now()->subYear())->count();
+        $createdBusinesses = $user->businesses()->where('created_at', '>', Carbon::now()->subYear())->count();
         $createdBusinessCategories = $user->businessCategories()->where('created_at', '>', Carbon::now()->subYear())->count();
-        $createdNotes = Note::where('created_at', '>', Carbon::now()->subYear())->count();
-        $createdTasks = Task::where('created_at', '>', Carbon::now()->subYear())->count();
-        $createdCategories = Tag::where('created_at', '>', Carbon::now()->subYear())->count();
+        $createdNotes = $user->notes()->where('created_at', '>', Carbon::now()->subYear())->count();
+        $createdTasks = $user->tasks()->where('created_at', '>', Carbon::now()->subYear())->count();
+        $createdCategories = $user->tags()->where('created_at', '>', Carbon::now()->subYear())->count();
 
         return compact('createdPersons', 'createdBusinesses', 'createdBusinessCategories', 'createdNotes', 'createdTasks', 'createdCategories');
     }
