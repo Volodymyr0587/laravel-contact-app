@@ -29,4 +29,15 @@ class Note extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        // Listen for the "deleting" event to delete associated tags
+        static::deleting(function ($note) {
+            // Detach all tags associated with the note
+            $note->tags()->detach();
+        });
+    }
 }
