@@ -34,7 +34,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($businesses as $business)
+                            @forelse ($businesses as $business)
                                 <tr>
                                     <td><a href="{{ route('business.show', $business->id) }}"
                                             class="text-blue-700 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
@@ -43,7 +43,8 @@
                                     <td>
                                         @foreach ($business->categories as $category)
                                             <span class="bg-orange-500 py-1 px-1 rounded-full">
-                                                <a href="{{ route('business.getByCategory', $category->category_name) }}">{{ $category->category_name }}</a>
+                                                <a
+                                                    href="{{ route('business.getByCategory', $category->category_name) }}">{{ $category->category_name }}</a>
                                             </span>
                                         @endforeach
                                     </td>
@@ -70,7 +71,11 @@
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td>{{ __('No businesses found') }}</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                     {{ $businesses->links() }}
