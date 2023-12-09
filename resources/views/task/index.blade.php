@@ -1,28 +1,28 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <x-section-header>
             {{ __('Tasks') }}
-        </h2>
+        </x-section-header>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 dark:bg-gray-900">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700 dark:text-white">
                 <div class="p-6 text-gray-900">
 
                     <table class="table-fixed border-separate border-spacing-6">
                         <thead>
-                            <tr>
+                            <x-table-row>
                                 <th>Task Title</th>
                                 <th>For</th>
                                 <th>Status</th>
                                 <th>Actions</th>
-                            </tr>
+                            </x-table-row>
                         </thead>
                         <tbody>
                             @forelse ($tasks as $task)
-                                <tr>
-                                    <td>{{ $task->title }}</td>
+                                <x-table-row>
+                                    <td class="font-medium">{{ $task->title }}</td>
                                     <td>
                                         @if (str_contains($task->taskable_type, 'Business'))
                                             <span class="flex">
@@ -56,11 +56,11 @@
                                                 type="submit">Complete Task</button>
                                         </form>
                                     </td>
-                                </tr>
+                                </x-table-row>
                             @empty
-                                <tr>
+                                <x-table-row>
                                     <td>{{ __('No tasks found') }}</td>
-                                </tr>
+                                </x-table-row>
                             @endforelse
                         </tbody>
                     </table>

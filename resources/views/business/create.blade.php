@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <x-section-header>
             {{ __('Business') }}
-        </h2>
+        </x-section-header>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 dark:bg-gray-900">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700">
+                <div class="p-6 text-gray-900 dark:text-white">
 
                     <h3 class="font-semibold pb-5">Add a new business</h3>
 
@@ -18,7 +18,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
                                 <label class="block" for="business_name">Business name</label>
-                                <input class="block w-full" type="text" name="business_name" id="business_name"
+                                <input class="block w-full dark:text-gray-600" type="text" name="business_name" id="business_name"
                                     value="{{ old('business_name') }}">
 
                                 @error('business_name')
@@ -29,7 +29,7 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="contact_email">Email</label>
-                                <input class="block w-full" type="text" name="contact_email" id="contact_email"
+                                <input class="block w-full dark:text-gray-600" type="text" name="contact_email" id="contact_email"
                                     value="{{ old('contact_email') }}">
 
                                 @error('contact_email')
@@ -40,7 +40,7 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="category">Category</label>
-                                <select class="block w-full" name="category_id" id="category_id">
+                                <select class="block w-full dark:text-gray-600" name="category_id" id="category_id">
                                     <option value="" selected>( No Category )</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}" @selected($category->id == old('category_id'))>

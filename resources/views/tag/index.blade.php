@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <x-section-header>
             {{ __('Tags') }}
-        </h2>
+        </x-section-header>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 dark:bg-gray-900">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700 dark:text-white">
                 <div class="p-6 text-gray-900">
 
                     <div class="flex items-center justify-end">
@@ -16,17 +16,17 @@
 
                     <table class="table-fixed border-separate border-spacing-6">
                         <thead>
-                            <tr>
+                            <x-table-row>
                                 <th>Name</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
                                 <th>Actions</th>
-                            </tr>
+                            </x-table-row>
                         </thead>
                         <tbody>
                             @forelse ($tags as $tag)
-                                <tr>
-                                    <td>{{ $tag->tag_name }}</td>
+                                <x-table-row>
+                                    <td class="font-medium">{{ $tag->tag_name }}</td>
                                     <td>{{ $tag->created_at }}</td>
                                     <td>{{ $tag->updated_at }}</td>
                                     <td>
@@ -36,11 +36,11 @@
                                             </svg>
                                         </a>
                                     </td>
-                                </tr>
+                                </x-table-row>
                             @empty
-                                <tr>
+                                <x-table-row>
                                     <td>{{ __('No tags found') }}</td>
-                                </tr>
+                                </x-table-row>
                             @endforelse
                         </tbody>
                     </table>

@@ -1,20 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <x-section-header>
                 {{ __('Notes') }}
-            </h2>
+            </x-section-header>
             <form action="{{ route('note.search') }}" method="GET">
-                <input class="rounded-md" type="text" name="search" required />
+                <input class="rounded-md dark:text-gray-700" type="text" name="search" required />
                 <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
                     type="submit">Search</button>
             </form>
         </div>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 dark:bg-gray-900">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700 dark:text-white">
                 <div class="p-6 text-gray-900">
 
                     <div class="flex items-center justify-end">
@@ -24,15 +24,15 @@
 
                     <table class="table-fixed border-separate border-spacing-6">
                         <thead>
-                            <tr>
+                            <x-table-row>
                                 <th>Title</th>
                                 <th>Keywords</th>
                                 <th>Actions</th>
-                            </tr>
+                            </x-table-row>
                         </thead>
                         <tbody>
                             @forelse ($notes as $note)
-                                <tr>
+                                <x-table-row>
                                     <td class="inline-flex">
                                         @if ($note->is_active)
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -42,7 +42,7 @@
                                             </svg>
                                         @endif
                                         <a href="{{ route('note.show', $note->id) }}"
-                                            class="text-blue-700 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
+                                            class="text-blue-700 font-bold dark:text-blue-500 hover:bg-yellow-300 py-2 px-2 rounded-full">
                                             {{ $note->title }}</a>
                                     </td>
                                     <td>
@@ -64,11 +64,11 @@
                                             </svg>
                                         </a>
                                     </td>
-                                </tr>
+                                </x-table-row>
                             @empty
-                                <tr>
+                                <x-table-row>
                                     <td>{{ __('No notes found') }}</td>
-                                </tr>
+                                </x-table-row>
                             @endforelse
                         </tbody>
                     </table>

@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <x-section-header>
             {{ __('Dashboard') }}
-        </h2>
+        </x-section-header>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 dark:bg-gray-900">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -25,60 +25,54 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-white border-b ">
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
+                                <x-table-row>
+                                    <x-table-header>
                                         Total People
-                                    </th>
+                                    </x-table-header>
                                     <td class="px-6 py-4">
                                         {{ $peopleCount }}
                                     </td>
-                                </tr>
-                                <tr class="bg-white border-b ">
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
+                                </x-table-row>
+                                <x-table-row>
+                                    <x-table-header>
                                         Total Businesses
-                                    </th>
+                                    </x-table-header>
                                     <td class="px-6 py-4">
                                         {{ $businessCount }}
                                     </td>
-                                </tr>
-                                <tr class="bg-white border-b ">
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
+                                </x-table-row>
+                                <x-table-row>
+                                    <x-table-header>
                                         Total Business Categories
-                                    </th>
+                                    </x-table-header>
                                     <td class="px-6 py-4">
                                         {{ $businessCategoriesCount }}
                                     </td>
-                                </tr>
-                                <tr class="bg-white border-b ">
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
+                                </x-table-row>
+                                <x-table-row>
+                                    <x-table-header>
                                         Total Notes
-                                    </th>
+                                    </x-table-header>
                                     <td class="px-6 py-4">
                                         {{ $noteCount }}
                                     </td>
-                                </tr>
-                                <tr class="bg-white border-b ">
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
+                                </x-table-row>
+                                <x-table-row>
+                                    <x-table-header>
                                         Total Tasks
-                                    </th>
+                                    </x-table-header>
                                     <td class="px-6 py-4">
                                         {{ $taskCount }}
                                     </td>
-                                </tr>
-                                <tr class="bg-white border-b ">
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowra">
+                                </x-table-row>
+                                <x-table-row>
+                                    <x-table-header>
                                         Total Tags
-                                    </th>
+                                    </x-table-header>
                                     <td class="px-6 py-4">
                                         {{ $categoryCount }}
                                     </td>
-                                </tr>
+                                </x-table-row>
 
 
                                 @php
@@ -89,18 +83,18 @@
                                 @foreach ($timePeriods as $timePeriod)
                                     {{-- Statistics By {{ $timePeriod }} --}}
                                     <tr class="px-6 py-4 text-xs text-gray-700 uppercase bg-gray-50 whitespace-no-wrap text-center">
-                                        <td colspan="2" class="px-6 py-4">Statistics By {{ $timePeriod }}</td>
+                                        <td colspan="2" class="px-6 py-4 font-bold">Statistics By {{ $timePeriod }}</td>
                                     </tr>
 
                                     @foreach ($categories as $category)
-                                        <tr class="bg-white border-b">
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-no-wrap">
+                                        <x-table-row>
+                                            <x-table-header>
                                                 Added {{ $category }}
-                                            </th>
+                                            </x-table-header>
                                             <td class="px-6 py-4">
                                                 {{ ${'statisticsBy'.$timePeriod}['created'.$category] }}
                                             </td>
-                                        </tr>
+                                        </x-table-row>
                                     @endforeach
                                 @endforeach
 

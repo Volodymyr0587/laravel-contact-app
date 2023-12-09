@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight inline-flex">
+        <x-section-header class="inline-flex">
             <a class="flex justify-left items-center mr-2" href="{{ URL::previous() }}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -8,7 +8,7 @@
                 </svg>
             </a>
             {{ __('Business. Search result ror ') }} <span class="italic">"{{ $search }}"</span>
-        </h2>
+        </x-section-header>
     </x-slot>
 
     <div class="py-12">

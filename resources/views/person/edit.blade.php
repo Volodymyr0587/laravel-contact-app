@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <x-section-header>
             {{ __('Edit Person') }}
-        </h2>
+        </x-section-header>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 dark:bg-gray-900">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700">
+                <div class="p-6 text-gray-900 dark:text-white">
 
                     <h3 class="font-semibold pb-5">Edit a person: {{ $person->firstname }} {{ $person->lastname }}</h3>
 
@@ -20,27 +20,27 @@
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
                                 <label class="block" for="firstname">First name</label>
-                                <input class="block w-full" type="text" name="firstname" id="firstname"
+                                <input class="block w-full dark:text-gray-600" type="text" name="firstname" id="firstname"
                                     value="{{ old('firstname', $person->firstname) }}">
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="lastname">Last name</label>
-                                <input class="block w-full" type="text" name="lastname" id="lastname"
+                                <input class="block w-full dark:text-gray-600" type="text" name="lastname" id="lastname"
                                     value="{{ old('lastname', $person->lastname) }}">
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="email">Email</label>
-                                <input class="block w-full" type="text" name="email" id="email"
+                                <input class="block w-full dark:text-gray-600" type="text" name="email" id="email"
                                     value="{{ old('email', $person->email) }}">
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="phone">Phone</label>
-                                <input class="block w-full" type="text" name="phone" id="phone"
+                                <input class="block w-full dark:text-gray-600" type="text" name="phone" id="phone"
                                     value="{{ old('phone', $person->phone) }}">
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="birthday">Date of birth</label>
-                                <input class="block w-full" type="date" name="birthday" id="birthday"
+                                <input class="block w-full dark:text-gray-600" type="date" name="birthday" id="birthday"
                                     value="{{ old('birthday', $person?->birthday) }}">
 
                                 @error('birthday')
@@ -56,7 +56,7 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="business">Business</label>
-                                <select class="block w-full" name="business_id" id="business_id">
+                                <select class="block w-full dark:text-gray-600" name="business_id" id="business_id">
                                     <option value=""  @selected("" == old('business_id', $person->business_id))>( No Business )</option>
                                     @foreach ($businesses as $business)
                                         <option value="{{ $business->id }}" @selected($business->id == old('business_id', $person->business_id))>

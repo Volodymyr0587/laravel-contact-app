@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <x-section-header>
             {{ __('Edit Business Category') }}
-        </h2>
+        </x-section-header>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 dark:bg-gray-900">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700">
+                <div class="p-6 text-gray-900 dark:text-white">
 
                     <h3 class="font-semibold pb-5">Edit business category: {{ $businessCategory->cateory_name }}</h3>
 
@@ -19,7 +19,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
                                 <label class="block" for="category_name">Business category name</label>
-                                <input class="block w-full" type="text" name="category_name" id="category_name"
+                                <input class="block w-full dark:text-gray-600" type="text" name="category_name" id="category_name"
                                     value="{{ old('category_name', $businessCategory->category_name) }}">
                             </span>
 

@@ -1,34 +1,34 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <x-section-header>
                 {{ __('People') }}
-            </h2>
+            </x-section-header>
             <form action="{{ route('person.search') }}" method="GET">
-                <input class="rounded-md" type="text" name="search" required />
+                <input class="rounded-md dark:text-gray-700" type="text" name="search" required />
                 <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
                     type="submit">Search</button>
             </form>
         </div>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 dark:bg-gray-900">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700 dark:text-white">
                 <div class="p-6 text-gray-900">
 
                     <div class="flex items-center justify-between">
                         <div class="flex items-center justify-between">
                             <a href="{{ route('person.index', ['order' => 'asc']) }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 dark:text-white">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M8.25 6.75L12 3m0 0l3.75 3.75M12 3v18" />
                                 </svg>
                             </a>
                             <a href="{{ route('person.index', ['order' => 'desc']) }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6 dark:text-white">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M15.75 17.25L12 21m0 0l-3.75-3.75M12 21V3" />
                                 </svg>
@@ -45,20 +45,20 @@
 
                     <table class="table-fixed border-separate border-spacing-6">
                         <thead>
-                            <tr>
+                            <x-table-row>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Business</th>
                                 <th>Tags</th>
                                 <th>Actions</th>
-                            </tr>
+                            </x-table-row>
                         </thead>
                         <tbody>
                             @forelse ($people as $person)
-                                <tr>
+                                <x-table-row>
                                     <td><a href="{{ route('person.show', $person->id) }}"
-                                            class="text-blue-700 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
+                                            class="text-blue-700 dark:text-blue-500 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
                                             {{ $person->firstname }} {{ $person->lastname }}</a></td>
                                     <td>{{ $person->email }}</td>
                                     <td>{{ $person->phone }}</td>
@@ -83,11 +83,11 @@
                                             </svg>
                                         </a>
                                     </td>
-                                </tr>
+                                </x-table-row>
                             @empty
-                                <tr>
+                                <x-table-row>
                                     <td>{{ __('No people found') }}</td>
-                                </tr>
+                                </x-table-row>
                             @endforelse
                         </tbody>
                     </table>

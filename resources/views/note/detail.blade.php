@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight inline-flex">
+        <x-section-header class="inline-flex">
             <a class="flex justify-left items-center mr-2" href="{{ URL::previous() }}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -8,27 +8,25 @@
                 </svg>
             </a>
             {{ __('Note') }} | {{ $note->title }}
-        </h2>
+        </x-section-header>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 dark:bg-gray-900">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700"">
+                <div class="p-6 text-gray-900 dark:text-white">
+                    <div class="flex">
                         <div class="sm:col-span-3">
                             <h3 class="font-semibold text-l pb-5">{{ $note->title }}</h3>
                             <div class="pl-3">
-                                <img class="object-contain object-left h-48 w-96"
+                                <img class="object-contain mr-8 pt-2 mb-4 h-48 w-96 float-left"
                                     src="{{ $note->image ? Storage::url($note->image) : asset('/images/note-no-image.png') }}"
                                     alt="Photo">
-                            </div>
-                            <div class="pl-3 mt-5">
-                                {!! $note->body !!}
+                                    {!! $note->body !!}
                             </div>
                             <dl>
                                 <dd>
-                                    Keywords:
+                                    <span class="font-bold">Keywords:</span>
                                     @foreach ($note->tags as $tag)
                                         <span class="bg-green-600 text-white text-xs px-1 rounded-full">
                                             <a href="{{ route('note.getByTag', $tag->tag_name) }}">
@@ -38,7 +36,7 @@
                                     @endforeach
                                 </dd>
                                 <dd>
-                                    Related notes:
+                                    <span class="font-bold">Related notes:</span>
                                     @if ($relatedNotes->isNotEmpty())
                                         @foreach ($relatedNotes as $relatedNote)
                                             <span class="bg-green-600 text-white text-sm px-2 py-1 rounded-full">

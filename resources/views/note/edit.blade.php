@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <x-section-header>
             {{ __('Edit Note') }}
-        </h2>
+        </x-section-header>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12 c">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700">
+                <div class="p-6 text-gray-900 dark:text-white">
 
                     <h3 class="font-semibold pb-5">Edit a note: {{ $note->title }}</h3>
 
@@ -20,7 +20,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
                                 <label class="block" for="title">Title</label>
-                                <input class="block w-full" type="text" name="title" id="title"
+                                <input class="block w-full dark:text-gray-600" type="text" name="title" id="title"
                                     value="{{ old('title', $note->title) }}">
                             </span>
                             <span class="sm:col-span-3">
@@ -30,7 +30,7 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="body">Content</label>
-                                <input class="block w-full" type="text" name="body" id="body"
+                                <input class="block w-full dark:text-gray-600" type="text" name="body" id="body"
                                     value="{{ old('body', strip_tags($note->body)) }}">
 
                                 <div class="flex mt-4">
@@ -46,7 +46,7 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="tags">Keywords [separated by a space]</label>
-                                <input class="block w-full" type="text" id="tags" name="tags" value="{{ implode(" ", $note->tags->pluck('tag_name')->toArray()) }}">
+                                <input class="block w-full dark:text-gray-600" type="text" id="tags" name="tags" value="{{ implode(" ", $note->tags->pluck('tag_name')->toArray()) }}">
                             </span>
 
                         </div>
