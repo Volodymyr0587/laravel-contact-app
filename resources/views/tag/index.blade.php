@@ -24,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tags as $tag)
+                            @forelse ($tags as $tag)
                                 <tr>
                                     <td>{{ $tag->tag_name }}</td>
                                     <td>{{ $tag->created_at }}</td>
@@ -37,7 +37,11 @@
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td>{{ __('No tags found') }}</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                     {{ $tags->links() }}

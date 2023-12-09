@@ -31,25 +31,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($notes as $note)
+                            @forelse ($notes as $note)
                                 <tr>
                                     <td class="inline-flex">
                                         @if ($note->is_active)
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
                                             </svg>
                                         @endif
                                         <a href="{{ route('note.show', $note->id) }}"
                                             class="text-blue-700 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
-                                            {{ $note->title }}</a></td>
+                                            {{ $note->title }}</a>
+                                    </td>
                                     <td>
                                         @foreach ($note->tags as $tag)
-
-                                                <a href="{{ route('note.getByTag', $tag->tag_name) }}"
-                                                    class="bg-green-500 py-1 px-1 rounded-full">
-                                                    {{ $tag->tag_name }}
-                                                </a>
-
+                                            <a href="{{ route('note.getByTag', $tag->tag_name) }}"
+                                                class="bg-green-500 py-1 px-1 rounded-full">
+                                                {{ $tag->tag_name }}
+                                            </a>
                                         @endforeach
                                     </td>
                                     <td>
@@ -64,7 +65,11 @@
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td>{{ __('No notes found') }}</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                     {{ $notes->links() }}
