@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class NoteTag extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory; //, SoftDeletes;
 
     protected $fillable = ['tag_name'];
 
