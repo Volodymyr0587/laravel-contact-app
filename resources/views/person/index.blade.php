@@ -55,7 +55,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($people as $person)
+                            @forelse ($people as $person)
                                 <tr>
                                     <td><a href="{{ route('person.show', $person->id) }}"
                                             class="text-blue-700 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
@@ -84,7 +84,11 @@
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td>{{ __('No people found') }}</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                     {{-- {{ $people->links() }} --}}
