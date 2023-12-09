@@ -147,6 +147,7 @@ class PersonController extends Controller
     public function destroy(Person $person)
     {
         $this->authorize('delete', $person);
+        $person->tasks()->delete();
         $person->delete();
 
         return redirect(route('person.index'));

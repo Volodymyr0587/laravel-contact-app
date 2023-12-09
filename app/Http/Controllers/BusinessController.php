@@ -124,6 +124,7 @@ class BusinessController extends Controller
     public function destroy(Business $business)
     {
         $this->authorize('delete', $business);
+        $business->tasks()->delete();
         $business->delete();
 
         return redirect(route('business.index'));
