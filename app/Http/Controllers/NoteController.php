@@ -69,7 +69,7 @@ class NoteController extends Controller
             // Call the method to add links to related articles
             $this->addLinksToRelatedNotes($note, $tagNames);
         }
-        return redirect(route('note.index'));
+        return redirect(route('note.index'))->with('noteStore', 'Note created successfully');
     }
 
     /**
@@ -132,7 +132,7 @@ class NoteController extends Controller
 
         // $note->save();
 
-        return redirect(route('note.index'));
+        return redirect(route('note.index'))->with('noteStore', 'Note updated successfully');
     }
 
     /**
@@ -184,7 +184,7 @@ class NoteController extends Controller
         // Delete the note
         $note->delete();
 
-        return redirect(route('note.index'));
+        return redirect(route('note.index'))->with('noteDestroy', 'Note has been deleted successfully');
     }
 
 
