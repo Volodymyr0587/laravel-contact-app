@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TagRequest extends FormRequest
@@ -22,7 +23,14 @@ class TagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tag_name' => 'required|min:2|max:20',
+            'tag_name' => [
+                'required',
+                'min:2',
+                'max:20',
+                Rule::unique('tags')->where(function ($query) {
+                    return $query->where('user_id', auth()->id());
+                }),
+            ],
         ];
     }
 }
