@@ -18,39 +18,43 @@
                     <div class="flex">
                         <div class="sm:col-span-3">
                             <h3 class="font-semibold text-l pb-5">{{ $note->title }}</h3>
-                            <div class="pl-3">
+                            <div
+                                class="pl-3 pb-8 first-letter:text-7xl first-letter:font-bold
+                            first-letter:mr-3 first-letter:float-left">
                                 <img class="object-contain mr-8 pt-2 mb-4 h-48 w-96 float-left"
                                     src="{{ $note->image ? Storage::url($note->image) : asset('/images/note-no-image.png') }}"
                                     alt="Photo">
-                                    {!! $note->body !!}
+                                {!! $note->body !!}
                             </div>
-                            <dl>
-                                <dd>
-                                    <span class="font-bold">Keywords:</span>
-                                    @foreach ($note->tags as $tag)
-                                        <span class="bg-green-600 text-white text-xs px-1 rounded-full">
-                                            <a href="{{ route('note.getByTag', $tag->tag_name) }}">
-                                                {{ $tag->tag_name }}
-                                            </a>
-                                        </span>
-                                    @endforeach
-                                </dd>
-                                <dd>
-                                    <span class="font-bold">Related notes:</span>
-                                    @if ($relatedNotes->isNotEmpty())
-                                        @foreach ($relatedNotes as $relatedNote)
-                                            <span class="bg-green-600 text-white text-sm px-2 py-1 rounded-full">
-                                                <a href="{{ route('note.show', $relatedNote->id) }}">
-                                                    {{ $relatedNote->title }}
+
+                                <dl class="mt-8">
+                                    <dd>
+                                        <span class="font-bold">Keywords:</span>
+                                        @foreach ($note->tags as $tag)
+                                            <span class="bg-green-600 text-white text-xs px-1 rounded-full">
+                                                <a href="{{ route('note.getByTag', $tag->tag_name) }}">
+                                                    {{ $tag->tag_name }}
                                                 </a>
                                             </span>
                                         @endforeach
-                                    @else
+                                    </dd>
+                                    <dd>
+                                        <span class="font-bold">Related notes:</span>
+                                        @if ($relatedNotes->isNotEmpty())
+                                            @foreach ($relatedNotes as $relatedNote)
+                                                <span class="bg-green-600 text-white text-sm px-2 py-1 rounded-full">
+                                                    <a href="{{ route('note.show', $relatedNote->id) }}">
+                                                        {{ $relatedNote->title }}
+                                                    </a>
+                                                </span>
+                                            @endforeach
+                                        @else
                                             <i> No related notes </i>
-                                    @endif
+                                        @endif
 
-                                </dd>
-                            </dl>
+                                    </dd>
+                                </dl>
+
 
                             <div class="pt-3">
                                 <a href="{{ route('note.edit', $note->id) }}"

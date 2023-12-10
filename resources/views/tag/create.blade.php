@@ -18,8 +18,8 @@
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
                                 <label class="block" for="tag_name">Tag name</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="tag_name" id="tag_name"
-                                    value="{{ old('tag_name') }}">
+                                <x-form-input type="text" name="tag_name" id="tag_name"
+                                    value="{{ old('tag_name') }}"></x-form-input>
 
                                 @error('tag_name')
                                     <div class="text-red-500 mt-2 text-sm">

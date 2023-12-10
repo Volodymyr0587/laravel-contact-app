@@ -18,8 +18,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
                                 <label class="block" for="business_name">Business name</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="business_name" id="business_name"
-                                    value="{{ old('business_name') }}">
+                                <x-form-input type="text" name="business_name" id="business_name"></x-form-input>
 
                                 @error('business_name')
                                     <div class="text-red-500 mt-2 text-sm">
@@ -29,8 +28,7 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="contact_email">Email</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="contact_email" id="contact_email"
-                                    value="{{ old('contact_email') }}">
+                                <x-form-input type="text" name="contact_email" id="contact_email"></x-form-input>
 
                                 @error('contact_email')
                                     <div class="text-red-500 mt-2 text-sm">
@@ -40,7 +38,7 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="category">Category</label>
-                                <select class="block w-full dark:text-gray-600" name="category_id" id="category_id">
+                                <select class="block p-2.5 w-full text-left text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="category_id" id="category_id">
                                     <option value="" selected>( No Category )</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}" @selected($category->id == old('category_id'))>

@@ -19,8 +19,8 @@
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
                                 <label class="block" for="tag_name">Tag name</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="tag_name" id="tag_name"
-                                    value="{{ old('tag_name', $tag->tag_name) }}">
+                                <x-form-input type="text" name="tag_name" id="tag_name"
+                                    value="{{ old('tag_name', $tag->tag_name) }}"></x-form-input>
                             </span>
 
                         </div>
@@ -42,7 +42,7 @@
                         @csrf
                         @method('DELETE')
 
-                        <div class="border bg-red-600 text-white mt-6 p-6">
+                        <div class="border rounded-lg bg-red-600 text-white mt-6 p-6">
                             <h3 class="font-semibold">Danger zone</h3>
                             <p>You can delete this tag here</p>
                             <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">

@@ -20,28 +20,28 @@
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
                                 <label class="block" for="firstname">First name</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="firstname" id="firstname"
-                                    value="{{ old('firstname', $person->firstname) }}">
+                                <x-form-input type="text" name="firstname" id="firstname"
+                                    value="{{ old('firstname', $person->firstname) }}"></x-form-input>
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="lastname">Last name</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="lastname" id="lastname"
-                                    value="{{ old('lastname', $person->lastname) }}">
+                                <x-form-input type="text" name="lastname" id="lastname"
+                                    value="{{ old('lastname', $person->lastname) }}"></x-form-input>
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="email">Email</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="email" id="email"
-                                    value="{{ old('email', $person->email) }}">
+                                <x-form-input type="text" name="email" id="email"
+                                    value="{{ old('email', $person->email) }}"></x-form-input>
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="phone">Phone</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="phone" id="phone"
-                                    value="{{ old('phone', $person->phone) }}">
+                                <x-form-input type="text" name="phone" id="phone"
+                                    value="{{ old('phone', $person->phone) }}"></x-form-input>
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="birthday">Date of birth</label>
-                                <input class="block w-full dark:text-gray-600" type="date" name="birthday" id="birthday"
-                                    value="{{ old('birthday', $person?->birthday) }}">
+                                <x-form-input type="date" name="birthday" id="birthday"
+                                    value="{{ old('birthday', $person?->birthday) }}"></x-form-input>
 
                                 @error('birthday')
                                     <div class="text-red-500 mt-2 text-sm">
@@ -56,7 +56,8 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="business">Business</label>
-                                <select class="block w-full dark:text-gray-600" name="business_id" id="business_id">
+                                <select class="block p-2.5 w-full text-left text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                name="business_id" id="business_id">
                                     <option value=""  @selected("" == old('business_id', $person->business_id))>( No Business )</option>
                                     @foreach ($businesses as $business)
                                         <option value="{{ $business->id }}" @selected($business->id == old('business_id', $person->business_id))>
@@ -92,7 +93,7 @@
                         @csrf
                         @method('DELETE')
 
-                        <div class="border bg-red-600 text-white mt-6 p-6">
+                        <div class="border rounded-lg bg-red-600 text-white mt-6 p-6">
                             <h3 class="font-semibold">Danger zone</h3>
                             <p>You can delete this person here</p>
                             <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">

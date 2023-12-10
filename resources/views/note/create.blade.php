@@ -18,8 +18,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
                                 <label class="block" for="title">Title</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="title" id="title"
-                                    value="{{ old('title') }}">
+                                <x-form-input type="text" name="title" id="title"></x-form-input>
 
                                 @error('title')
                                     <div class="text-red-500 mt-2 text-sm">
@@ -40,7 +39,7 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="body">Content</label>
-                                <textarea class="block w-full dark:text-gray-600" type="text" name="body" id="body">{{ old('body') }}</textarea>
+                                <textarea rows="4" class="block p-2.5 w-full text-left text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..." type="text" name="body" id="body">{{ old('body') }}</textarea>
 
                                 @error('body')
                                     <div class="text-red-500 mt-2 text-sm">
@@ -58,7 +57,7 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="tags">Keywords [separated by a space]</label>
-                                <input class="block w-full dark:text-gray-600" type="text" id="tags" name="tags" value="{{ old('tags') }}">
+                                <input class="block p-2.5 w-full text-left text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" id="tags" name="tags" value="{{ old('tags') }}">
                             </span>
                         </div>
 

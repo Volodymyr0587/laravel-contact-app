@@ -20,8 +20,8 @@
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
                                 <label class="block" for="title">Title</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="title" id="title"
-                                    value="{{ old('title', $note->title) }}">
+                                <x-form-input type="text" name="title" id="title"
+                                    value="{{ old('title', $note->title) }}"></x-form-input>
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="image">Image</label>
@@ -30,8 +30,8 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="body">Content</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="body" id="body"
-                                    value="{{ old('body', strip_tags($note->body)) }}">
+                                    <textarea rows="4" class="block p-2.5 w-full text-left text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..." type="text" name="body" id="body">
+                                        {{ old('body', strip_tags($note->body)) }}</textarea>
 
                                 <div class="flex mt-4">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
@@ -46,7 +46,7 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="tags">Keywords [separated by a space]</label>
-                                <input class="block w-full dark:text-gray-600" type="text" id="tags" name="tags" value="{{ implode(" ", $note->tags->pluck('tag_name')->toArray()) }}">
+                                <input class="block p-2.5 w-full text-left text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" id="tags" name="tags" value="{{ implode(" ", $note->tags->pluck('tag_name')->toArray()) }}">
                             </span>
 
                         </div>
@@ -73,7 +73,7 @@
                         @csrf
                         @method('DELETE')
 
-                        <div class="border bg-red-600 text-white mt-6 p-6">
+                        <div class="border rounded-lg bg-red-600 text-white mt-6 p-6">
                             <h3 class="font-semibold">Danger zone</h3>
                             <p>You can delete this note here</p>
                             <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">

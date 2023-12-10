@@ -19,8 +19,8 @@
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
                                 <label class="block" for="firstname">First name</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="firstname" id="firstname"
-                                    value="{{ old('firstname') }}">
+                                <x-form-input type="text" name="firstname" id="firstname"
+                                    placeholder="enter first name"></x-form-input>
 
                                 @error('firstname')
                                     <div class="text-red-500 mt-2 text-sm">
@@ -30,8 +30,8 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="lastname">Last name</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="lastname" id="lastname"
-                                    value="{{ old('lastname') }}">
+                                <x-form-input type="text" name="lastname" id="lastname"
+                                    placeholder="enter last name"></x-form-input>
 
                                 @error('lastname')
                                     <div class="text-red-500 mt-2 text-sm">
@@ -41,8 +41,8 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="email">Email</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="email" id="email"
-                                    value="{{ old('email') }}">
+                                <x-form-input type="text" name="email" id="email"
+                                    placeholder="enter email"></x-form-input>
 
                                 @error('email')
                                     <div class="text-red-500 mt-2 text-sm">
@@ -52,8 +52,8 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="phone">Phone</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="phone" id="phone"
-                                    value="{{ old('phone') }}">
+                                <x-form-input type="text" name="phone" id="phone"
+                                    placeholder="enter phone number"></x-form-input>
 
                                 @error('phone')
                                     <div class="text-red-500 mt-2 text-sm">
@@ -64,8 +64,7 @@
 
                             <span class="sm:col-span-3">
                                 <label class="block" for="birthday">Date of birth</label>
-                                <input class="block w-full dark:text-gray-600" type="date" name="birthday" id="birthday"
-                                    value="{{ old('birthday') }}">
+                                <x-form-input type="date" name="birthday" id="birthday"></x-form-input>
 
                                 @error('birthday')
                                     <div class="text-red-500 mt-2 text-sm">
@@ -86,7 +85,7 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="business">Business</label>
-                                <select class="block w-full dark:text-gray-600" name="business_id" id="business_id">
+                                <select class="block p-2.5 w-full text-left text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="business_id" id="business_id">
                                     <option value="" selected>( No Business )</option>
                                     @foreach ($businesses as $business)
                                         <option value="{{ $business->id }}" @selected($business->id == old('business_id'))>

@@ -18,8 +18,8 @@
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
                                 <label class="block" for="category_name">Business category name</label>
-                                <input class="block w-full dark:text-gray-600" type="text" name="category_name" id="category_name"
-                                    value="{{ old('category_name') }}">
+                                <x-form-input type="text" name="category_name" id="category_name"
+                                    value="{{ old('category_name') }}"></x-form-input>
 
                                 @error('category_name')
                                     <div class="text-red-500 mt-2 text-sm">
