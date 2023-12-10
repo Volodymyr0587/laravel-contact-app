@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BusinessCategoryController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PeoplePdfController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagController;
@@ -31,6 +32,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
 Route::get('/people-pdf', [PeoplePdfController::class, 'download'])
     ->middleware('auth')->name('people.downloadPDF');
+
+Route::get('/gallery', GalleryController::class)->middleware('auth')->name('gallery.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

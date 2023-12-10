@@ -60,6 +60,10 @@
                     <x-nav-link :href="route('note.index')" :active="request()->routeIs('note.index')">
                         {{ __('Notes') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('gallery.index')" :active="request()->routeIs('gallery.index')">
+                        {{ __('Gallery') }}
+                    </x-nav-link>
                 </div>
             </div>
 
