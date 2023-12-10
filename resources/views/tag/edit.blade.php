@@ -21,6 +21,11 @@
                                 <label class="block" for="tag_name">Tag name</label>
                                 <x-form-input type="text" name="tag_name" id="tag_name"
                                     value="{{ old('tag_name', $tag->tag_name) }}"></x-form-input>
+                                @error('tag_name')
+                                    <div class="text-red-500 mt-2 text-sm">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </span>
 
                         </div>
@@ -28,10 +33,13 @@
 
 
                         <div class="mt-6 flex items-center justify-end gap-x-6">
-                            <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" href="{{ route('tag.index') }}">
+                            <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
+                                href="{{ route('tag.index') }}">
                                 Cancel
                             </a>
-                            <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">
+                            <button
+                                class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
+                                type="submit">
                                 Save
                             </button>
                         </div>
@@ -45,7 +53,9 @@
                         <div class="border rounded-lg bg-red-600 text-white mt-6 p-6">
                             <h3 class="font-semibold">Danger zone</h3>
                             <p>You can delete this tag here</p>
-                            <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">
+                            <button
+                                class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
+                                type="submit">
                                 Delete
                             </button>
                         </div>

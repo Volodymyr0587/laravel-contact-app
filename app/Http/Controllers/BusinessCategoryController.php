@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BusinessCategoryRequest;
 use App\Models\BusinessCategory;
-use Illuminate\Http\Request;
 
 class BusinessCategoryController extends Controller
 {
@@ -38,7 +37,7 @@ class BusinessCategoryController extends Controller
         $businessCategory->user()->associate($user);
         $businessCategory->save();
 
-        return redirect(route('businessCategory.index'));
+        return redirect(route('businessCategory.index'))->with('store', 'Business category created successfully');
     }
 
     /**
@@ -66,7 +65,7 @@ class BusinessCategoryController extends Controller
         $this->authorize('update', $businessCategory);
         $businessCategory->update($request->validated());
 
-        return redirect(route('businessCategory.index'));
+        return redirect(route('businessCategory.index'))->with('store', 'Business category updated successfully');
     }
 
     /**
@@ -77,6 +76,6 @@ class BusinessCategoryController extends Controller
         $this->authorize('delete', $businessCategory);
         $businessCategory->delete();
 
-        return redirect(route('businessCategory.index'));
+        return redirect(route('businessCategory.index'))->with('destroy', 'Business category has been deleted successfully');
     }
 }

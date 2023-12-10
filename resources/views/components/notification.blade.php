@@ -1,4 +1,4 @@
-@if (session()->has('noteStore'))
+@if (session()->has('store'))
     <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show" class="flex justify-center mt-2 ml-0">
 
         <div id="toast-success"
@@ -13,7 +13,7 @@
                 </svg>
                 <span class="sr-only">Check icon</span>
             </div>
-            <div class="ms-3 text-sm font-normal">{{ session('noteStore') }}</div>
+            <div class="ms-3 text-sm font-normal">{{ session('store') }}</div>
             <button type="button" x-on:click="show = false"
                 class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
                 data-dismiss-target="#toast-success" aria-label="Close">
@@ -27,7 +27,7 @@
         </div>
     </div>
 
-@elseif (session()->has('noteDestroy'))
+@elseif (session()->has('destroy'))
     <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)" x-show="show" class="flex justify-center mt-2 ml-0">
 
         <div id="toast-danger"
@@ -42,7 +42,7 @@
                 </svg>
                 <span class="sr-only">Error icon</span>
             </div>
-            <div class="ms-3 text-sm font-normal">{{ session('noteDestroy') }}</div>
+            <div class="ms-3 text-sm font-normal">{{ session('destroy') }}</div>
             <button type="button" x-on:click="show = false"
                 class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
                 data-dismiss-target="#toast-danger" aria-label="Close">

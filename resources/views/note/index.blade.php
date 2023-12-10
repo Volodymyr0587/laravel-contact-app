@@ -17,7 +17,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700 dark:text-white">
                 <div class="p-6 text-gray-900">
-                    {{-- <x-notification /> --}}
                     <div class="flex items-center justify-end">
                         <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
                             href="{{ route('note.create') }}">Add Note</a>

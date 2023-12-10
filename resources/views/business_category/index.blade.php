@@ -3,6 +3,7 @@
         <x-section-header>
             {{ __('Business category') }}
         </x-section-header>
+        <x-notification />
     </x-slot>
 
     <div class="py-12 dark:bg-gray-900">

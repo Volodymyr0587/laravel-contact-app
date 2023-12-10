@@ -44,7 +44,7 @@ class BusinessController extends Controller
 
         $business->tags()->sync($request->tags);
 
-        return redirect(route('business.index'));
+        return redirect(route('business.index'))->with('store', 'Business created successfully');
     }
 
     /**
@@ -82,7 +82,7 @@ class BusinessController extends Controller
 
         $business->tags()->sync($request->tags);
 
-        return redirect(route('business.index'));
+        return redirect(route('business.index'))->with('store', 'Business updated successfully');
     }
 
     /**
@@ -127,6 +127,6 @@ class BusinessController extends Controller
         $business->tasks()->delete();
         $business->delete();
 
-        return redirect(route('business.index'));
+        return redirect(route('business.index'))->with('destroy', 'Business has been deleted successfully');
     }
 }

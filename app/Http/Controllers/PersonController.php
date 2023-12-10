@@ -59,7 +59,7 @@ class PersonController extends Controller
 
         $person->tags()->sync($request->tags);
 
-        return redirect(route('person.index'));
+        return redirect(route('person.index'))->with('store', 'Contact created successfully');
     }
 
     /**
@@ -101,8 +101,8 @@ class PersonController extends Controller
 
         $person->tags()->sync($request->tags);
 
-        // return redirect(route('person.index'));
-        return view('person.detail')->with('person', $person);
+        return redirect(route('person.index'))->with('store', 'Contact updated successfully');
+        // return view('person.detail')->with(['person' => $person, 'store' => 'Contact updated successfully']);
 
     }
 
@@ -150,6 +150,6 @@ class PersonController extends Controller
         $person->tasks()->delete();
         $person->delete();
 
-        return redirect(route('person.index'));
+        return redirect(route('person.index'))->with('destroy', 'Contact has been deleted successfully');
     }
 }

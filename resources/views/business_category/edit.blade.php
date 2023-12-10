@@ -21,7 +21,14 @@
                                 <label class="block" for="category_name">Business category name</label>
                                 <x-form-input type="text" name="category_name" id="category_name"
                                     value="{{ old('category_name', $businessCategory->category_name) }}"></x-form-input>
+
+                            @error('category_name')
+                                <div class="text-red-500 mt-2 text-sm">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                             </span>
+
 
                         </div>
 

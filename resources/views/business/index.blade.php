@@ -10,6 +10,7 @@
                     type="submit">Search</button>
             </form>
         </div>
+        <x-notification />
     </x-slot>
 
     <div class="py-12 dark:bg-gray-900">

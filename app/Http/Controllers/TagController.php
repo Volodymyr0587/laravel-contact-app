@@ -35,7 +35,7 @@ class TagController extends Controller
         $tag->user()->associate($user);
         $tag->save();
 
-        return redirect(route('tag.index'));
+        return redirect(route('tag.index'))->with('store', 'Tag has been created successfully');
     }
 
     /**
@@ -63,7 +63,7 @@ class TagController extends Controller
         $this->authorize('update', $tag);
         $tag->update($request->validated());
 
-        return redirect(route('tag.index'));
+        return redirect(route('tag.index'))->with('store', 'Tag has been updated successfully');
     }
 
     /**
@@ -74,6 +74,6 @@ class TagController extends Controller
         $this->authorize('delete', $tag);
         $tag->delete();
 
-        return redirect(route('tag.index'));
+        return redirect(route('tag.index'))->with('destroy', 'Tag has been deleted successfully');
     }
 }
