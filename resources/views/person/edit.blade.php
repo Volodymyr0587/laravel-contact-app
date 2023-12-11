@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700">
                 <div class="p-6 text-gray-900 dark:text-white">
 
-                    <h3 class="font-semibold pb-5">Edit a person: {{ $person->firstname }} {{ $person->lastname }}</h3>
+                    <h3 class="font-semibold pb-5">{{ __("Edit Person") }}: {{ $person->firstname }} {{ $person->lastname }}</h3>
 
                     <form action="{{ route('person.update', $person->id) }}" method="POST"
                         enctype="multipart/form-data">
@@ -19,27 +19,27 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
-                                <label class="block" for="firstname">First name</label>
+                                <label class="block" for="firstname">{{ __("First name") }}</label>
                                 <x-form-input type="text" name="firstname" id="firstname"
                                     value="{{ old('firstname', $person->firstname) }}"></x-form-input>
                             </span>
                             <span class="sm:col-span-3">
-                                <label class="block" for="lastname">Last name</label>
+                                <label class="block" for="lastname">{{ __("Last name") }}</label>
                                 <x-form-input type="text" name="lastname" id="lastname"
                                     value="{{ old('lastname', $person->lastname) }}"></x-form-input>
                             </span>
                             <span class="sm:col-span-3">
-                                <label class="block" for="email">Email</label>
+                                <label class="block" for="email">{{ __("Email") }}</label>
                                 <x-form-input type="text" name="email" id="email"
                                     value="{{ old('email', $person->email) }}"></x-form-input>
                             </span>
                             <span class="sm:col-span-3">
-                                <label class="block" for="phone">Phone</label>
+                                <label class="block" for="phone">{{ __("Phone") }}</label>
                                 <x-form-input type="text" name="phone" id="phone"
                                     value="{{ old('phone', $person->phone) }}"></x-form-input>
                             </span>
                             <span class="sm:col-span-3">
-                                <label class="block" for="birthday">Date of birth</label>
+                                <label class="block" for="birthday">{{ __("Date of birth") }}</label>
                                 <x-form-input type="date" name="birthday" id="birthday"
                                     value="{{ old('birthday', $person?->birthday) }}"></x-form-input>
 
@@ -50,15 +50,15 @@
                                 @enderror
                             </span>
                             <span class="sm:col-span-3">
-                                <label class="block" for="image">Image</label>
+                                <label class="block" for="image">{{ __("Image") }}</label>
                                 <input class="block w-full" type="file" name="image" id="image"
                                     value="{{ old('image') }}">
                             </span>
                             <span class="sm:col-span-3">
-                                <label class="block" for="business">Business</label>
+                                <label class="block" for="business">{{ __("Business") }}</label>
                                 <select class="block p-2.5 w-full text-left text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 name="business_id" id="business_id">
-                                    <option value=""  @selected("" == old('business_id', $person->business_id))>( No Business )</option>
+                                    <option value=""  @selected("" == old('business_id', $person->business_id))>( {{ __("No Business") }} )</option>
                                     @foreach ($businesses as $business)
                                         <option value="{{ $business->id }}" @selected($business->id == old('business_id', $person->business_id))>
                                             {{ $business->business_name }}
@@ -68,7 +68,7 @@
                             </span>
                         </div>
 
-                        <h4 class="font-semibold pt-5">Categories</h4>
+                        <h4 class="font-semibold pt-5">{{ __("Categories") }}</h4>
                         <div class="grid grid-cols-1 sm:grid-cols-12 gap-x-6 gap-y-6">
                             @foreach ($tags as $tag)
                                 <span class="sm:col-span-2">
@@ -80,10 +80,10 @@
 
                         <div class="mt-6 flex items-center justify-end gap-x-6">
                             <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" href="{{ route('person.index') }}">
-                                Cancel
+                                {{ __("Cancel") }}
                             </a>
                             <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">
-                                Save
+                                {{ __("Save") }}
                             </button>
                         </div>
                     </form>
@@ -94,10 +94,10 @@
                         @method('DELETE')
 
                         <div class="border rounded-lg bg-red-600 text-white mt-6 p-6">
-                            <h3 class="font-semibold">Danger zone</h3>
-                            <p>You can delete this person here</p>
+                            <h3 class="font-semibold">{{ __("Danger zone") }}</h3>
+                            <p>{{ __("You can delete this person here") }}</p>
                             <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">
-                                Delete
+                                {{ __("Delete") }}
                             </button>
                         </div>
                     </form>

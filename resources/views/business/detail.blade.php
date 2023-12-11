@@ -17,13 +17,13 @@
                 <div class="p-6 text-gray-900 dark:text-white">
                     <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                         <div class="sm:col-span-3">
-                            <h3 class="font-semibold text-l pb-5">Company Details</h3>
+                            <h3 class="font-semibold text-l pb-5">{{ __("Company Details") }}</h3>
                             <dl>
-                                <dt class="font-semibold">Name</dt>
+                                <dt class="font-semibold">{{ __("Name") }}</dt>
                                 <dd class="pl-3">{{ $business->business_name }}</dd>
-                                <dt class="font-semibold">Contact email</dt>
+                                <dt class="font-semibold">{{ __("Contact email") }}</dt>
                                 <dd class="pl-3">{{ $business->contact_email }}</dd>
-                                <dt class="font-semibold">Tags</dt>
+                                <dt class="font-semibold">{{ __("Tags") }}</dt>
                                 <dd class="pl-3">
                                     @foreach ($business->tags as $tag)
                                         <span
@@ -34,18 +34,18 @@
 
                             <div class="pt-3">
                                 <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                                    href="{{ route('business.edit', $business->id) }}">Edit Business</a>
+                                    href="{{ route('business.edit', $business->id) }}">{{ __("Edit Business") }}</a>
                             </div>
                         </div>
                         <div class="sm:col-span-3">
-                            <h3 class="font-semibold text-l pb-5">Create a new Task</h3>
+                            <h3 class="font-semibold text-l pb-5">{{ __("Create a new Task") }}</h3>
                             <form action="{{ route('task.store') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="taskable_id" value="{{ $business->id }}">
                                 <input type="hidden" name="target_model" value="business">
                                 <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                                     <span class="sm:col-span-6">
-                                        <label class="block" for="title">Task title </label>
+                                        <label class="block" for="title">{{ __("Task title") }}</label>
                                         <x-form-input type="text" name="title" id="title"
                                             value="{{ old('title') }}"></x-form-input>
 
@@ -56,7 +56,7 @@
                                         @enderror
                                     </span>
                                     <span class="sm:col-span-6">
-                                        <label class="block" for="description">Task description</label>
+                                        <label class="block" for="description">{{ __("Task description") }}</label>
                                         <textarea class="block p-2.5 w-full text-left text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         type="text" name="description" id="description">{{ old('description') }}</textarea>
                                         @error('description')
@@ -69,12 +69,13 @@
 
                                 <div class="mt-5 flex items-center justify-end gap-x-6">
                                     <button type="submit"
-                                        class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600">Create
-                                        Task</button>
+                                        class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600">
+                                        {{ __("Create Task") }}
+                                    </button>
                                 </div>
                             </form>
 
-                            <h3 class="font-semibold text-l pb-5">Tasks</h3>
+                            <h3 class="font-semibold text-l pb-5">{{ __("Tasks") }}</h3>
                             @foreach ($business->tasks->sortByDesc('created_at') as $task)
                                 <div class="border-t border-grey-500 py-3">
                                     <h4 class="font-semibold">{{ $task->title }}</h4>

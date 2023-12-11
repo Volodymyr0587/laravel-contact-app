@@ -12,3 +12,8 @@
         @endif
     @endforeach
 </div>
+
+{{-- http_build_query(request()->except('language')) is used to get all
+the current query parameters except the 'language' parameter. This way,
+when you switch the language, the other query parameters
+(like the note_id in your case) will be preserved. --}}

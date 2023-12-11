@@ -29,7 +29,7 @@
 
                                 <dl class="mt-8">
                                     <dd>
-                                        <span class="font-bold">Keywords:</span>
+                                        <span class="font-bold">{{ __("Keywords") }}:</span>
                                         @foreach ($note->tags as $tag)
                                             <span class="bg-green-600 text-white text-xs px-1 rounded-full">
                                                 <a href="{{ route('note.getByTag', $tag->tag_name) }}">
@@ -39,7 +39,7 @@
                                         @endforeach
                                     </dd>
                                     <dd>
-                                        <span class="font-bold">Related notes:</span>
+                                        <span class="font-bold">{{ __("Related notes") }}:</span>
                                         @if ($relatedNotes->isNotEmpty())
                                             @foreach ($relatedNotes as $relatedNote)
                                                 <span class="bg-green-600 text-white text-sm px-2 py-1 rounded-full">
@@ -49,7 +49,7 @@
                                                 </span>
                                             @endforeach
                                         @else
-                                            <i> No related notes </i>
+                                            <i> {{ __("No related notes") }} </i>
                                         @endif
 
                                     </dd>
@@ -58,11 +58,11 @@
 
                             <div class="pt-3">
                                 <a href="{{ route('note.edit', $note->id) }}"
-                                    class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600">Edit
-                                    Note</a>
+                                    class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600">
+                                    {{ __("Edit Note") }}
+                                </a>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

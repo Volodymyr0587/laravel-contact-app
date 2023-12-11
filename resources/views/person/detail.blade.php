@@ -17,21 +17,21 @@
                 <div class="p-6 text-gray-900 dark:text-white">
                     <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                         <div class="sm:col-span-3">
-                            <h3 class="font-semibold text-l pb-5">Person Details</h3>
+                            <h3 class="font-semibold text-l pb-5">{{ __("Person Details") }}</h3>
                             <dl>
-                                <dt class="font-semibold">Photo</dt>
+                                <dt class="font-semibold">{{ __("Photo") }}</dt>
                                 <dd class="pl-3">
                                     <img class="object-contain object-left h-48 w-96" src="{{ $person->image ? Storage::url($person->image) : asset('/images/person-no-image.png') }}" alt="Photo">
                                 </dd>
-                                <dt class="font-semibold">Name</dt>
+                                <dt class="font-semibold">{{ __("Name") }}</dt>
                                 <dd class="pl-3">{{ $person->firstname }} {{ $person->lastname }}</dd>
-                                <dt class="font-semibold">Phone</dt>
+                                <dt class="font-semibold">{{ __("Phone") }}</dt>
                                 <dd class="pl-3">{{ $person->phone }}</dd>
-                                <dt class="font-semibold">Email</dt>
+                                <dt class="font-semibold">{{ __("Email") }}</dt>
                                 <dd class="pl-3">{{ $person->email }}</dd>
-                                <dt class="font-semibold">Birthday</dt>
+                                <dt class="font-semibold">{{ __("Birthday") }}</dt>
                                 <dd class="pl-3">{{ $person->birthday ?: 'No date' }}</dd>
-                                <dt class="font-semibold">Categories</dt>
+                                <dt class="font-semibold">{{ __("Categories") }}</dt>
                                 <dd class="pl-3">
                                     @foreach ($person->tags as $tag)
                                         <span class="bg-green-600 text-white text-xs px-1 rounded-full">{{ $tag->tag_name }}</span>
@@ -40,11 +40,11 @@
                             </dl>
 
                             <div class="pt-3">
-                                <a href="{{ route('person.edit', $person->id) }}" class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600">Edit Person</a>
+                                <a href="{{ route('person.edit', $person->id) }}" class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600">{{ __("Edit Person") }}</a>
                             </div>
                         </div>
                         <div class="sm:col-span-3">
-                            <h3 class="font-semibold text-l pb-5">Creat new task</h3>
+                            <h3 class="font-semibold text-l pb-5">{{ __("Creat new task") }}</h3>
                             <form action="{{ route('task.store') }}" method="POST">
                                 @csrf
 
@@ -52,7 +52,7 @@
                                 <input type="hidden" name="target_model" value="person">
                                 <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                                     <span class="sm:col-span-6">
-                                        <label class="block" for="title">Task title </label>
+                                        <label class="block" for="title">{{ __("Task title") }}</label>
                                         <x-form-input type="text" name="title" id="title" value="{{ old('title') }}"></x-form-input>
 
                                         @error('title')
@@ -62,7 +62,7 @@
                                         @enderror
                                     </span>
                                     <span class="sm:col-span-6">
-                                        <label class="block" for="description">Task description</label>
+                                        <label class="block" for="description">{{ __("Task description") }}</label>
                                         <textarea class="block p-2.5 w-full text-left text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         type="text" name="description" id="description">{{ old('description') }}</textarea>
 
@@ -75,11 +75,11 @@
                                 </div>
 
                                 <div class="mt-5 flex items-center justify-end gap-x-6">
-                                    <button type="submit" class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600">Create Task</button>
+                                    <button type="submit" class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600">{{ __("Create Task") }}</button>
                                 </div>
                             </form>
 
-                            <h3 class="font-semibold text-l pb-5">Tasks</h3>
+                            <h3 class="font-semibold text-l pb-5">{{ __("Tasks") }}</h3>
                             @foreach ($person->tasks->sortByDesc('created_at') as $task)
                                 <div class="border-t border-grey-500 py-3">
                                     <h4 class="font-semibold">{{$task->title}}</h4>
@@ -89,11 +89,11 @@
                                             <form action="{{route('task.complete', $task->id)}}" method="POST">
                                                 @csrf
                                                 @method('PUT')
-                                                <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">Complete Task</button>
+                                                <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">{{ __("Complete Task") }}</button>
                                             </form>
                                         </div>
                                     @else
-                                        <p class="italic">Completed</p>
+                                        <p class="italic">{{ __("Completed") }}</p>
                                     @endif
                                 </div>
                             @endforeach
