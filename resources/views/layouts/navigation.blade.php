@@ -22,7 +22,7 @@
                             <x-slot name="trigger">
                                 <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150
                                 dark:bg-gray-800 dark:text-gray-500 dark:hover:text-white">
-                                    <div>Contacts</div>
+                                    <div>{{  __('Contacts') }}</div>
 
                                     <div class="ms-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -43,9 +43,39 @@
                                 </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
+
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150
+                                dark:bg-gray-800 dark:text-gray-500 dark:hover:text-white">
+                                    <div>{{  __('Manage contacts') }}</div>
+
+                                    <div class="ms-1">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+
+                                <x-dropdown-link :href="route('businessCategory.index')">
+                                    {{ __('Business categories') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('task.index')">
+                                    {{ __('Tasks') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('tag.index')">
+                                    {{ __('Tags') }}
+                                </x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
                     </div>
 
-                    <x-nav-link :href="route('businessCategory.index')" :active="request()->routeIs('businessCategory.index')">
+                    {{-- <x-nav-link :href="route('businessCategory.index')" :active="request()->routeIs('businessCategory.index')">
                         {{ __('Business categories') }}
                     </x-nav-link>
 
@@ -55,7 +85,7 @@
 
                     <x-nav-link :href="route('tag.index')" :active="request()->routeIs('tag.index')">
                         {{ __('Tags') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
 
                     <x-nav-link :href="route('note.index')" :active="request()->routeIs('note.index')">
                         {{ __('Notes') }}
