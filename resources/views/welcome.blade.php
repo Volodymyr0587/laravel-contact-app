@@ -849,6 +849,7 @@
                             class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
                     @endif
                 @endauth
+                @include('partials/language_switcher')
             </div>
         @endif
 
@@ -900,9 +901,7 @@
                             </h2>
 
                             <p class="mt-4 text-gray-500 dark:text-gray-400 text-lg leading-relaxed">
-                                Welcome to our Contact App, where organizing your contacts has never been easier!
-                                Effortlessly add new contacts, include essential details like birthdays, keywords, work information, and more.
-                                Streamline your connections and stay on top of important dates with our user-friendly and feature-packed Contact App.
+                                {{  __('Welcome to our Contact App, where organizing your contacts has never been easier! Effortlessly add new contacts, include essential details like birthdays, keywords, work information, and more. Streamline your connections and stay on top of important dates with our user-friendly and feature-packed Contact App.') }}
                             </p>
                         </div>
                     </div>
