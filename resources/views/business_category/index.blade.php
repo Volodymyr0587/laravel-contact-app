@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <x-section-header>
-            {{ __('Business category') }}
+            {{ __('Business categories') }}
         </x-section-header>
         <x-notification />
     </x-slot>

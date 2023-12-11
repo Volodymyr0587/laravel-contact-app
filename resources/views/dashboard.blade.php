@@ -17,17 +17,17 @@
                                 class="text-xs text-gray-700 uppercase bg-gray-50">  {{--dark:bg-gray-700 dark:text-gray-400--}}
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
-                                        Item
+                                        {{ __("ITEM") }}
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Count
+                                        {{ __("COUNT") }}
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <x-table-row>
                                     <x-table-header>
-                                        Total People
+                                        {{ __("Total People") }}
                                     </x-table-header>
                                     <td class="px-6 py-4">
                                         {{ $peopleCount }}
@@ -35,7 +35,7 @@
                                 </x-table-row>
                                 <x-table-row>
                                     <x-table-header>
-                                        Total Businesses
+                                        {{ __("Total Businesses") }}
                                     </x-table-header>
                                     <td class="px-6 py-4">
                                         {{ $businessCount }}
@@ -43,7 +43,7 @@
                                 </x-table-row>
                                 <x-table-row>
                                     <x-table-header>
-                                        Total Business Categories
+                                        {{ __("Total Business Categories") }}
                                     </x-table-header>
                                     <td class="px-6 py-4">
                                         {{ $businessCategoriesCount }}
@@ -51,7 +51,7 @@
                                 </x-table-row>
                                 <x-table-row>
                                     <x-table-header>
-                                        Total Notes
+                                        {{ __("Total Notes") }}
                                     </x-table-header>
                                     <td class="px-6 py-4">
                                         {{ $noteCount }}
@@ -59,7 +59,7 @@
                                 </x-table-row>
                                 <x-table-row>
                                     <x-table-header>
-                                        Total Tasks
+                                        {{ __("Total Tasks") }}
                                     </x-table-header>
                                     <td class="px-6 py-4">
                                         {{ $taskCount }}
@@ -67,7 +67,7 @@
                                 </x-table-row>
                                 <x-table-row>
                                     <x-table-header>
-                                        Total Tags
+                                        {{ __("Total Tags") }}
                                     </x-table-header>
                                     <td class="px-6 py-4">
                                         {{ $categoryCount }}
@@ -83,13 +83,13 @@
                                 @foreach ($timePeriods as $timePeriod)
                                     {{-- Statistics By {{ $timePeriod }} --}}
                                     <tr class="px-6 py-4 text-xs text-gray-700 uppercase bg-gray-50 whitespace-no-wrap text-center">
-                                        <td colspan="2" class="px-6 py-4 font-bold">Statistics By {{ $timePeriod }}</td>
+                                        <td colspan="2" class="px-6 py-4 font-bold">{{  __("STATISTACS BY") }} {{ __("$timePeriod") }}</td>
                                     </tr>
 
                                     @foreach ($categories as $category)
                                         <x-table-row>
                                             <x-table-header>
-                                                Added {{ $category }}
+                                                {{ __("Added") }} {{ __("$category") }}
                                             </x-table-header>
                                             <td class="px-6 py-4">
                                                 {{ ${'statisticsBy'.$timePeriod}['created'.$category] }}
