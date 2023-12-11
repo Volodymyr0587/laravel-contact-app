@@ -143,11 +143,20 @@ class NoteController extends Controller
         // Get the search value from teh request
         $search = $request->input('search');
 
-        // Search in the title and body columns from the notes table
-        $notes = auth()->user()->notes()
-            ->where('title', 'LIKE', "%{$search}%")
-            ->orWhere('body', 'LIKE', "%{$search}%")
-            ->paginate(5);
+        // Combine search in the title and body columns from the notes table
+        $searchTerms = explode(' ', $search);
+
+        // Get current user notes
+        $notes = auth()->user()->notes();
+
+        foreach ($searchTerms as $term) {
+            $notes->where(function ($query) use ($term) {
+                $query->where('title', 'LIKE', "%{$term}%")
+                ->orWhere('body', 'LIKE', "%{$term}%");
+            });
+        }
+
+        $notes = $notes->paginate(5);
 
         return view('note.search')->with(['notes' => $notes, 'search' => $search]);
     }
