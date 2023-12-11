@@ -7,32 +7,32 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
                 </svg>
             </a>
-            {{ __('People. Search result ror ') }} <span class="italic">"{{ $search }}"</span>
+            {{ __('People. Search result for') }} <span class="italic ml-2">"{{ $search }}"</span>
         </x-section-header>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700 dark:text-white">
                 <div class="p-6 text-gray-900">
 
                     @if ($people->isNotEmpty())
-                        <table class="table-fixed border-separate border-spacing-6">
+                        <table class="table-fixed border-separate border-spacing-6 dark:text-white">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Business</th>
-                                    <th>Categories</th>
-                                    <th>Actions</th>
+                                    <th>{{ __("Name") }}</th>
+                                    <th>{{ __("Email") }}</th>
+                                    <th>{{ __("Phone") }}</th>
+                                    <th>{{ __("Business") }}</th>
+                                    <th>{{ __("Categories") }}</th>
+                                    <th>{{ __("Actions") }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($people as $person)
                                     <tr>
                                         <td><a href="{{ route('person.show', $person->id) }}"
-                                                class="text-blue-700 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
+                                                class="text-blue-700 dark:text-blue-500 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
                                                 {{ $person->firstname }} {{ $person->lastname }}</a></td>
                                         <td>{{ $person->email }}</td>
                                         <td>{{ $person->phone }}</td>
@@ -64,7 +64,7 @@
                         {{-- {{ $people->links() }} --}}
                     @else
                         <div>
-                            <h2>No results</h2>
+                            <h2>{{ __("No results") }}</h2>
                         </div>
                     @endif
                 </div>

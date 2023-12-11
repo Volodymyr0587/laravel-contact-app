@@ -13,10 +13,10 @@
                     <table class="table-fixed border-separate border-spacing-6">
                         <thead>
                             <x-table-row>
-                                <th>Task Title</th>
-                                <th>For</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                <th>{{ __("Task Title") }}</th>
+                                <th>{{ __("For") }}</th>
+                                <th>{{ __("Status") }}</th>
+                                <th>{{ __("Actions") }}</th>
                             </x-table-row>
                         </thead>
                         <tbody>
@@ -53,7 +53,7 @@
                                             @method('PUT')
                                             <button
                                                 class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                                                type="submit">Complete Task</button>
+                                                type="submit">{{ __("Complete Task") }}</button>
                                         </form>
                                     </td>
                                 </x-table-row>

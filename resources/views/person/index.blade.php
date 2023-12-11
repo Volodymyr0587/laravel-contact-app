@@ -7,7 +7,7 @@
             <form action="{{ route('person.search') }}" method="GET">
                 <input class="rounded-md dark:text-gray-700" type="text" name="search" required />
                 <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                    type="submit">Search</button>
+                    type="submit">{{ __("Search") }}</button>
             </form>
         </div>
         <x-notification />
@@ -37,9 +37,9 @@
                         </div>
                         <div>
                             <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                            href="{{ route('people.downloadPDF') }}" target="_blank">Get PDF</a>
+                            href="{{ route('people.downloadPDF') }}" target="_blank">{{ __("Get") }} PDF</a>
                             <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                            href="{{ route('person.create') }}">Add Person</a>
+                            href="{{ route('person.create') }}">{{ __("Add Person") }}</a>
                         </div>
 
                     </div>
@@ -47,12 +47,12 @@
                     <table class="table-fixed border-separate border-spacing-6">
                         <thead>
                             <x-table-row>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Business</th>
-                                <th>Tags</th>
-                                <th>Actions</th>
+                                <th>{{ __("Name") }}</th>
+                                <th>{{ __("Email") }}</th>
+                                <th>{{ __("Phone") }}</th>
+                                <th>{{ __("Business") }}</th>
+                                <th>{{ __("Tags") }}</th>
+                                <th>{{ __("Actions") }}</th>
                             </x-table-row>
                         </thead>
                         <tbody>

@@ -7,7 +7,7 @@
             <form action="{{ route('note.search') }}" method="GET">
                 <input class="rounded-md dark:text-gray-700" type="text" name="search" required />
                 <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                    type="submit">Search</button>
+                    type="submit">{{ __("Search") }}</button>
             </form>
         </div>
         <x-notification />
@@ -19,15 +19,15 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex items-center justify-end">
                         <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                            href="{{ route('note.create') }}">Add Note</a>
+                            href="{{ route('note.create') }}">{{ __("Add Note") }}</a>
                     </div>
 
                     <table class="table-fixed border-separate border-spacing-6">
                         <thead>
                             <x-table-row>
-                                <th>Title</th>
-                                <th>Keywords</th>
-                                <th>Actions</th>
+                                <th>{{ __("Title") }}</th>
+                                <th>{{ __("Keywords") }}</th>
+                                <th>{{ __("Actions") }}</th>
                             </x-table-row>
                         </thead>
                         <tbody>

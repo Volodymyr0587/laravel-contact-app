@@ -12,16 +12,18 @@
                 <div class="p-6 text-gray-900">
 
                     <div class="flex items-center justify-end">
-                        <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" href="{{ route('tag.create') }}">Add Tag</a>
+                        <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" href="{{ route('tag.create') }}">
+                            {{ __("Add Tag") }}
+                        </a>
                     </div>
 
                     <table class="table-fixed border-separate border-spacing-6">
                         <thead>
                             <x-table-row>
-                                <th>Name</th>
-                                <th>Created at</th>
-                                <th>Updated at</th>
-                                <th>Actions</th>
+                                <th>{{ __("Name") }}</th>
+                                <th>{{ __("Created at") }}</th>
+                                <th>{{ __("Updated at") }}</th>
+                                <th>{{ __("Actions") }}</th>
                             </x-table-row>
                         </thead>
                         <tbody>

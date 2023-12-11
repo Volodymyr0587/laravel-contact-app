@@ -7,7 +7,7 @@
             <form action="{{ route('business.search') }}" method="GET">
                 <input class="rounded-md dark:text-gray-700" type="text" name="search" required />
                 <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                    type="submit">Search</button>
+                    type="submit">{{ __("Search") }}</button>
             </form>
         </div>
         <x-notification />
@@ -20,18 +20,18 @@
 
                     <div class="flex items-center justify-end">
                         <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                            href="{{ route('business.create') }}">Add Business</a>
+                            href="{{ route('business.create') }}">{{ __("Add Business") }}</a>
                     </div>
 
                     <table class="table-fixed border-separate border-spacing-6">
                         <thead>
                             <x-table-row>
-                                <th>Business Name</th>
-                                <th>Contact Email</th>
-                                <th>Categories</th>
-                                <th>Tags</th>
-                                <th>#people</th>
-                                <th>Actions</th>
+                                <th>{{ __("Business Name") }}</th>
+                                <th>{{ __("Contact Email") }}</th>
+                                <th>{{ __("Categories") }}</th>
+                                <th>{{ __("Tags") }}</th>
+                                <th>{{ __("#people") }}</th>
+                                <th>{{ __("Actions") }}</th>
                             </x-table-row>
                         </thead>
                         <tbody>
