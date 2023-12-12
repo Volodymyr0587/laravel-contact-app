@@ -57,10 +57,11 @@
 
 
                             <div class="pt-3">
-                                <a href="{{ route('note.edit', $note->id) }}"
-                                    class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600">
-                                    {{ __("Edit Note") }}
-                                </a>
+                                <x-action-button>
+                                    <a href="{{ route('note.edit', $note->id) }}">
+                                        {{ __("Edit Note") }}
+                                    </a>
+                                </x-action-button>
                             </div>
                         </div>
                     </div>

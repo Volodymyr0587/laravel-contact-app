@@ -17,8 +17,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700 dark:text-white">
                 <div class="p-6 text-gray-900">
                     <div class="flex items-center justify-end">
-                        <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                            href="{{ route('note.create') }}">{{ __("Add Note") }}</a>
+                        <x-action-button>
+                            <a href="{{ route('note.create') }}">{{ __("Add Note") }}</a>
+                        </x-action-button>
                     </div>
 
                     <table class="table-fixed border-separate border-spacing-6">

@@ -59,12 +59,14 @@
                         </div> --}}
 
                         <div class="mt-6 flex items-center justify-end gap-x-6">
-                            <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" href="{{ route('note.show', $note->id) }}">
-                                {{ __("Cancel") }}
-                            </a>
-                            <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">
+                            <x-action-button>
+                                <a href="{{ route('note.show', $note->id) }}">
+                                    {{ __("Cancel") }}
+                                </a>
+                            </x-action-button>
+                            <x-action-button type="submit">
                                 {{ __("Save") }}
-                            </button>
+                            </x-action-button>
                         </div>
                     </form>
 
@@ -76,9 +78,9 @@
                         <div class="border rounded-lg bg-red-600 text-white mt-6 p-6">
                             <h3 class="font-semibold">{{ __("Danger zone") }}</h3>
                             <p>{{ __("You can delete this note here") }}</p>
-                            <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">
+                            <x-action-button type="submit">
                                 {{ __("Delete") }}
-                            </button>
+                            </x-action-button>
                         </div>
                     </form>
 
