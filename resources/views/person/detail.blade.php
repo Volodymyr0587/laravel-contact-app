@@ -40,7 +40,11 @@
                             </dl>
 
                             <div class="pt-3">
-                                <a href="{{ route('person.edit', $person->id) }}" class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600">{{ __("Edit Person") }}</a>
+                                <x-action-button>
+                                    <a href="{{ route('person.edit', $person->id) }}">
+                                        {{ __("Edit Person") }}
+                                    </a>
+                                </x-action-button>
                             </div>
                         </div>
                         <div class="sm:col-span-3">
@@ -75,7 +79,7 @@
                                 </div>
 
                                 <div class="mt-5 flex items-center justify-end gap-x-6">
-                                    <button type="submit" class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600">{{ __("Create Task") }}</button>
+                                    <x-action-button type="submit">{{ __("Create Task") }}</x-action-button>
                                 </div>
                             </form>
 
@@ -89,7 +93,9 @@
                                             <form action="{{route('task.complete', $task->id)}}" method="POST">
                                                 @csrf
                                                 @method('PUT')
-                                                <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600" type="submit">{{ __("Complete Task") }}</button>
+                                                <x-action-button type="submit">
+                                                    {{ __("Complete Task") }}
+                                                </x-action-button>
                                             </form>
                                         </div>
                                     @else

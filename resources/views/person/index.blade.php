@@ -35,10 +35,12 @@
                             </a>
                         </div>
                         <div>
-                            <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                            href="{{ route('people.downloadPDF') }}" target="_blank">{{ __("Get") }} PDF</a>
-                            <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                            href="{{ route('person.create') }}">{{ __("Add Person") }}</a>
+                            <x-action-button>
+                                <a href="{{ route('people.downloadPDF') }}" target="_blank">{{ __("Get") }} PDF</a>
+                            </x-action-button>
+                            <x-action-button>
+                                <a href="{{ route('person.create') }}">{{ __("Add Person") }}</a>
+                            </x-action-button>
                         </div>
 
                     </div>
