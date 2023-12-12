@@ -112,5 +112,14 @@
     "You can delete this note here": "Ви можете видалити цей запис тут",
     "Note": "Нотаток",
     "Related notes": "Пов'язані нотатки",
-    "No related notes": "Немає пов'язаних нотаток"
+    "No related notes": "Немає пов'язаних нотаток",
+    "Profile Information": "Інформація про профіль",
+    "Update your account's profile information and email address.": "Оновіть інформацію про профіль облікового запису та адресу електронної пошти.",
+    "Update Password": "Оновити пароль",
+    "Ensure your account is using a long, random password to stay secure.": "Переконайтеся, що ваш обліковий запис використовує довгий випадковий пароль, щоб залишатися в безпеці.",
+    "Current Password": "Поточний пароль",
+    "New Password": "Новий пароль",
+    "Confirm Password": "Підтвердити пароль",
+    "Delete Account": "Видалити обліковий запис",
+    "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.": "Після видалення вашого облікового запису всі його ресурси та дані будуть безповоротно видалені. Перед видаленням облікового запису, будь ласка, завантажте всі дані або інформацію, які ви хочете зберегти."
 }
