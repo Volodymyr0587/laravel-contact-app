@@ -6,8 +6,7 @@
             </x-section-header>
             <form action="{{ route('note.search') }}" method="GET">
                 <input class="rounded-md dark:text-gray-700" type="text" name="search" required />
-                <button class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                    type="submit">{{ __("Search") }}</button>
+                <x-primary-button type="submit">{{ __("Search") }}</x-primary-button>
             </form>
         </div>
         <x-notification />
