@@ -51,9 +51,9 @@
                                             onsubmit="return confirm('Are you sure?');">
                                             @csrf
                                             @method('PUT')
-                                            <button
-                                                class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                                                type="submit">{{ __("Complete Task") }}</button>
+                                            <x-action-button type="submit">
+                                                {{ __("Complete Task") }}
+                                            </x-action-button>
                                         </form>
                                     </td>
                                 </x-table-row>
