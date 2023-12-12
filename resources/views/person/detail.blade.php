@@ -21,7 +21,10 @@
                             <dl>
                                 <dt class="font-semibold">{{ __("Photo") }}</dt>
                                 <dd class="pl-3">
-                                    <img class="object-contain object-left h-48 w-96" src="{{ $person->image ? Storage::url($person->image) : asset('/images/person-no-image.png') }}" alt="Photo">
+                                    <div class="person-image-container">
+                                        <img class="person-image object-contain object-left h-48 w-96" src="{{ $person->image ? Storage::url($person->image) : asset('/images/person-no-image.png') }}" alt="Photo">
+                                        <div class="person-image-overlay">{{ $person->firstname }} {{ $person->lastname }}</div>
+                                    </div>
                                 </dd>
                                 <dt class="font-semibold">{{ __("Name") }}</dt>
                                 <dd class="pl-3">{{ $person->firstname }} {{ $person->lastname }}</dd>
