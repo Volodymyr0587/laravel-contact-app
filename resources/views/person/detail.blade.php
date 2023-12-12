@@ -19,7 +19,7 @@
                         <div class="sm:col-span-3">
                             <h3 class="font-semibold text-l pb-5">{{ __("Person Details") }}</h3>
                             <dl>
-                                <dt class="font-semibold">{{ __("Photo") }}</dt>
+                                {{-- <dt class="font-semibold">{{ __("Photo") }}</dt> --}}
                                 <dd class="pl-3">
                                     <div class="person-image-container">
                                         <img class="person-image object-contain object-left h-48 w-96" src="{{ $person->image ? Storage::url($person->image) : asset('/images/person-no-image.png') }}" alt="Photo">
