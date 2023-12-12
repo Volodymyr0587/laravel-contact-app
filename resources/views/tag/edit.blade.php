@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700">
                 <div class="p-6 text-gray-900 dark:text-white">
 
-                    <h3 class="font-semibold pb-5">{{ __("Edit Tag") }}: {{ $tag->tag_name }}</h3>
+                    <h3 class="font-semibold pb-5">{{ __('Edit Tag') }}: {{ $tag->tag_name }}</h3>
 
                     <form action="{{ route('tag.update', $tag->id) }}" method="POST">
                         @csrf
@@ -18,7 +18,7 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-6 gap-x-6 gap-y-6">
                             <span class="sm:col-span-3">
-                                <label class="block" for="tag_name">{{ __("Tag name") }}</label>
+                                <label class="block" for="tag_name">{{ __('Tag name') }}</label>
                                 <x-form-input type="text" name="tag_name" id="tag_name"
                                     value="{{ old('tag_name', $tag->tag_name) }}"></x-form-input>
                                 @error('tag_name')
@@ -33,15 +33,12 @@
 
 
                         <div class="mt-6 flex items-center justify-end gap-x-6">
-                            <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                                href="{{ route('tag.index') }}">
-                                {{ __("Cancel") }}
-                            </a>
-                            <button
-                                class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                                type="submit">
-                                {{ __("Save") }}
-                            </button>
+                            <x-action-button>
+                                <a href="{{ route('tag.index') }}">{{ __('Cancel') }}</a>
+                            </x-action-button>
+                            <x-action-button type="submit">
+                                {{ __('Save') }}
+                            </x-action-button>
                         </div>
                     </form>
 
@@ -51,13 +48,11 @@
                         @method('DELETE')
 
                         <div class="border rounded-lg bg-red-600 text-white mt-6 p-6">
-                            <h3 class="font-semibold">{{ __("Danger zone") }}</h3>
-                            <p>{{ __("You can delete this tag here") }}</p>
-                            <button
-                                class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                                type="submit">
-                                {{ __("Delete") }}
-                            </button>
+                            <h3 class="font-semibold">{{ __('Danger zone') }}</h3>
+                            <p>{{ __('You can delete this tag here') }}</p>
+                            <x-action-button type="submit">
+                                {{ __('Delete') }}
+                            </x-action-button>
                         </div>
                     </form>
 
