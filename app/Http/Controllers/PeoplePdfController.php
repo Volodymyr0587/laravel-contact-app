@@ -12,7 +12,9 @@ class PeoplePdfController extends Controller
     public function download()
     {
         $user = auth()->user();
-        $people = Person::where('user_id', $user->id)->get();
+        $people = Person::query()->where('user_id', $user->id)
+                    ->whereNull('deleted_at')
+                    ->get();
 
         $pdf = Pdf::loadView('pdf.people', compact('people', 'user'));
 
