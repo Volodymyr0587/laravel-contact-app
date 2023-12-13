@@ -12,6 +12,6 @@ class PeopleSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Person::factory(20)->createQuietly();
+        \App\Models\Person::factory(200)->createQuietly();
     }
 }

@@ -22,14 +22,15 @@ class PersonFactory extends Factory
         $businesses = Business::pluck('id');
 
         return [
+            'user_id' => User::all()->random()->id,
+            // 'business_id' => Business::all()->random()->id,
+            'business_id' => (fake()->boolean(50) ? fake()->randomElement($businesses) : null),
             'firstname' => fake()->firstName(),
             'lastname' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
             'birthday' => fake()->date('Y-m-d'),
             'phone' => fake()->phoneNumber(),
             'image' => fake()->boolean(50) ? 'https://source.unsplash.com/random?person' . '&' . rand(1, 1000) : null,
-            'business_id' => (fake()->boolean(50) ? fake()->randomElement($businesses) : null),
-            'user_id' => User::all()->random()->id,
         ];
     }
 

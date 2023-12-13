@@ -16,9 +16,9 @@
             @forelse ($notesWithImages as $index => $note)
                 <div class="flex w-1/3 flex-wrap">
                     <div class="w-full p-1 md:p-2">
-                        <img id="myImg{{ $index }}" alt="{{ generate_image_name_from_image_path($note->image) }}"
+                        <img id="myImg{{ $index }}" alt="{{ is_url($note->image) ? "Image by " . $note->user->name : generate_image_name_from_image_path($note->image) }}"
                             class="modal-image cursor-zoom-in block h-full w-full rounded-lg object-cover object-center transition duration-300 ease-in-out hover:scale-110"
-                            src="{{ Storage::url($note->image) }}" />
+                            src="{{ is_url($note->image) ? $note->image : Storage::url($note->image) }}" />
                     </div>
                 </div>
             @empty
@@ -36,7 +36,7 @@
             @forelse ($peopleWithImages as $index => $person)
                 <div class="flex w-1/3 flex-wrap">
                     <div class="w-full p-1 md:p-2">
-                        <img id="myImg{{ $index }}" alt="{{ generate_image_name_from_image_path($person->image) }}"
+                        <img id="myImg{{ $index }}" alt="{{ is_url($person->image) ? "Image by " . $person->user->name : generate_image_name_from_image_path($person->image) }}"
                             class="modal-image cursor-zoom-in block h-full w-full rounded-lg object-cover object-center transition duration-300 ease-in-out hover:scale-110"
                             src="{{ is_url($person->image) ? $person->image : Storage::url($person->image) }}" />
                     </div>

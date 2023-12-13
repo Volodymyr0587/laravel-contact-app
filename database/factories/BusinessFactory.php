@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,7 @@ class BusinessFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::all()->random()->id,
             'business_name' => fake()->company(),
             'contact_email' => fake()->unique()->companyEmail(),
         ];

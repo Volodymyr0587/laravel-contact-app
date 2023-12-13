@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Business;
+use App\Models\User;
 use App\Models\Person;
+use App\Models\Business;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,7 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::all()->random()->id,
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(),
             'status' => fake()->randomElement(['open', 'completed']),

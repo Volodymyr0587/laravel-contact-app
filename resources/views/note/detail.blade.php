@@ -21,9 +21,18 @@
                             <div
                                 class="pl-3 pb-8 first-letter:text-7xl first-letter:font-bold
                             first-letter:mr-3 first-letter:float-left">
-                                <img class="object-contain mr-8 pt-2 mb-4 h-48 w-96 float-left"
+                                {{-- <img class="object-contain mr-8 pt-2 mb-4 h-48 w-96 float-left"
                                     src="{{ $note->image ? Storage::url($note->image) : asset('/images/note-no-image.png') }}"
+                                    alt="Photo"> --}}
+                                @if (!empty($note->image))
+                                    <img class="object-contain mr-8 pt-2 mb-4 h-48 w-96 float-left"
+                                    src="{{ is_url($note->image) ? $note->image : Storage::url($note->image) }}"
                                     alt="Photo">
+                                @else
+                                     {{-- Use default image --}}
+                                     <img class="object-contain mr-8 pt-2 mb-4 h-48 w-96 float-left"
+                                     src="{{ asset('images/note-no-image.png') }}" alt="Default photo">
+                                @endif
                                 {!! $note->body !!}
                             </div>
 
