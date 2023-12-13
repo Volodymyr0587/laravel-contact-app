@@ -19,10 +19,17 @@
                         <div class="sm:col-span-3">
                             <h3 class="font-semibold text-l pb-5">{{ __("Person Details") }}</h3>
                             <dl>
-                                {{-- <dt class="font-semibold">{{ __("Photo") }}</dt> --}}
                                 <dd class="pl-3">
                                     <div class="person-image-container">
-                                        <img class="person-image object-contain object-left h-48 w-96" src="{{ $person->image ? Storage::url($person->image) : asset('/images/person-no-image.png') }}" alt="Photo">
+                                        @if (!empty($person->image))
+                                            <img class="person-image object-contain object-left h-48 w-96"
+                                            src="{{ is_url($person->image) ? $person->image : Storage::url($person->image) }}"
+                                            alt="Photo">
+                                        @else
+                                             {{-- Use default image --}}
+                                             <img class="person-image object-contain object-left h-48 w-96"
+                                             src="{{ asset('images/person-no-image.png') }}" alt="Default photo">
+                                        @endif
                                         <div class="person-image-overlay">{{ $person->firstname }} {{ $person->lastname }}</div>
                                     </div>
                                 </dd>

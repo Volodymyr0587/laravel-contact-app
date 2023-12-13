@@ -13,6 +13,8 @@ class GalleryController extends Controller
     {
         // Get all notes with images for the authenticated user
         $notesWithImages = auth()->user()->notes()->whereNotNull('image')->get();
-        return view('gallery.index', compact('notesWithImages'));
+        $peopleWithImages = auth()->user()->people()->whereNotNull('image')->whereNull('deleted_at')->get();
+
+        return view('gallery.index')->with(['notesWithImages' => $notesWithImages, 'peopleWithImages' => $peopleWithImages]);
     }
 }
