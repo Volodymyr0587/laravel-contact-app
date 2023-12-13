@@ -27,3 +27,5 @@ Register new users.
 After registering a new user, you can populate the database with fake data by running the `php artisan db :seed` command
 
 To enable the functionality of sending a message to mail when a new task is created for a contact, add the details of your Email Delivery Platform to the `.env`, such as MAIL_HOST, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, etc. Also, in the observer `app/Observers/TaskObserver.php`, uncomment the line `// Mail::to($user)->send(new TaskCreated());` in the `created` method.
+
+To send a welcome email to the user upon registration, uncomment the line `// Mail::to($user->email)->send(new AccountCreated ());` in `store` method of controller `app/Http/Controllers/Auth/RegisteredUserController.php `
