@@ -2,19 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class GalleryController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
-    public function __invoke(Request $request)
+    public function index(): View
+    {
+        return view('gallery.index');
+    }
+
+    public function notesImages(): View
     {
         // Get all notes with images for the authenticated user
-        $notesWithImages = auth()->user()->notes()->whereNotNull('image')->get();
-        $peopleWithImages = auth()->user()->people()->whereNotNull('image')->whereNull('deleted_at')->get();
+        $notesWithImages = auth()->user()->notes()->whereNotNull('image')->paginate(6);
 
-        return view('gallery.index')->with(['notesWithImages' => $notesWithImages, 'peopleWithImages' => $peopleWithImages]);
+        return view('gallery.notes')->with('notesWithImages', $notesWithImages);
+    }
+
+    public function peopleImages(): View
+    {
+        // Get all people with images for the authenticated user
+        $peopleWithImages = auth()->user()->people()->whereNotNull('image')->whereNull('deleted_at')->paginate(6);
+
+        return view('gallery.people')->with('peopleWithImages', $peopleWithImages);
     }
 }

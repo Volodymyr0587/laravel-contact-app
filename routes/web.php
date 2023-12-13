@@ -42,7 +42,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 Route::get('/people-pdf', [PeoplePdfController::class, 'download'])
     ->middleware('auth')->name('people.downloadPDF');
 
-Route::get('/gallery', GalleryController::class)->middleware('auth')->name('gallery.index');
+Route::controller(GalleryController::class)->prefix('gallery')->name('gallery')->middleware('auth')->group(function () {
+    Route::get('/gallery', 'index')->name('.index');
+    Route::get('/notesImages', 'notesImages')->name('.notesImages');
+    Route::get('/peopleImages', 'peopleImages')->name('.peopleImages');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
