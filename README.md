@@ -14,11 +14,11 @@ An application for storing contacts with the ability to add categories to a cont
 
 ```php artisan migrate```
 
+```php artisan storage:link```
+
 ```npm install```
 
 ```npm run dev```
-
-```php artisan storage:link```
 
 ```php artisan serve```
 
