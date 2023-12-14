@@ -30,8 +30,13 @@
                             </span>
                             <span class="sm:col-span-3">
                                 <label class="block" for="body">{{ __("Content") }}</label>
-                                    <textarea rows="4" class="block p-2.5 w-full text-left text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..." type="text" name="body" id="body">
-                                        {{ old('body', strip_tags($note->body)) }}</textarea>
+                                    <textarea rows="4"
+                                            class="block p-2.5 w-full text-left text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="Write your thoughts here..."
+                                            type="text"
+                                            name="body"
+                                            id="body">{{ old('body', strip_tags($note->body)) }}
+                                    </textarea>
 
                                 <div class="flex mt-4">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
