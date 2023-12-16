@@ -37,14 +37,23 @@
 
                                 <x-dropdown-link :href="route('person.index')">
                                     {{ __('People') }}
+                                    <span class="inline-flex items-center justify-center w-12 h-4 ms-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
+                                        {{ $numberOfPeople }}
+                                    </span>
                                 </x-dropdown-link>
 
                                 <x-dropdown-link :href="route('business.index')">
                                     {{ __('Businesses') }}
+                                    <span class="inline-flex items-center justify-center w-12 h-4 ms-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
+                                        {{ $numberOfBusinesses }}
+                                    </span>
                                 </x-dropdown-link>
 
                                 <x-dropdown-link :href="route('favoriteContacts')">
                                     {{ __('Favorite') }}
+                                    <span class="inline-flex items-center justify-center w-12 h-4 ms-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
+                                        {{ $numberOfFaforiteContacts }}
+                                    </span>
                                 </x-dropdown-link>
 
                             </x-slot>
@@ -182,6 +191,10 @@
 
                         <x-dropdown-link :href="route('business.index')">
                             {{ __('Businesses') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('favoriteContacts')">
+                            {{ __('Favorite') }}
                         </x-dropdown-link>
                     </x-slot>
                 </x-dropdown>

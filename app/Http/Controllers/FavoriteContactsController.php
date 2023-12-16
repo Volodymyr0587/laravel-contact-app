@@ -17,8 +17,6 @@ class FavoriteContactsController extends Controller
             $user->businesses->where('is_favorite', '1')
         );
 
-        // dd($favoriteContacts);
-
         return view('favorite_contacts.favorite')
             ->with('favoriteContacts', $favoriteContacts);
     }

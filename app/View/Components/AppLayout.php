@@ -12,6 +12,16 @@ class AppLayout extends Component
      */
     public function render(): View
     {
-        return view('layouts.app');
+        $user = auth()->user();
+        $numberOfPeople = $user->people()->count();
+        $numberOfBusinesses = $user->businesses()->count();
+        $numberOfFaforiteContacts = $user->people->where('is_favorite', '1')->merge(
+            $user->businesses->where('is_favorite', '1')
+        )->count();
+
+        return view('layouts.app')
+            ->with(['numberOfPeople' => $numberOfPeople,
+                    'numberOfBusinesses' => $numberOfBusinesses,
+                    'numberOfFaforiteContacts' => $numberOfFaforiteContacts]);
     }
 }
