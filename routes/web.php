@@ -63,6 +63,8 @@ Route::controller(PersonController::class)->prefix('person')->name('person')->mi
     Route::put('/{person}/update', 'update')->name('.update');
     Route::get('/search', 'search')->name('.search');
     Route::get('/tag/{tag_name}', 'getByTag')->name('.getByTag');
+    Route::post('/{person}/mark-as-favorite', 'markAsFavorite')->name('.markAsFavorite');
+    Route::post('/{person}/mark-as-normal', 'markAsNormal')->name('.markAsNormal');
     Route::delete('/{person}/destroy', 'destroy')->name('.destroy');
 });
 
@@ -76,8 +78,12 @@ Route::controller(BusinessController::class)->prefix('business')->name('business
     Route::get('/search', 'search')->name('.search');
     Route::get('/tag/{tag_name}', 'getByTag')->name('.getByTag');
     Route::get('/category/{category_name}', 'getByCategory')->name('.getByCategory');
+    Route::post('/{business}/mark-as-favorite', 'markAsFavorite')->name('.markAsFavorite');
+    Route::post('/{business}/mark-as-normal', 'markAsNormal')->name('.markAsNormal');
     Route::delete('/{business}/destroy', 'destroy')->name('.destroy');
 });
+
+Route::get('/favorite', 'FavoriteContactsController')->middleware('auth')->name('favoriteContacts');
 
 Route::controller(TaskController::class)->prefix('task')->name('task')->middleware('auth')->group(function(){
     Route::get('/', 'index')->name('.index');

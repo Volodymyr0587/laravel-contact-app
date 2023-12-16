@@ -50,6 +50,23 @@
                             </dl>
 
                             <div class="pt-3">
+                                <div class="mb-2">
+                                    @if ($person->is_favorite)
+                                        <form action="{{ route('person.markAsNormal', $person->id) }}" method="POST">
+                                            @csrf
+                                            <x-action-button class="bg-red-400">
+                                            {{ __("Remove from Favorite") }}
+                                        </x-action-button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('person.markAsFavorite', $person->id) }}" method="POST">
+                                            @csrf
+                                            <x-action-button>
+                                            {{ __("Add to Favorite") }}
+                                        </x-action-button>
+                                        </form>
+                                    @endif
+                                </div>
                                 <x-action-button>
                                     <a href="{{ route('person.edit', $person->id) }}">
                                         {{ __("Edit Person") }}

@@ -24,6 +24,7 @@ class Business extends Model
         'user_id',
         'business_name',
         'contact_email',
+        'is_favorite',
         'category_id',
     ];
 
@@ -50,5 +51,10 @@ class Business extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getIsFavoriteAttribute()
+    {
+        return $this->attributes['is_favorite'];
     }
 }

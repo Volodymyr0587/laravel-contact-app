@@ -129,5 +129,14 @@
     "Remember me": "Запам'ятати мене",
     "Forgot your password?": "Забули свій пароль?",
     "Log in": "Увійти",
-    "Already registered?": "Вже зареєстровані?"
+    "Already registered?": "Вже зареєстровані?",
+    "Add to Favorite": "До обраних",
+    "Remove from Favorite": "Видалити з обраних",
+    "Favorite contacts": "Обрані контакти",
+    "Type": "Тип",
+    "Favorite": "Обрані",
+    "Person was marked as normal contact": "Людину видалено з обраних контактів",
+    "Business was marked as normal contact": "Компанію видалено з обраних контактів",
+    "No favorite contacts": "Немає обраних контактів",
+    "Are you sure?": "Ви впевнені?"
 }

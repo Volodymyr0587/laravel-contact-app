@@ -33,8 +33,28 @@
                             </dl>
 
                             <div class="pt-3">
-                                <a class="bg-blue-600 text-white py-2 px-3 rounded-full hover:bg-yellow-300 hover:text-blue-600"
-                                    href="{{ route('business.edit', $business->id) }}">{{ __("Edit Business") }}</a>
+                                <div class="mb-2">
+                                    @if ($business->is_favorite)
+                                        <form action="{{ route('business.markAsNormal', $business->id) }}" method="POST">
+                                            @csrf
+                                            <x-action-button class="bg-red-400">
+                                                {{ __("Remove from Favorite") }}
+                                            </x-action-button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('business.markAsFavorite', $business->id) }}" method="POST">
+                                            @csrf
+                                            <x-action-button>
+                                                {{ __("Add to Favorite") }}
+                                            </x-action-button>
+                                        </form>
+                                    @endif
+                                </div>
+                                <x-action-button>
+                                    <a href="{{ route('business.edit', $business->id) }}">
+                                        {{ __("Edit Business") }}
+                                    </a>
+                                </x-action-button>
                             </div>
                         </div>
                         <div class="sm:col-span-3">

@@ -142,6 +142,21 @@ class PersonController extends Controller
     }
 
     /**
+     * Mark as favorite contact to add on favorite contacts page
+     */
+    public function markAsFavorite(Person $person)
+    {
+        $person->update(['is_favorite' => true]);
+        return redirect()->back()->with('store', 'Person was marked as favorite contact');
+    }
+
+    public function markAsNormal(Person $person)
+    {
+        $person->update(['is_favorite' => false]);
+        return redirect()->back()->with('store', 'Person was marked as normal contact');
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(Person $person)

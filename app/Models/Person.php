@@ -21,6 +21,7 @@ class Person extends Model
         'phone',
         'birthday',
         'image',
+        'is_favorite',
         'business_id',
     ];
 
@@ -44,6 +45,11 @@ class Person extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getIsFavoriteAttribute()
+    {
+        return $this->attributes['is_favorite'];
     }
 
     protected static function boot()

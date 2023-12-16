@@ -42,6 +42,11 @@
                                 <x-dropdown-link :href="route('business.index')">
                                     {{ __('Businesses') }}
                                 </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('favoriteContacts')">
+                                    {{ __('Favorite') }}
+                                </x-dropdown-link>
+
                             </x-slot>
                         </x-dropdown>
 

@@ -118,6 +118,18 @@ class BusinessController extends Controller
 
         return view('business.index', ['businesses' => $businesses]);
     }
+
+    public function markAsFavorite(Business $business)
+    {
+        $business->update(['is_favorite' => true]);
+        return redirect()->back()->with('store', 'Business was marked as favorite contact');
+    }
+
+    public function markAsNormal(Business $business)
+    {
+        $business->update(['is_favorite' => false]);
+        return redirect()->back()->with('store', 'Business was marked as normal contact');
+    }
     /**
      * Remove the specified resource from storage.
      */
