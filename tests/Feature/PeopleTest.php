@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PeopleTest extends TestCase
 {
+    // use RefreshDatabase;
     public function test_people_page_contains_empty_table(): void
     {
         // Assuming you have a User model and want to simulate a logged-in user
@@ -28,7 +29,7 @@ class PeopleTest extends TestCase
         // Assuming you have a User model and want to simulate a logged-in user
         $user = User::factory()->create();
 
-        Person::create([
+        $person = Person::create([
             'user_id' => $user->id,
             'firstname' => 'Maria',
             'lastname' => 'Lovecraft',
@@ -39,5 +40,11 @@ class PeopleTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertDontSee(__('No people found'));
+        $response->assertSee('Maria');
+        $response->assertSee('Lovecraft');
+        $response->assertViewHas('people', function ($collection) use ($person) {
+            return $collection->contains($person);
+        });
+
     }
 }
