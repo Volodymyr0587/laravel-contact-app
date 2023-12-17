@@ -21,6 +21,18 @@
                                 <x-form-input type="text" name="tag_name" id="tag_name"
                                     value="{{ old('tag_name') }}"></x-form-input>
 
+                                <label class="block mt-4 mb-2" for="color">{{ __("Tag Color") }}</label>
+                                <span class="sm:col-span-3">
+                                    <input id="nativeColorPicker1" name="color" type="color" value="#6590D5"
+                                    class="p-1 cursor-pointer" />
+                                    <span
+                                      id="burronNativeColor"
+                                      class="inline-block rounded-full bg-green-500 px-6 py-2.5 text-xs font-medium
+                                      uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out">
+                                      {{ __("Tag Color") }}
+                                    </span>
+                                </span>
+
                                 @error('tag_name')
                                     <div class="text-red-500 mt-2 text-sm">
                                         {{ $message }}

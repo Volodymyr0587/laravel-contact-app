@@ -29,7 +29,7 @@
                         <tbody>
                             @forelse ($tags as $tag)
                                 <x-table-row>
-                                    <td class="font-medium">{{ $tag->tag_name }}</td>
+                                    <td class="font-medium py-1 px-1 text-center rounded-full" style="background-color: {{ $tag->color ?? '#2d9f2f' }}">{{ $tag->tag_name }}</td>
                                     <td>{{ $tag->created_at }}</td>
                                     <td>{{ $tag->updated_at }}</td>
                                     <td>

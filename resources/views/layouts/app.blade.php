@@ -14,7 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/css/imageModal.css',
         'resources/css/personImageOverlay.css', 'resources/css/typingEffect.css',
-        'resources/js/app.js', 'resources/js/modal.js'])
+        'resources/js/app.js', 'resources/js/modal.js', 'resources/js/color-picker.js'])
         <script src="//unpkg.com/alpinejs" defer></script>
     </head>
     <body class="font-sans antialiased">

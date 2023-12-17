@@ -51,7 +51,8 @@
                                     </td>
                                     <td>
                                         @foreach ($business->tags as $tag)
-                                            <span class="bg-green-500 py-1 px-1 rounded-full">
+                                            <span class="py-1 px-1 rounded-full"
+                                                  style="background-color: {{ $tag->color ?? '#2d9f2f' }}">
                                                 <a
                                                     href="{{ route('business.getByTag', $tag->tag_name) }}">{{ $tag->tag_name }}</a>
                                             </span>

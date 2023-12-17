@@ -12,7 +12,7 @@ class Tag extends Model
 {
     use HasFactory; //, SoftDeletes;
 
-    protected $fillable = ['user_id', 'tag_name'];
+    protected $fillable = ['user_id', 'tag_name', 'color'];
 
     public function people(): MorphToMany
     {

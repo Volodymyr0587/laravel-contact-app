@@ -22,15 +22,20 @@ class TagRequest extends FormRequest
      */
     public function rules(): array
     {
+        $tagId = $this->route('tag');
+
         return [
             'tag_name' => [
                 'required',
                 'min:2',
                 'max:20',
-                Rule::unique('tags')->where(function ($query) {
-                    return $query->where('user_id', auth()->id());
-                }),
+                Rule::unique('tags')
+                    ->where(function ($query) {
+                        return $query->where('user_id', auth()->id());
+                    })
+                    ->ignore($tagId), // Exclude the current tag from the unique check
             ],
+            'color' => 'nullable|string',
         ];
     }
 }
