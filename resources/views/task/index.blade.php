@@ -48,7 +48,7 @@
                                     <td>{{ $task->status }}</td>
                                     <td>
                                         <form action="{{ route('task.complete', $task->id) }}" method="POST"
-                                            onsubmit="return confirm('Are you sure?');">
+                                            onsubmit="return confirm('{{ __('Are you sure?') }}');">
                                             @csrf
                                             @method('PUT')
                                             <x-action-button type="submit">

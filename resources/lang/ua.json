@@ -90,6 +90,9 @@
     "Business name": "Назва команії",
     "Category": "Категорія",
     "No Category": "Без категорії",
+    "Business created successfully": "Компанію створено успішно",
+    "Business updated successfully": "Компанію успішно оновлено",
+    "Business has been deleted successfully": "Компанію успішно видалено",
     "Edit business": "Редагувати компанію",
     "You can delete this business here": "Ви можете видалити цю компанію тут",
     "Business Categories": "Категорії компаній",
@@ -140,5 +143,10 @@
     "Business was marked as normal contact": "Компанію видалено з обраних контактів",
     "No favorite contacts": "Немає обраних контактів",
     "Are you sure?": "Ви впевнені?",
-    "Tag Color": "Колір тега"
+    "Tag Color": "Колір тега",
+    "Contact created successfully": "Контакт успішно створено",
+    "Contact updated successfully": "Контакт успішно оновлено",
+    "Person was marked as favorite contact": "Людину додано до обраних контактів",
+    "Contact has been deleted successfully": "Контакт успішно видалено",
+    "Are you sure you want to delete your account?": "Ви впевнені, що хочете видалити свій обліковий запис?"
 }

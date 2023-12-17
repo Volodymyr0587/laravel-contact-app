@@ -9,6 +9,7 @@
             </a>
             {{ __('Person') }} | {{ $person->firstname }} {{ $person->lastname }}
         </h2>
+        <x-notification />
     </x-slot>
 
     <div class="py-12 dark:text-gray-600">

@@ -56,7 +56,7 @@
                     </form>
 
                     <form action="{{ route('tag.destroy', $tag->id) }}" method="POST"
-                        onsubmit="return confirm('Are you sure?');">
+                        onsubmit="return confirm('{{ __('Are you sure?') }}');">
                         @csrf
                         @method('DELETE')
 

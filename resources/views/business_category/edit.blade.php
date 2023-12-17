@@ -47,7 +47,7 @@
                     </form>
 
                     <form action="{{ route('businessCategory.destroy', $businessCategory->id) }}" method="POST"
-                        onsubmit="return confirm('Are you sure?');">
+                        onsubmit="return confirm('{{ __('Are you sure?') }}');">
                         @csrf
                         @method('DELETE')
 
