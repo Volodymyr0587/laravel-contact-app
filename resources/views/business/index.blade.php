@@ -37,9 +37,11 @@
                         <tbody>
                             @forelse ($businesses as $business)
                                 <x-table-row>
-                                    <td><a href="{{ route('business.show', $business->id) }}"
-                                            class="text-blue-700 dark:text-blue-500 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
-                                            {{ $business->business_name }}</a></td>
+                                    <td>
+                                        <x-buttons.show-button href="{{ route('business.show', $business->id) }}">
+                                            {{ $business->business_name }}
+                                        </x-buttons.show-button>
+                                    </td>
                                     <td>{{ $business->contact_email }}</td>
                                     <td>
                                         @foreach ($business->categories as $category)

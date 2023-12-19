@@ -28,9 +28,11 @@
                             <tbody>
                                 @foreach ($notes as $note)
                                     <tr>
-                                        <td><a href="{{ route('note.show', $note->id) }}"
-                                                class="text-blue-700 dark:text-blue-500 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
-                                                {{ $note->title }}</a></td>
+                                        <td>
+                                            <x-buttons.show-button href="{{ route('note.show', $note->id) }}">
+                                                {{ $note->title }}
+                                            </x-buttons.show-button>
+                                        </td>
                                         <td>
                                             @foreach ($note->tags as $tag)
                                                 <span class="bg-green-500 py-1 px-1 rounded-full">

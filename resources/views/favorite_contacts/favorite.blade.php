@@ -26,9 +26,9 @@
                                 <x-table-row>
                                     @if ($favContact instanceof \App\Models\Person)
                                         <td>
-                                            <a href="{{ route('person.show', $favContact->id) }}"
-                                            class="text-blue-700 dark:text-blue-500 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
-                                            {{ $favContact->firstname }} {{ $favContact->lastname }}</a>
+                                            <x-buttons.show-button href="{{ route('person.show', $favContact->id) }}">
+                                                {{ $favContact->firstname }} {{ $favContact->lastname }}
+                                            </x-buttons.show-button>
                                         </td>
                                         <td class="font-mono tracking-widest">{{ __("Person") }}</td>
                                         <td>
@@ -42,9 +42,8 @@
                                         </td>
                                     @else
                                         <td>
-                                            <a href="{{ route('business.show', $favContact->id) }}"
-                                            class="text-blue-700 dark:text-blue-500 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
-                                            {{ $favContact->business_name }}</form>
+                                            <x-buttons.show-button href="{{ route('business.show', $favContact->id) }}">
+                                            {{ $favContact->business_name }}</x-buttons.show-button>
                                         </td>
                                         <td class="font-mono tracking-widest">{{ __("Business") }}</td>
                                         <td>

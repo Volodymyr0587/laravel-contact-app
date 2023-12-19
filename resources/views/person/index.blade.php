@@ -78,9 +78,11 @@
                                             @endif
                                         </span>
                                     </td>
-                                    <td><a href="{{ route('person.show', $person->id) }}"
-                                            class="text-blue-700 dark:text-blue-500 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
-                                            {{ $person->firstname }} {{ $person->lastname }}</a></td>
+                                    <td>
+                                        <x-buttons.show-button href="{{ route('person.show', $person->id) }}">
+                                            {{ $person->firstname }} {{ $person->lastname }}
+                                        </x-buttons.show-button>
+                                    </td>
                                     <td>{{ $person->email }}</td>
                                     <td>{{ $person->phone }}</td>
                                     <td class="{{ $person->business?->deleted_at ? 'italic' : 'non-italic' }}">

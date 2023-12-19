@@ -27,9 +27,7 @@
                                 <x-table-row>
                                     @if ($delContact instanceof \App\Models\Person)
                                         <td>
-                                            <a href="{{ route('person.show', $delContact->id) }}"
-                                            class="text-blue-700 dark:text-blue-500 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
-                                            {{ $delContact->firstname }} {{ $delContact->lastname }}</a>
+                                            {{ $delContact->firstname }} {{ $delContact->lastname }}
                                         </td>
                                         <td class="font-mono tracking-widest">{{ __("Person") }}</td>
                                         <td>
@@ -50,9 +48,7 @@
                                         </td>
                                     @else
                                         <td>
-                                            <a href="{{ route('business.show', $delContact->id) }}"
-                                            class="text-blue-700 dark:text-blue-500 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
-                                            {{ $delContact->business_name }}</form>
+                                            {{ $delContact->business_name }}
                                         </td>
                                         <td class="font-mono tracking-widest">{{ __("Business") }}</td>
                                         <td>
