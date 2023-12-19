@@ -18,10 +18,15 @@ class AppLayout extends Component
         $numberOfFaforiteContacts = $user->people->where('is_favorite', '1')->merge(
             $user->businesses->where('is_favorite', '1')
         )->count();
+        $numberOfTrashedContacts = $user->people()->withTrashed()->whereNotNull('deleted_at')->get()->merge(
+            $user->businesses()->withTrashed()->whereNotNull('deleted_at')->get()
+        )->count();
 
         return view('layouts.app')
             ->with(['numberOfPeople' => $numberOfPeople,
                     'numberOfBusinesses' => $numberOfBusinesses,
-                    'numberOfFaforiteContacts' => $numberOfFaforiteContacts]);
+                    'numberOfFaforiteContacts' => $numberOfFaforiteContacts,
+                    'numberOfTrashedContacts' => $numberOfTrashedContacts,
+                ]);
     }
 }

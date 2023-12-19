@@ -157,13 +157,30 @@ class PersonController extends Controller
         return redirect()->back()->with('store', 'Person was marked as normal contact');
     }
 
+    public function restoreFromTrash($person)
+    {
+        // $this->authorize('update', $person);
+        Person::withTrashed()->find($person)->restore();
+        return redirect()->back()->with('store', 'Contact has been restored');
+    }
+
+    public function destroyPermanetly($person)
+    {
+        // $this->authorize('delete', $person);
+
+        Person::withTrashed()->find($person)->tasks()->delete();
+        Person::withTrashed()->find($person)->forceDelete();
+
+        return redirect()->back()->with('destroy', 'Contact has been permanently deleted');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Person $person)
     {
         $this->authorize('delete', $person);
-        $person->tasks()->delete();
+        // $person->tasks()->delete();
         $person->delete();
 
         return redirect(route('person.index'))->with('destroy', 'Contact has been deleted successfully');

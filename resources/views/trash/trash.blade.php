@@ -2,8 +2,9 @@
     <x-slot name="header">
         <div class="flex justify-between">
             <x-section-header>
-                {{ __('Favorite contacts') }}
+                {{ __('Deleted contacts') }}
             </x-section-header>
+
         </div>
         <x-notification />
     </x-slot>
@@ -22,51 +23,63 @@
                             </x-table-row>
                         </thead>
                         <tbody>
-                            @forelse ($favoriteContacts as $favContact)
+                            @forelse ($trashedContacts as $delContact)
                                 <x-table-row>
-                                    @if ($favContact instanceof \App\Models\Person)
+                                    @if ($delContact instanceof \App\Models\Person)
                                         <td>
-                                            <a href="{{ route('person.show', $favContact->id) }}"
+                                            <a href="{{ route('person.show', $delContact->id) }}"
                                             class="text-blue-700 dark:text-blue-500 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
-                                            {{ $favContact->firstname }} {{ $favContact->lastname }}</a>
+                                            {{ $delContact->firstname }} {{ $delContact->lastname }}</a>
                                         </td>
                                         <td class="font-mono tracking-widest">{{ __("Person") }}</td>
                                         <td>
-                                            <form action="{{ route('person.markAsNormal', $favContact->id) }}" method="POST"
+                                            <a href="{{ route('person.restoreFromTrash', $delContact->id) }}">
+                                                <x-action-button class="bg-green-400">
+                                                    {{ __("Restore") }}
+                                                </x-action-button>
+                                            </a>
+                                            <form action="{{ route('person.destroyPermanetly', $delContact->id) }}" method="POST"
                                                 onsubmit="return confirm('{{ __('Are you sure?') }}');">
                                                 @csrf
-                                                <x-action-button class="bg-red-400">
-                                                    {{ __("Remove from Favorite") }}
+                                                @method('DELETE')
+
+                                                <x-action-button class="bg-red-600">
+                                                    {{ __("Delete Permanently") }}
                                                 </x-action-button>
-                                            </form>
+                                            </a>
                                         </td>
                                     @else
                                         <td>
-                                            <a href="{{ route('business.show', $favContact->id) }}"
+                                            <a href="{{ route('business.show', $delContact->id) }}"
                                             class="text-blue-700 dark:text-blue-500 font-bold hover:bg-yellow-300 py-2 px-2 rounded-full">
-                                            {{ $favContact->business_name }}</form>
+                                            {{ $delContact->business_name }}</form>
                                         </td>
                                         <td class="font-mono tracking-widest">{{ __("Business") }}</td>
                                         <td>
-                                            <form action="{{ route('business.markAsNormal', $favContact->id) }}" method="POST"
+                                            <a href="{{ route('business.restoreFromTrash', $delContact->id) }}">
+                                                <x-action-button class="bg-green-400">
+                                                    {{ __("Restore") }}
+                                                </x-action-button>
+                                            </a>
+                                            <form action="{{ route('business.destroyPermanetly', $delContact->id) }}" method="POST"
                                                 onsubmit="return confirm('{{ __('Are you sure?') }}');">
                                                 @csrf
-                                                <x-action-button class="bg-red-400">
-                                                    {{ __("Remove from Favorite") }}
+                                                @method('DELETE')
+
+                                                <x-action-button class="bg-red-600">
+                                                    {{ __("Delete Permanently") }}
                                                 </x-action-button>
-                                            </form>
+                                            </a>
                                         </td>
                                     @endif
                                 </x-table-row>
                             @empty
                                 <x-table-row>
-                                    <td>{{ __('No favorite contacts') }}</td>
+                                    <td>{{ __('Trash is empty') }}</td>
                                 </x-table-row>
                             @endforelse
                         </tbody>
                     </table>
-                    {{-- {{ $people->links() }} --}}
-                    {{-- {{ $people->appends(['order' => $order])->links() }} --}}
                 </div>
             </div>
         </div>

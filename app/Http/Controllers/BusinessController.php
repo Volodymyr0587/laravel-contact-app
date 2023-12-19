@@ -130,6 +130,24 @@ class BusinessController extends Controller
         $business->update(['is_favorite' => false]);
         return redirect()->back()->with('store', 'Business was marked as normal contact');
     }
+
+    public function restoreFromTrash($business)
+    {
+        // $this->authorize('update', $business);
+        Business::withTrashed()->find($business)->restore();
+        return redirect()->back()->with('store', 'Business has been restored');
+    }
+
+    public function destroyPermanetly($business)
+    {
+        // $this->authorize('delete', $business);
+
+        Business::withTrashed()->find($business)->tasks()->delete();
+        Business::withTrashed()->find($business)->forceDelete();
+
+        return redirect()->back()->with('destroy', 'Business has been permanently deleted');
+    }
+
     /**
      * Remove the specified resource from storage.
      */

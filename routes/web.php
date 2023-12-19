@@ -65,7 +65,9 @@ Route::controller(PersonController::class)->prefix('person')->name('person')->mi
     Route::get('/tag/{tag_name}', 'getByTag')->name('.getByTag');
     Route::post('/{person}/mark-as-favorite', 'markAsFavorite')->name('.markAsFavorite');
     Route::post('/{person}/mark-as-normal', 'markAsNormal')->name('.markAsNormal');
+    Route::get('/{person}/restore', 'restoreFromTrash')->name('.restoreFromTrash');
     Route::delete('/{person}/destroy', 'destroy')->name('.destroy');
+    Route::delete('/{person}/destroyPermanetly', 'destroyPermanetly')->name('.destroyPermanetly');
 });
 
 Route::controller(BusinessController::class)->prefix('business')->name('business')->middleware('auth')->group(function () {
@@ -80,10 +82,13 @@ Route::controller(BusinessController::class)->prefix('business')->name('business
     Route::get('/category/{category_name}', 'getByCategory')->name('.getByCategory');
     Route::post('/{business}/mark-as-favorite', 'markAsFavorite')->name('.markAsFavorite');
     Route::post('/{business}/mark-as-normal', 'markAsNormal')->name('.markAsNormal');
+    Route::get('/{business}/restore', 'restoreFromTrash')->name('.restoreFromTrash');
     Route::delete('/{business}/destroy', 'destroy')->name('.destroy');
+    Route::delete('/{business}/destroyPermanetly', 'destroyPermanetly')->name('.destroyPermanetly');
 });
 
 Route::get('/favorite', 'FavoriteContactsController')->middleware('auth')->name('favoriteContacts');
+Route::get('/trash', 'TrashController')->middleware('auth')->name('trashedContacts');
 
 Route::controller(TaskController::class)->prefix('task')->name('task')->middleware('auth')->group(function(){
     Route::get('/', 'index')->name('.index');

@@ -56,6 +56,13 @@
                                     </span>
                                 </x-dropdown-link>
 
+                                <x-dropdown-link :href="route('trashedContacts')">
+                                    {{ __('Trash') }}
+                                    <span class="inline-flex items-center justify-center w-12 h-4 ms-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
+                                        {{ $numberOfTrashedContacts }}
+                                    </span>
+                                </x-dropdown-link>
+
                             </x-slot>
                         </x-dropdown>
 

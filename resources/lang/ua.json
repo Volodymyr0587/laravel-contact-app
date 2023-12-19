@@ -148,5 +148,12 @@
     "Contact updated successfully": "Контакт успішно оновлено",
     "Person was marked as favorite contact": "Людину додано до обраних контактів",
     "Contact has been deleted successfully": "Контакт успішно видалено",
-    "Are you sure you want to delete your account?": "Ви впевнені, що хочете видалити свій обліковий запис?"
+    "Are you sure you want to delete your account?": "Ви впевнені, що хочете видалити свій обліковий запис?",
+    "Delete Permanently": "Видалити назавжди",
+    "Contact has been permanently deleted": "Контакт видалено назавжди",
+    "Business has been permanently deleted": "Компанію видалено назавжди",
+    "Contact has been restored": "Контакт відновлено",
+    "Business has been restored": "Компаню відновлено",
+    "Restore": "Відновити",
+    "Trash": "Видалені"
 }
