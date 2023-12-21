@@ -14,7 +14,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-700 dark:text-white">
                 <div class="p-6 text-gray-900">
 
-                    <table class="table-fixed border-separate border-spacing-6">
+                    <table class="table-fixed border-separate border-spacing-6 hidden md:block">
                         <thead>
                             <x-table-row>
                                 <th>{{ __("Name") }}</th>
@@ -76,6 +76,70 @@
                             @endforelse
                         </tbody>
                     </table>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 mb-4 md:hidden">
+                        @forelse ($trashedContacts as $delContact)
+                        <div class="bg-white space-y-3 p-4 rounded-lg shadow-orange-300">
+                            <div class="flex items-center space-x-2 text-sm">
+                                <div>
+                                    @if ($delContact instanceof \App\Models\Person)
+                                        <div>
+                                            {{ $delContact->firstname }} {{ $delContact->lastname }}
+                                        </div>
+                                        <div class="font-mono tracking-widest">{{ __("Person") }}</div>
+                                        <div>
+                                            <a href="{{ route('person.restoreFromTrash', $delContact->id) }}">
+                                                <x-action-button class="bg-green-400">
+                                                    {{ __("Restore") }}
+                                                </x-action-button>
+                                            </a>
+                                            <form action="{{ route('person.destroyPermanetly', $delContact->id) }}" method="POST"
+                                                onsubmit="return confirm('{{ __('Are you sure?') }}');">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <x-action-button class="bg-red-600">
+                                                    {{ __("Delete Permanently") }}
+                                                </x-action-button>
+                                            </a>
+                                        </div>
+                                    @else
+                                        <div>
+                                            {{ $delContact->business_name }}
+                                        </div>
+                                        <div class="font-mono tracking-widest">{{ __("Business") }}</div>
+                                        <div>
+                                            <a href="{{ route('business.restoreFromTrash', $delContact->id) }}">
+                                                <x-action-button class="bg-green-400">
+                                                    {{ __("Restore") }}
+                                                </x-action-button>
+                                            </a>
+                                            <form action="{{ route('business.destroyPermanetly', $delContact->id) }}" method="POST"
+                                                onsubmit="return confirm('{{ __('Are you sure?') }}');">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <x-action-button class="bg-red-600">
+                                                    {{ __("Delete Permanently") }}
+                                                </x-action-button>
+                                            </a>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        @empty
+                        <div class="bg-white space-y-3 p-4 rounded-lg shadow-orange-300">
+                            <div class="flex items-center space-x-2 text-sm">
+                                <div>
+
+                                    {{ __('Trash is empty') }}
+
+                                </div>
+                            </div>
+                        </div>
+                        @endforelse
+                    </div>
                 </div>
             </div>
         </div>

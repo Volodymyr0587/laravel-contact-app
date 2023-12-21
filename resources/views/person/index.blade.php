@@ -45,7 +45,7 @@
 
                     </div>
 
-                    <table class="table-fixed border-separate border-spacing-6">
+                    <table class="table-fixed border-separate border-spacing-6 hidden md:block">
                         <thead>
                             <x-table-row>
                                 <th>
@@ -115,6 +115,67 @@
                             @endforelse
                         </tbody>
                     </table>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 mb-4 md:hidden">
+                        @forelse ($people as $person)
+                        <div class="bg-white space-y-3 p-4 rounded-lg shadow-orange-300">
+                            <div class="flex items-center space-x-2 text-sm">
+                                <div class="flex-auto">
+                                    <span>
+                                        @if (!empty($person->image))
+                                            <img class="object-contain object-left h-10 w-10"
+                                            src="{{ is_url($person->image) ? $person->image : Storage::url($person->image) }}"
+                                            alt="Photo">
+                                        @else
+                                            {{-- Use default image --}}
+                                            <img class="object-contain object-left h-10 w-10"
+                                            src="{{ asset('images/person-no-image.png') }}" alt="Default photo">
+                                        @endif
+                                    </span>
+                                </div>
+                                <div>
+                                    <x-buttons.show-button href="{{ route('person.show', $person->id) }}">
+                                        {{ $person->firstname }} {{ $person->lastname }}
+                                    </x-buttons.show-button>
+                                </div>
+                                <div class="{{ $person->business?->deleted_at ? 'italic' : 'non-italic' }}">
+                                    {{ $person->business?->business_name }}
+                                </div>
+                                <div>
+                                    @foreach ($person->tags as $tag)
+                                        <span class="py-1 px-1 rounded-full"
+                                                style="background-color: {{ $tag->color ?? '#2d9f2f' }}">
+                                            <a
+                                                href="{{ route('person.getByTag', $tag->tag_name) }}">{{ $tag->tag_name }}</a>
+                                        </span>
+                                    @endforeach
+                                </div>
+
+                                <div>
+                                    <a href="{{ route('person.edit', $person->id) }}"
+                                        class="flex justify-center items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor"
+                                            class="w-6 h-6 hover:text-green-500">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        @empty
+                        <div class="bg-white space-y-3 p-4 rounded-lg shadow-orange-300">
+                            <div class="flex items-center space-x-2 text-sm">
+                                <div>
+
+                                    {{ __('No people found') }}
+
+                                </div>
+                            </div>
+                        </div>
+                        @endforelse
+                    </div>
                     {{-- {{ $people->links() }} --}}
                     {{ $people->appends(['order' => $order])->links() }}
                 </div>
