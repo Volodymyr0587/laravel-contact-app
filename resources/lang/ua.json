@@ -159,5 +159,7 @@
     "Contact has been restored": "Контакт відновлено",
     "Business has been restored": "Компаню відновлено",
     "Restore": "Відновити",
-    "Trash": "Видалені"
+    "Trash": "Видалені",
+    "Deleted contacts": "Видалені контакти",
+    "Trash is empty": "Немає видалених"
 }
