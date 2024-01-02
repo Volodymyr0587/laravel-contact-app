@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\NoteTag;
 use Illuminate\Http\Request;
+use App\Services\NoteLinkService;
 use App\Http\Requests\NoteRequest;
 
 class NoteController extends Controller
@@ -196,47 +197,15 @@ class NoteController extends Controller
         return redirect(route('note.index'))->with('destroy', 'Note has been deleted successfully');
     }
 
-
     private function addLinksToRelatedNotes(Note $note, $tagNames)
     {
-        $relatedNotes = Note::whereHas('tags', function ($query) use ($note) {
-            $query->whereIn('note_tag_id', $note->tags->pluck('id'));
-        })->where([
-                    ['id', '!=', $note->id],
-                    ['user_id', '=', $note->user_id],
-                ])->get();
-
-        foreach ($tagNames as $tagName) {
-            // Add links to related articles
-            foreach ($relatedNotes as $relatedNote) {
-                // Use regular expressions with a callback function for replacement
-                $relatedNote->body = preg_replace_callback(
-                    "/\b$tagName\b/i",
-                    function ($matches) use ($note, $tagName) {
-                        // Create a link in the text
-                        return "<a href='" . route('note.show', $note->id) . "' class='text-blue-500 underline font-bold'>$matches[0]</a>";
-                    },
-                    $relatedNote->body
-                );
-                $relatedNote->save();
-            }
-        }
+        // Use the NoteLinkService to handle adding links
+        app(NoteLinkService::class)->addLinksToRelatedNotes($note, $tagNames);
     }
 
     private function removeLinksToDeletedNote(Note $deletedNote)
     {
-        // Find all notes that have links to the deleted note
-        $notesWithLinks = Note::where('body', 'like', "%href='" . route('note.show', $deletedNote->id) . "%")
-            ->get();
-
-        // Remove links to the deleted note from other notes
-        foreach ($notesWithLinks as $noteWithLinks) {
-            $noteWithLinks->body = preg_replace(
-                "/<a\s+href='" . preg_quote(route('note.show', $deletedNote->id), '/') . "'[^>]*>(.*?)<\/a>/i",
-                '$1',
-                $noteWithLinks->body
-            );
-            $noteWithLinks->save();
-        }
+        // Use the NoteLinkService to handle removing links
+        app(NoteLinkService::class)->removeLinksToDeletedNote($deletedNote);
     }
 }
