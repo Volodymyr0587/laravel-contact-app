@@ -16,8 +16,9 @@ class NoteController extends Controller
     public function index()
     {
         $user = auth()->user();
-        // $notes = $user->notes()->orderBy('created_at', 'desc')->paginate(10);
+
         $notes = $user->notes()->orderByDesc('is_active')->orderByDesc('created_at')->paginate(10);
+
         return view('note.index')->with('notes', $notes);
     }
 
@@ -55,13 +56,7 @@ class NoteController extends Controller
         $note->user()->associate($user);
         $note->save();
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $custom_name = time() . '_' . preg_replace('/\s+/', '_', $note->title) . '.' . $image->getClientOriginalExtension();
-            $path = $image->storeAs('public/images/notes', $custom_name);
-            $note->image = $path;
-            $note->save();
-        }
+        $this->saveImage($note, $request);
 
         $tagNames = explode(" ", preg_replace('/\s+/', ' ', trim($request->tags)));
 
@@ -112,13 +107,7 @@ class NoteController extends Controller
         // $note->is_active = $request->has('is_active'); // Set based on checkbox status
         $note->update($request->validated());
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $custom_name = time() . '_' . preg_replace('/\s+/', '_', $note->title) . '.' . $image->getClientOriginalExtension();
-            $path = $image->storeAs('public/images/notes', $custom_name);
-            $note->image = $path;
-            $note->save();
-        }
+        $this->saveImage($note, $request);
 
         $tagNames = explode(" ", preg_replace('/\s+/', ' ', trim($request->tags)));
 
@@ -134,6 +123,20 @@ class NoteController extends Controller
         // $note->save();
 
         return redirect(route('note.index'))->with('store', 'Note updated successfully');
+    }
+
+    /**
+     * Save image logic
+     */
+    protected function saveImage(Note $note, NoteRequest $request)
+    {
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $custom_name = time() . '_' . preg_replace('/\s+/', '_', $note->title) . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('public/images/notes', $custom_name);
+            $note->image = $path;
+            $note->save();
+        }
     }
 
     /**
