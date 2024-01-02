@@ -10,6 +10,13 @@ use App\Http\Requests\NoteRequest;
 
 class NoteController extends Controller
 {
+    protected $noteLinkService;
+
+    public function __construct(NoteLinkService $noteLinkService)
+    {
+        $this->noteLinkService = $noteLinkService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -63,7 +70,7 @@ class NoteController extends Controller
         if (!empty(array_filter($tagNames, 'strlen'))) {
             $this->syncTags($note, $tagNames);
             // Call the method to add links to related articles
-            $this->addLinksToRelatedNotes($note, $tagNames);
+            $this->noteLinkService->addLinksToRelatedNotes($note, $tagNames);
         }
         return redirect(route('note.index'))->with('store', 'Note created successfully');
     }
@@ -117,7 +124,7 @@ class NoteController extends Controller
         if (!empty(array_filter($tagNames, 'strlen'))) {
             $this->syncTags($note, $tagNames);
             // Call the method to add links to related articles
-            $this->addLinksToRelatedNotes($note, $tagNames);
+            $this->noteLinkService->addLinksToRelatedNotes($note, $tagNames);
         }
 
         // $note->save();
@@ -180,7 +187,7 @@ class NoteController extends Controller
     {
         $this->authorize('delete', $note);
         // Find and remove links pointing to the deleted note
-        $this->removeLinksToDeletedNote($note);
+        $this->noteLinkService->removeLinksToDeletedNote($note);
 
         $tagsToDelete = $note->tags;
 
@@ -200,15 +207,4 @@ class NoteController extends Controller
         return redirect(route('note.index'))->with('destroy', 'Note has been deleted successfully');
     }
 
-    private function addLinksToRelatedNotes(Note $note, $tagNames)
-    {
-        // Use the NoteLinkService to handle adding links
-        app(NoteLinkService::class)->addLinksToRelatedNotes($note, $tagNames);
-    }
-
-    private function removeLinksToDeletedNote(Note $deletedNote)
-    {
-        // Use the NoteLinkService to handle removing links
-        app(NoteLinkService::class)->removeLinksToDeletedNote($deletedNote);
-    }
 }
